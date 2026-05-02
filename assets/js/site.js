@@ -54,6 +54,18 @@ const hidePlayer = () => {
   playerTarget.innerHTML = "";
 };
 
+document.addEventListener("click", (event) => {
+  const link = event.target.closest?.("a[href^='http']");
+  if (!link || typeof window.gtag !== "function") return;
+
+  window.gtag("event", "fan_link_click", {
+    link_text: link.textContent.trim().replace(/\s+/g, " "),
+    link_url: link.href,
+    link_domain: new URL(link.href).hostname,
+    transport_type: "beacon",
+  });
+});
+
 closePlayer?.addEventListener("click", hidePlayer);
 
 playlistStage?.addEventListener("click", (event) => {
