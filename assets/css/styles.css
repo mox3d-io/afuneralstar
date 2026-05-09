@@ -148,6 +148,16 @@ button {
   white-space: nowrap;
 }
 
+.header-genre {
+  display: none;
+  margin: 0;
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .nav-toggle {
   width: 2.75rem;
   height: 2.75rem;
@@ -209,45 +219,30 @@ button {
 }
 
 .hero {
-  position: relative;
-  min-height: clamp(20rem, 34vw, 34rem);
-  overflow: hidden;
-  display: flex;
-  align-items: end;
-  padding: calc(var(--header-h) + 1.8rem) clamp(1rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem);
-  isolation: isolate;
+  padding-top: var(--header-h);
+  background: #000;
+  border-bottom: 1px solid var(--line);
 }
 
-.hero-media,
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+.hero-media {
+  width: 100%;
+  background: #000;
 }
 
 .hero-media img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.98) contrast(1.06);
-  opacity: 0.9;
+  height: auto;
+  object-fit: contain;
+  filter: saturate(1.02) contrast(1.04);
+  opacity: 1;
 }
 
-.hero-overlay {
-  z-index: -1;
-  background:
-    linear-gradient(90deg, rgba(5, 5, 6, 0.82), rgba(5, 5, 6, 0.42) 46%, rgba(5, 5, 6, 0.1)),
-    linear-gradient(180deg, rgba(5, 5, 6, 0.08), #050506 100%);
-}
-
-.hero-content {
-  width: min(58rem, 100%);
-}
-
-.hero-logo {
-  width: min(18rem, 54vw);
-  margin: 0 0 1rem;
-  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.72));
+.hero .hero-actions {
+  width: min(var(--max), calc(100% - 2rem));
+  max-width: calc(100vw - 2rem);
+  margin: 0 auto;
+  padding: 1rem 0 1.15rem;
+  justify-content: center;
 }
 
 .eyebrow {
@@ -1185,6 +1180,11 @@ h3 {
     border-bottom-color: var(--red);
   }
 
+  .header-genre {
+    display: block;
+    margin-right: auto;
+  }
+
   .album-feature {
     grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1fr);
     gap: clamp(1.4rem, 4vw, 3rem);
@@ -1273,31 +1273,25 @@ h3 {
     height: auto;
   }
 
+  .header-genre {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.64rem;
+  }
+
   .nav-toggle {
     width: 2.5rem;
     height: 2.5rem;
   }
 
   .hero {
-    align-items: flex-start;
-    min-height: auto;
-    padding: calc(var(--header-h) + 1rem) 1rem 1rem;
+    padding-top: var(--header-h);
   }
 
-  .hero-overlay {
-    background:
-      linear-gradient(90deg, rgba(5, 5, 6, 0.96), rgba(5, 5, 6, 0.68) 62%, rgba(5, 5, 6, 0.2)),
-      linear-gradient(180deg, rgba(5, 5, 6, 0.08), #050506 96%);
-  }
-
-  .hero-logo {
-    width: min(8.5rem, 40vw);
-    margin-bottom: 0.75rem;
-  }
-
-  .hero h1 {
-    max-width: 9ch;
-    font-size: clamp(2.1rem, 8vw, 2.7rem);
+  .hero .hero-actions {
+    padding: 0.75rem 0 0.9rem;
   }
 
   h2 {

@@ -161,6 +161,17 @@ document.addEventListener("click", (event) => {
   });
 });
 
+document.addEventListener("click", (event) => {
+  const link = event.target.closest?.("a[data-hero-link]");
+  if (!(link instanceof HTMLAnchorElement) || typeof window.gtag !== "function") return;
+
+  trackEvent("hero_cta_click", {
+    cta: link.dataset.hero,
+    link_text: link.textContent.trim().replace(/\s+/g, " "),
+    link_url: link.href,
+  });
+});
+
 document.querySelectorAll("[data-short-video]").forEach((video) => {
   video.addEventListener("play", () => {
     document.querySelectorAll("[data-short-video]").forEach((otherVideo) => {
