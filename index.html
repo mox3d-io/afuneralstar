@@ -45,6 +45,7 @@
       <nav class="primary-nav" id="primary-nav" data-primary-nav>
         <a href="#music">Music</a>
         <a href="#videos">Videos</a>
+        <a href="#shorts">Shorts</a>
         <a href="#photos">Photos</a>
         <a href="#merch">Merch</a>
         <a href="#support">Support</a>
@@ -87,6 +88,87 @@
         </div>
       </section>
 
+      <section class="promo-rotator" aria-label="Featured links" data-promo-rotator>
+        <div class="promo-track">
+          <article class="promo-slide is-active" data-promo-slide>
+            <div class="promo-copy">
+              <p class="eyebrow">Shorts</p>
+              <h2>Watch Shorts</h2>
+              <p>Fast cuts from the albums, hosted here.</p>
+              <a class="button button-primary" href="#shorts" data-promo-link data-promo="Watch Shorts">Watch shorts</a>
+            </div>
+            <div class="promo-media promo-media-shorts" aria-hidden="true">
+              <img src="assets/img/shorts/vals-del-diablo-short.jpg" alt="">
+              <img src="assets/img/shorts/hold-that-pose-new.jpg" alt="">
+              <img src="assets/img/shorts/into-void-youtube-short.jpg" alt="">
+            </div>
+          </article>
+          <article class="promo-slide" data-promo-slide>
+            <div class="promo-copy">
+              <p class="eyebrow">Streaming</p>
+              <h2>Listen on Spotify/Apple</h2>
+              <p>Stream the Collapse Trilogy where you already listen.</p>
+              <div class="promo-actions">
+                <a
+                  class="button button-secondary"
+                  href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-promo-link
+                  data-promo="Listen on Spotify">
+                  <img src="assets/img/platform-logos/spotify.svg" alt="" width="18" height="18">
+                  Spotify
+                </a>
+                <a
+                  class="button button-secondary"
+                  href="https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-promo-link
+                  data-promo="Listen on Apple Music">
+                  <img src="assets/img/platform-logos/apple-music.svg" alt="" width="18" height="18">
+                  Apple
+                </a>
+              </div>
+            </div>
+            <div class="promo-media promo-media-listen" aria-hidden="true">
+              <img src="assets/img/consumed-cover.jpg" alt="">
+              <img src="assets/img/homeless-cover.jpg" alt="">
+              <img src="assets/img/silver-cover.jpg" alt="">
+              <div class="promo-platforms">
+                <img src="assets/img/platform-logos/spotify.svg" alt="">
+                <img src="assets/img/platform-logos/apple-music.svg" alt="">
+                <img src="assets/img/platform-logos/youtube-music.svg" alt="">
+              </div>
+            </div>
+          </article>
+          <article class="promo-slide" data-promo-slide>
+            <div class="promo-copy">
+              <p class="eyebrow">Merch</p>
+              <h2>Merchandise</h2>
+              <p>Shirts and support links from the official store.</p>
+              <a
+                class="button button-primary"
+                href="https://direct.distrokid.com/afuneralstar/home"
+                target="_blank"
+                rel="noreferrer"
+                data-promo-link
+                data-promo="Merchandise">
+                Open store
+              </a>
+            </div>
+            <div class="promo-media promo-media-merch" aria-hidden="true">
+              <img src="assets/img/merch-shirts-stacked.png" alt="">
+            </div>
+          </article>
+        </div>
+        <div class="promo-dots" aria-label="Featured link slides">
+          <button class="promo-dot is-active" type="button" aria-label="Show Watch Shorts" data-promo-dot></button>
+          <button class="promo-dot" type="button" aria-label="Show Listen on Spotify and Apple" data-promo-dot></button>
+          <button class="promo-dot" type="button" aria-label="Show Merchandise" data-promo-dot></button>
+        </div>
+      </section>
+
       <section class="section section-music" id="music">
         <div class="section-head">
           <p class="eyebrow">Discography</p>
@@ -115,6 +197,33 @@
           <article class="album-feature">
             <div class="album-cover">
               <img src="assets/img/consumed-cover.jpg" alt="Consumed by a Funeral Star album art" width="1200" height="1200">
+              <div class="album-platforms" aria-label="Consumed by a Funeral Star streaming links">
+                <a
+                  class="album-platform"
+                  href="https://music.apple.com/us/album/consumed-by-a-funeral-star/6766791921"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Listen to Consumed by a Funeral Star on Apple Music"
+                  data-platform-link
+                  data-platform="Apple Music"
+                  data-album="Consumed by a Funeral Star">
+                  <img src="assets/img/platform-logos/apple-music.svg" alt="" width="24" height="24">
+                </a>
+                <a
+                  class="album-platform"
+                  href="https://open.spotify.com/album/6fuZyp5dx6VddapdwGRKTx"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Listen to Consumed by a Funeral Star on Spotify"
+                  data-platform-link
+                  data-platform="Spotify"
+                  data-album="Consumed by a Funeral Star">
+                  <img src="assets/img/platform-logos/spotify.svg" alt="" width="24" height="24">
+                </a>
+                <span class="album-platform is-disabled" aria-label="YouTube Music link coming soon" aria-disabled="true">
+                  <img src="assets/img/platform-logos/youtube-music.svg" alt="" width="24" height="24">
+                </span>
+              </div>
             </div>
             <div class="album-body">
               <p class="eyebrow">Cosmic Collapse</p>
@@ -150,6 +259,25 @@
           <article class="album-feature">
             <div class="album-cover">
               <img src="assets/img/homeless-cover.jpg" alt="Homeless and Hopeless album art" width="1200" height="1200">
+              <div class="album-platforms" aria-label="Homeless and Hopeless streaming links">
+                <span class="album-platform is-disabled" aria-label="Apple Music link coming soon" aria-disabled="true">
+                  <img src="assets/img/platform-logos/apple-music.svg" alt="" width="24" height="24">
+                </span>
+                <a
+                  class="album-platform"
+                  href="https://open.spotify.com/album/1p9YdRV5ECDo2aTwbOWEDZ"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Listen to Homeless and Hopeless on Spotify"
+                  data-platform-link
+                  data-platform="Spotify"
+                  data-album="Homeless and Hopeless">
+                  <img src="assets/img/platform-logos/spotify.svg" alt="" width="24" height="24">
+                </a>
+                <span class="album-platform is-disabled" aria-label="YouTube Music link coming soon" aria-disabled="true">
+                  <img src="assets/img/platform-logos/youtube-music.svg" alt="" width="24" height="24">
+                </span>
+              </div>
             </div>
             <div class="album-body">
               <p class="eyebrow">Societal Collapse</p>
@@ -186,6 +314,33 @@
           <article class="album-feature">
             <div class="album-cover">
               <img src="assets/img/silver-cover.jpg" alt="The Land of Silver and Sorrow album art" width="1200" height="1200">
+              <div class="album-platforms" aria-label="The Land of Silver and Sorrow streaming links">
+                <a
+                  class="album-platform"
+                  href="https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Listen to The Land of Silver and Sorrow on Apple Music"
+                  data-platform-link
+                  data-platform="Apple Music"
+                  data-album="The Land of Silver and Sorrow">
+                  <img src="assets/img/platform-logos/apple-music.svg" alt="" width="24" height="24">
+                </a>
+                <a
+                  class="album-platform"
+                  href="https://open.spotify.com/album/0ZBk9PCZo596PlkhXHi5y8"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Listen to The Land of Silver and Sorrow on Spotify"
+                  data-platform-link
+                  data-platform="Spotify"
+                  data-album="The Land of Silver and Sorrow">
+                  <img src="assets/img/platform-logos/spotify.svg" alt="" width="24" height="24">
+                </a>
+                <span class="album-platform is-disabled" aria-label="YouTube Music link coming soon" aria-disabled="true">
+                  <img src="assets/img/platform-logos/youtube-music.svg" alt="" width="24" height="24">
+                </span>
+              </div>
             </div>
             <div class="album-body">
               <p class="eyebrow">Romantic Collapse</p>
@@ -249,6 +404,143 @@
             <a class="text-link" href="https://www.youtube.com/channel/UCHr58sw3YcdmXJvoggp1oew" target="_blank" rel="noreferrer">
               Visit the YouTube channel
             </a>
+          </div>
+        </div>
+
+        <div class="shorts-block" id="shorts">
+          <div class="section-head">
+            <p class="eyebrow">Shorts</p>
+            <h2>Shorts.</h2>
+          </div>
+          <div class="shorts-rail" aria-label="A Funeral Star hosted shorts">
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/vals-del-diablo-short.jpg"
+                data-short-video
+                data-short-title="Vals del Diablo"
+                data-short-album="The Land of Silver and Sorrow">
+                <source src="assets/video/shorts/vals-del-diablo-short.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>Vals del Diablo</strong>
+                <span>The Land of Silver and Sorrow</span>
+              </figcaption>
+            </figure>
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/lines-in-the-sand-short.jpg"
+                data-short-video
+                data-short-title="Lines in the Sand"
+                data-short-album="The Land of Silver and Sorrow">
+                <source src="assets/video/shorts/lines-in-the-sand-short.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>Lines in the Sand</strong>
+                <span>The Land of Silver and Sorrow</span>
+              </figcaption>
+            </figure>
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/clavada-final.jpg"
+                data-short-video
+                data-short-title="Clavada en Tu Voz"
+                data-short-album="The Land of Silver and Sorrow">
+                <source src="assets/video/shorts/clavada-final.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>Clavada en Tu Voz</strong>
+                <span>The Land of Silver and Sorrow</span>
+              </figcaption>
+            </figure>
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/hold-that-pose-new.jpg"
+                data-short-video
+                data-short-title="Hold That Pose"
+                data-short-album="Homeless and Hopeless">
+                <source src="assets/video/shorts/hold-that-pose-new.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>Hold That Pose</strong>
+                <span>Homeless and Hopeless</span>
+              </figcaption>
+            </figure>
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/the-universe-did-not-notice-korean.jpg"
+                data-short-video
+                data-short-title="The Universe Did Not Notice"
+                data-short-album="Homeless and Hopeless">
+                <source src="assets/video/shorts/the-universe-did-not-notice-korean.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>The Universe Did Not Notice</strong>
+                <span>Homeless and Hopeless</span>
+              </figcaption>
+            </figure>
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/consumed-short.jpg"
+                data-short-video
+                data-short-title="Consumed by a Funeral Star"
+                data-short-album="Consumed by a Funeral Star">
+                <source src="assets/video/shorts/consumed-short.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>Consumed</strong>
+                <span>Consumed by a Funeral Star</span>
+              </figcaption>
+            </figure>
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/drifting-fading-short.jpg"
+                data-short-video
+                data-short-title="Drifting, Fading"
+                data-short-album="Consumed by a Funeral Star">
+                <source src="assets/video/shorts/drifting-fading-short.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>Drifting, Fading</strong>
+                <span>Consumed by a Funeral Star</span>
+              </figcaption>
+            </figure>
+            <figure class="short-card">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                poster="assets/img/shorts/into-void-youtube-short.jpg"
+                data-short-video
+                data-short-title="Into Void"
+                data-short-album="Consumed by a Funeral Star">
+                <source src="assets/video/shorts/into-void-youtube-short.mp4" type="video/mp4">
+              </video>
+              <figcaption>
+                <strong>Into Void</strong>
+                <span>Consumed by a Funeral Star</span>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>

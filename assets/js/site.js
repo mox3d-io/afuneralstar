@@ -5,6 +5,10 @@ const primaryNav = document.querySelector("[data-primary-nav]");
 const playlistStage = document.querySelector("[data-playlist-stage]");
 const playerTarget = document.querySelector("[data-player-target]");
 const closePlayer = document.querySelector("[data-close-player]");
+const promoSlides = Array.from(document.querySelectorAll("[data-promo-slide]"));
+const promoDots = Array.from(document.querySelectorAll("[data-promo-dot]"));
+let promoIndex = 0;
+let promoTimer;
 
 const setHeaderState = () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 12);
@@ -54,6 +58,63 @@ const hidePlayer = () => {
   playerTarget.innerHTML = "";
 };
 
+const trackEvent = (eventName, params = {}) => {
+  if (typeof window.gtag !== "function") return;
+
+  window.gtag("event", eventName, {
+    page_path: window.location.pathname,
+    transport_type: "beacon",
+    ...params,
+  });
+};
+
+const showPromo = (nextIndex, interaction = "auto") => {
+  if (!promoSlides.length) return;
+
+  promoIndex = (nextIndex + promoSlides.length) % promoSlides.length;
+  promoSlides.forEach((slide, index) => {
+    slide.classList.toggle("is-active", index === promoIndex);
+  });
+  promoDots.forEach((dot, index) => {
+    dot.classList.toggle("is-active", index === promoIndex);
+  });
+
+  const activeSlide = promoSlides[promoIndex];
+  const promoName = activeSlide?.querySelector("[data-promo-link]")?.dataset.promo;
+  trackEvent("promo_slide_view", {
+    promo: promoName,
+    slide_index: promoIndex + 1,
+    interaction,
+  });
+};
+
+const startPromo = () => {
+  if (promoSlides.length < 2) return;
+
+  window.clearInterval(promoTimer);
+  promoTimer = window.setInterval(() => showPromo(promoIndex + 1), 6500);
+};
+
+if (promoSlides.length) {
+  showPromo(0, "initial");
+  startPromo();
+}
+
+promoDots.forEach((dot, index) => {
+  dot.addEventListener("click", () => {
+    showPromo(index, "dot");
+    startPromo();
+  });
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    window.clearInterval(promoTimer);
+  } else {
+    startPromo();
+  }
+});
+
 document.addEventListener("click", (event) => {
   const link = event.target.closest?.("a[href^='http']");
   if (!link || typeof window.gtag !== "function") return;
@@ -72,10 +133,62 @@ document.addEventListener("click", (event) => {
 
   const lyricsUrl = new URL(link.getAttribute("href"), window.location.href);
 
-  window.gtag("event", "lyrics_click", {
+  trackEvent("lyrics_click", {
     song: link.textContent.trim().replace(/\s+/g, " "),
     page_path: lyricsUrl.pathname,
-    transport_type: "beacon",
+  });
+});
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest?.("a[data-platform-link]");
+  if (!(link instanceof HTMLAnchorElement) || typeof window.gtag !== "function") return;
+
+  trackEvent("album_platform_click", {
+    album: link.dataset.album,
+    platform: link.dataset.platform,
+    link_url: link.href,
+  });
+});
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest?.("a[data-promo-link]");
+  if (!(link instanceof HTMLAnchorElement) || typeof window.gtag !== "function") return;
+
+  trackEvent("promo_click", {
+    promo: link.dataset.promo,
+    link_text: link.textContent.trim().replace(/\s+/g, " "),
+    link_url: link.href,
+  });
+});
+
+document.querySelectorAll("[data-short-video]").forEach((video) => {
+  video.addEventListener("play", () => {
+    document.querySelectorAll("[data-short-video]").forEach((otherVideo) => {
+      if (otherVideo !== video) {
+        otherVideo.pause();
+      }
+    });
+
+    if (video.dataset.playTracked || typeof window.gtag !== "function") return;
+    video.dataset.playTracked = "true";
+
+    const source = video.querySelector("source");
+    trackEvent("short_play", {
+      video_title: video.dataset.shortTitle,
+      album: video.dataset.shortAlbum,
+      video_src: source?.getAttribute("src"),
+    });
+  });
+
+  video.addEventListener("ended", () => {
+    if (typeof window.gtag !== "function") return;
+
+    const source = video.querySelector("source");
+    trackEvent("short_complete", {
+      video_title: video.dataset.shortTitle,
+      album: video.dataset.shortAlbum,
+      video_src: source?.getAttribute("src"),
+    });
   });
 });
 
