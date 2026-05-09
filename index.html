@@ -16,6 +16,45 @@
     <meta property="og:image" content="assets/img/sitebanner.png">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#050506">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MusicGroup",
+        "name": "A Funeral Star",
+        "url": "https://www.afuneralstar.com",
+        "logo": "https://www.afuneralstar.com/assets/img/logo-main.png",
+        "image": "https://www.afuneralstar.com/assets/img/sitebanner.png",
+        "description": "Songs about people trapped by the gravity of their situations.",
+        "genre": ["Death Metal", "Black Metal", "Folk Metal"],
+        "email": "contact@afuneralstar.com",
+        "sameAs": [
+          "https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz",
+          "https://www.youtube.com/channel/UCHr58sw3YcdmXJvoggp1oew",
+          "https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194",
+          "https://afuneralstar.bandcamp.com",
+          "https://www.tiktok.com/@afuneralstar",
+          "https://x.com/afuneralstar",
+          "https://ko-fi.com/afuneralstar"
+        ],
+        "album": [
+          {
+            "@type": "MusicAlbum",
+            "name": "Consumed by a Funeral Star",
+            "url": "https://open.spotify.com/album/6fuZyp5dx6VddapdwGRKTx"
+          },
+          {
+            "@type": "MusicAlbum",
+            "name": "Homeless and Hopeless",
+            "url": "https://open.spotify.com/album/1p9YdRV5ECDo2aTwbOWEDZ"
+          },
+          {
+            "@type": "MusicAlbum",
+            "name": "The Land of Silver and Sorrow",
+            "url": "https://open.spotify.com/album/0ZBk9PCZo596PlkhXHi5y8"
+          }
+        ]
+      }
+    </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-888BCT159V"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -54,8 +93,8 @@
         <a href="#music">Music</a>
         <a href="#videos">Videos</a>
         <a href="#shorts">Shorts</a>
-        <a href="#photos">Photos</a>
         <a href="#merch">Merch</a>
+        <a href="#connect">Mailing list</a>
         <a href="#support">Support</a>
         <a href="#about">About</a>
       </nav>
@@ -64,7 +103,7 @@
     <main id="main">
       <section class="hero" id="top" aria-label="A Funeral Star">
         <div class="hero-media">
-          <img src="assets/img/sitebanner.png" alt="A Funeral Star new music and merch banner" width="2172" height="724">
+          <img src="assets/img/sitebanner.webp" alt="A Funeral Star new music and merch banner" width="2172" height="724">
         </div>
         <div class="hero-actions" aria-label="Primary links">
           <a class="button button-primary" href="https://open.spotify.com/track/4QLBXHvfms8OJZH0LiFZhc" target="_blank" rel="noreferrer" data-hero-link data-hero="Play Consumed by a Funeral Star">
@@ -78,20 +117,6 @@
           </a>
           <a class="button button-secondary" href="https://direct.distrokid.com/afuneralstar/home" target="_blank" rel="noreferrer" data-hero-link data-hero="Merch Store">
             Merch Store
-          </a>
-        </div>
-      </section>
-
-      <section class="release-strip" aria-label="Latest release">
-        <div class="release-strip-inner">
-          <img src="assets/img/silver-cover.jpg" alt="The Land of Silver and Sorrow album art" width="180" height="180">
-          <div>
-            <p class="eyebrow">Latest release</p>
-            <h2>The Land of Silver and Sorrow</h2>
-            <p>Romantic collapse in a border narco town.</p>
-          </div>
-          <a class="text-link" href="https://open.spotify.com/album/0ZBk9PCZo596PlkhXHi5y8" target="_blank" rel="noreferrer">
-            Spotify album
           </a>
         </div>
       </section>
@@ -585,27 +610,6 @@
         </div>
       </section>
 
-      <section class="section section-photos" id="photos">
-        <div class="section-head">
-          <p class="eyebrow">Images</p>
-          <h2>Album covers.</h2>
-        </div>
-        <div class="photo-grid">
-          <figure>
-            <img src="assets/img/silver-cover.jpg" alt="The Land of Silver and Sorrow cover art" loading="lazy">
-            <figcaption>Silver and Sorrow</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/img/homeless-cover.jpg" alt="Homeless and Hopeless cover art" loading="lazy">
-            <figcaption>Homeless and Hopeless</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/img/consumed-cover.jpg" alt="Consumed by a Funeral Star cover art" loading="lazy">
-            <figcaption>Consumed</figcaption>
-          </figure>
-        </div>
-      </section>
-
       <section class="section section-commerce" id="merch">
         <div class="section-head">
           <p class="eyebrow">Merch</p>
@@ -674,6 +678,36 @@
             <span>X</span>
             <strong>Follow the feed</strong>
           </a>
+        </div>
+      </section>
+
+      <section class="section section-connect" id="connect">
+        <div class="section-head">
+          <p class="eyebrow">Mailing list</p>
+          <h2>Stay close.</h2>
+          <p class="section-lede">News on releases, shorts, and shows. No spam.</p>
+        </div>
+        <div class="connect-layout">
+          <form
+            class="newsletter-form"
+            action="https://buttondown.com/api/emails/embed-subscribe/BUTTONDOWN_USERNAME"
+            method="post"
+            target="popupwindow"
+            data-newsletter-form>
+            <label for="newsletter-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              name="email"
+              id="newsletter-email"
+              required
+              placeholder="your@email.com"
+              autocomplete="email">
+            <button type="submit" class="button button-primary">Subscribe</button>
+          </form>
+          <p class="connect-contact">
+            Booking, press, or general inquiries:
+            <a href="mailto:contact@afuneralstar.com">contact@afuneralstar.com</a>
+          </p>
         </div>
       </section>
 

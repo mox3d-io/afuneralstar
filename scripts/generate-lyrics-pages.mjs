@@ -115,8 +115,8 @@ const pageTemplate = ({ album, track, lyrics, relativeUrl }) => `<!doctype html>
       <nav class="primary-nav" id="primary-nav" data-primary-nav>
         <a href="../../index.html#music">Music</a>
         <a href="../../index.html#videos">Videos</a>
-        <a href="../../index.html#photos">Photos</a>
         <a href="../../index.html#merch">Merch</a>
+        <a href="../../index.html#connect">Mailing list</a>
         <a href="../../index.html#support">Support</a>
         <a href="../../index.html#about">About</a>
       </nav>
@@ -166,8 +166,8 @@ const lyricsIndexTemplate = (tracks) => `<!doctype html>
       <nav class="primary-nav" id="primary-nav" data-primary-nav>
         <a href="../index.html#music">Music</a>
         <a href="../index.html#videos">Videos</a>
-        <a href="../index.html#photos">Photos</a>
         <a href="../index.html#merch">Merch</a>
+        <a href="../index.html#connect">Mailing list</a>
         <a href="../index.html#support">Support</a>
         <a href="../index.html#about">About</a>
       </nav>
