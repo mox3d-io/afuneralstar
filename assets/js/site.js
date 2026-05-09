@@ -66,6 +66,19 @@ document.addEventListener("click", (event) => {
   });
 });
 
+document.addEventListener("click", (event) => {
+  const link = event.target.closest?.("a[data-lyrics-link]");
+  if (!(link instanceof HTMLAnchorElement) || typeof window.gtag !== "function") return;
+
+  const lyricsUrl = new URL(link.getAttribute("href"), window.location.href);
+
+  window.gtag("event", "lyrics_click", {
+    song: link.textContent.trim().replace(/\s+/g, " "),
+    page_path: lyricsUrl.pathname,
+    transport_type: "beacon",
+  });
+});
+
 closePlayer?.addEventListener("click", hidePlayer);
 
 playlistStage?.addEventListener("click", (event) => {
