@@ -639,6 +639,8 @@ h3 {
 
 .album-cover {
   position: relative;
+  align-self: start;
+  width: 100%;
   aspect-ratio: 1;
   min-width: 0;
   overflow: hidden;
@@ -698,6 +700,7 @@ h3 {
 }
 
 .album-body {
+  min-width: 0;
   padding: 0.6rem 0.25rem 0.25rem;
 }
 
@@ -1186,7 +1189,7 @@ h3 {
   .album-feature {
     grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1fr);
     gap: clamp(1.4rem, 4vw, 3rem);
-    align-items: stretch;
+    align-items: start;
     padding: clamp(1rem, 2vw, 1.3rem);
   }
 
