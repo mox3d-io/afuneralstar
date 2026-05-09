@@ -173,6 +173,22 @@ document.addEventListener("click", (event) => {
 });
 
 document.querySelectorAll("[data-short-video]").forEach((video) => {
+  const milestones = [25, 50, 75];
+  const reachedMilestones = new Set();
+  let loopCount = 0;
+  let lastTime = 0;
+  let watchedSeconds = 0;
+  let lastWatchSample = 0;
+
+  const baseParams = () => {
+    const source = video.querySelector("source");
+    return {
+      video_title: video.dataset.shortTitle,
+      album: video.dataset.shortAlbum,
+      video_src: source?.getAttribute("src"),
+    };
+  };
+
   video.addEventListener("play", () => {
     document.querySelectorAll("[data-short-video]").forEach((otherVideo) => {
       if (otherVideo !== video) {
@@ -180,25 +196,47 @@ document.querySelectorAll("[data-short-video]").forEach((video) => {
       }
     });
 
-    if (video.dataset.playTracked || typeof window.gtag !== "function") return;
-    video.dataset.playTracked = "true";
+    lastWatchSample = video.currentTime;
 
-    const source = video.querySelector("source");
-    trackEvent("short_play", {
-      video_title: video.dataset.shortTitle,
-      album: video.dataset.shortAlbum,
-      video_src: source?.getAttribute("src"),
+    if (video.dataset.playTracked) return;
+    video.dataset.playTracked = "true";
+    trackEvent("short_play", baseParams());
+  });
+
+  video.addEventListener("timeupdate", () => {
+    const duration = video.duration;
+    if (!duration || !isFinite(duration)) return;
+
+    const delta = video.currentTime - lastWatchSample;
+    if (delta > 0 && delta < 1.5) {
+      watchedSeconds += delta;
+    }
+    lastWatchSample = video.currentTime;
+
+    if (lastTime > duration - 0.75 && video.currentTime < 0.75) {
+      loopCount += 1;
+      trackEvent("short_complete", {
+        ...baseParams(),
+        loop_count: loopCount,
+        watched_seconds: Math.round(watchedSeconds),
+      });
+    }
+    lastTime = video.currentTime;
+
+    const ratio = (video.currentTime / duration) * 100;
+    milestones.forEach((m) => {
+      if (ratio >= m && !reachedMilestones.has(m)) {
+        reachedMilestones.add(m);
+        trackEvent("short_progress", { ...baseParams(), milestone: m });
+      }
     });
   });
 
   video.addEventListener("ended", () => {
-    if (typeof window.gtag !== "function") return;
-
-    const source = video.querySelector("source");
     trackEvent("short_complete", {
-      video_title: video.dataset.shortTitle,
-      album: video.dataset.shortAlbum,
-      video_src: source?.getAttribute("src"),
+      ...baseParams(),
+      loop_count: loopCount,
+      watched_seconds: Math.round(watchedSeconds),
     });
   });
 });

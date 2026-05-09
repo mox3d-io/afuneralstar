@@ -74,6 +74,15 @@ const googleTag = `
       gtag("config", "G-888BCT159V");
     </script>`;
 
+const clarityTag = `
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wokypjnuyi");
+    </script>`;
+
 const pageTemplate = ({ album, track, lyrics, relativeUrl }) => `<!doctype html>
 <html lang="en">
   <head>
@@ -86,7 +95,7 @@ const pageTemplate = ({ album, track, lyrics, relativeUrl }) => `<!doctype html>
     <meta property="og:image" content="../../assets/img/${album.cover}">
     <meta property="og:type" content="music.song">
     <link rel="canonical" href="${siteUrl}/${relativeUrl}">
-    <meta name="theme-color" content="#050506">${googleTag}
+    <meta name="theme-color" content="#050506">${googleTag}${clarityTag}
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <script src="../../assets/js/site.js" defer></script>
   </head>
@@ -138,7 +147,7 @@ const lyricsIndexTemplate = (tracks) => `<!doctype html>
     <title>Lyrics | A Funeral Star</title>
     <meta name="description" content="Lyrics for A Funeral Star songs.">
     <link rel="canonical" href="${siteUrl}/lyrics/">
-    <meta name="theme-color" content="#050506">${googleTag}
+    <meta name="theme-color" content="#050506">${googleTag}${clarityTag}
     <link rel="stylesheet" href="../assets/css/styles.css">
     <script src="../assets/js/site.js" defer></script>
   </head>
