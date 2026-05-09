@@ -1,0 +1,15 @@
+# Scratch files used while building the site (not referenced by any page)
+.codex
+Screenshot_*.png
+banner2.png
+sitebanner.png
+ConsumedMug.png
+H&H Tshirt.png
+S&S Tote.png
+assets/img/banner2.png
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*~
+*.swp
