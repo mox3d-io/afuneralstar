@@ -128,9 +128,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: grid;
   gap: 0.55rem;
   justify-items: center;
-  padding: 0.25rem 0.25rem 1.4rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--hair);
+  padding: 0.25rem 0.25rem 0.95rem;
   cursor: pointer;
   text-align: center;
   width: 100%;
@@ -149,14 +147,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   filter: drop-shadow(0 4px 18px rgba(0,0,0,0.55));
 }
 
-.rail-home-genre {
-  margin: 0;
-  font-family: var(--mono);
-  font-weight: 400;
-  font-size: 0.58rem;
-  letter-spacing: 0.36em;
-  text-transform: uppercase;
-  color: var(--dim);
+/* Top-of-rail social row — under the logo, replacing the genre subtitle */
+.rail-social-top {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 0.25rem 1.4rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--hair);
 }
 
 .rail-section {
@@ -287,26 +286,32 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .rail-social a {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   display: grid;
   place-items: center;
   border: 1px solid var(--hair-strong);
-  color: var(--silver);
-  transition: color 200ms var(--easing), border-color 200ms var(--easing), background 200ms var(--easing), transform 200ms var(--easing);
+  background: linear-gradient(180deg, var(--surface), transparent);
+  color: var(--brand, var(--silver));
+  transition: border-color 220ms var(--easing), background 220ms var(--easing), transform 220ms var(--easing), box-shadow 260ms var(--easing);
 }
 
 .rail-social a svg {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1.2rem;
+  height: 1.2rem;
   fill: currentColor;
+  transition: filter 220ms var(--easing);
 }
 
 .rail-social a:hover {
-  color: var(--paper);
-  border-color: var(--silver-bright);
-  background: rgba(228, 232, 242, 0.04);
+  border-color: currentColor;
+  background: linear-gradient(180deg, var(--surface-rise), transparent);
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+}
+
+.rail-social a:hover svg {
+  filter: drop-shadow(0 0 10px currentColor);
 }
 
 .rail-contact {
@@ -1550,4 +1555,92 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (max-width: 540px) {
   .track { grid-template-columns: 2rem 1fr auto; gap: 0.6rem; }
   .track-title { font-size: 1.04rem; }
+}
+
+/* ============ Brand colors ============ */
+/* Tinting icons in their native brand colors via --brand CSS var.
+   Used by .listen-cta, .platform, and .rail-social — each adopts
+   var(--brand) for color (and SVGs inherit via fill:currentColor). */
+
+[data-platform="Spotify"]      { --brand: #1ED760; }
+[data-platform="Apple Music"]  { --brand: #FA243C; }
+[data-platform="YouTube"]      { --brand: #FF0033; }
+[data-platform="YouTube Music"]{ --brand: #FF0033; }
+[data-platform="Bandcamp"]     { --brand: #629AA9; }
+
+[data-social="youtube"]   { --brand: #FF0033; }
+[data-social="spotify"]   { --brand: #1ED760; }
+[data-social="tiktok"]    { --brand: #FE2C55; }
+[data-social="x"]         { --brand: #ffffff; }
+[data-social="instagram"] { --brand: #E4405F; }
+[data-social="bandcamp"]  { --brand: #629AA9; }
+[data-social="kofi"]      { --brand: #FF5E5B; }
+
+/* Listen-cta uses brand color for icon, paper for label */
+.listen-cta { --label-color: var(--paper-soft); }
+.listen-cta:hover { --label-color: var(--paper); }
+.listen-cta .listen-cta-logo { color: var(--brand, var(--paper-soft)); }
+.listen-cta .listen-cta-label { color: var(--label-color); }
+.listen-cta:hover .listen-cta-logo { filter: drop-shadow(0 0 14px currentColor); }
+
+/* Album-view platform buttons — icon in brand color, button frame in silver */
+.platform { color: var(--brand, var(--paper-soft)); }
+.platform:hover { filter: drop-shadow(0 0 12px currentColor); }
+.platform:hover { color: var(--brand, var(--paper)); border-color: currentColor; }
+.platform.platform-primary { color: var(--brand, var(--paper)); border-color: var(--brand, var(--silver)); }
+.platform.platform-primary:hover { color: var(--brand, var(--paper)); background: linear-gradient(135deg, var(--surface-rise), var(--surface) 80%); box-shadow: 0 10px 28px color-mix(in srgb, var(--brand, var(--silver)) 30%, transparent); }
+.platform-disabled { color: var(--dim) !important; }
+
+/* ============ Banner hotspots — clickable Shop Shirts/Mug/Tote overlays ============ */
+.home-hero-banner { position: relative; }
+
+.banner-hotspot {
+  position: absolute;
+  display: block;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  z-index: 2;
+  cursor: pointer;
+  transition: background 220ms var(--easing), border-color 220ms var(--easing), box-shadow 260ms var(--easing);
+}
+
+.banner-hotspot:hover,
+.banner-hotspot:focus-visible {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--silver-bright);
+  box-shadow: 0 0 24px var(--silver-glow), inset 0 0 12px rgba(228, 232, 242, 0.18);
+  outline: none;
+}
+
+/* Positions calibrated to the SHOP SHIRTS / SHOP MUG / SHOP TOTE row
+   in sitebanner.webp. Slightly generous on the box so the click target
+   is friendly without overlapping adjacent art. */
+.banner-hotspot--shirts { left: 33.2%; top: 79%; width: 11.5%; height: 16%; }
+.banner-hotspot--mug    { left: 46.0%; top: 79%; width: 11.0%; height: 16%; }
+.banner-hotspot--tote   { left: 58.2%; top: 79%; width: 11.5%; height: 16%; }
+
+.banner-hotspot-label {
+  position: absolute;
+  bottom: calc(100% + 0.4rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 0.35rem 0.7rem;
+  background: var(--ink);
+  border: 1px solid var(--silver);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms var(--easing), transform 220ms var(--easing);
+}
+
+.banner-hotspot:hover .banner-hotspot-label,
+.banner-hotspot:focus-visible .banner-hotspot-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
