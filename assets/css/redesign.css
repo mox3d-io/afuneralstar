@@ -1598,20 +1598,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .banner-hotspot {
   position: absolute;
   display: block;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 2px;
   z-index: 2;
   cursor: pointer;
-  transition: background 220ms var(--easing), border-color 220ms var(--easing), box-shadow 260ms var(--easing);
 }
 
-.banner-hotspot:hover,
+/* Keyboard users still get a focus ring; mouse hover stays invisible
+   so the artwork reads cleanly. */
 .banner-hotspot:focus-visible {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: var(--silver-bright);
-  box-shadow: 0 0 24px var(--silver-glow), inset 0 0 12px rgba(228, 232, 242, 0.18);
-  outline: none;
+  outline: 2px solid var(--silver-bright);
+  outline-offset: 2px;
 }
 
 /* Positions calibrated to the SHOP SHIRTS / SHOP MUG / SHOP TOTE row
@@ -1620,28 +1615,3 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .banner-hotspot--shirts { left: 33.2%; top: 79%; width: 11.5%; height: 16%; }
 .banner-hotspot--mug    { left: 46.0%; top: 79%; width: 11.0%; height: 16%; }
 .banner-hotspot--tote   { left: 58.2%; top: 79%; width: 11.5%; height: 16%; }
-
-.banner-hotspot-label {
-  position: absolute;
-  bottom: calc(100% + 0.4rem);
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  padding: 0.35rem 0.7rem;
-  background: var(--ink);
-  border: 1px solid var(--silver);
-  color: var(--paper);
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 220ms var(--easing), transform 220ms var(--easing);
-}
-
-.banner-hotspot:hover .banner-hotspot-label,
-.banner-hotspot:focus-visible .banner-hotspot-label {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
