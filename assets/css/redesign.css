@@ -1570,6 +1570,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 [data-social="youtube"]   { --brand: #FF0033; }
 [data-social="spotify"]   { --brand: #1ED760; }
+[data-social="apple"]     { --brand: #FA243C; }
 [data-social="tiktok"]    { --brand: #FE2C55; }
 [data-social="x"]         { --brand: #ffffff; }
 [data-social="instagram"] { --brand: #E4405F; }
