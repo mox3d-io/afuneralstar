@@ -33,45 +33,59 @@
       })(window, document, "clarity", "script", "wokypjnuyi");
     </script>
   </head>
-  <body data-view="album-silver">
+  <body data-view="home">
     <a class="skip-link" href="#stage">Skip to content</a>
 
+    <!-- ============ SVG sprite ============ -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+      <defs>
+        <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7V5z" fill="currentColor"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" fill="none"/></symbol>
+        <symbol id="logo-spotify" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></symbol>
+        <symbol id="logo-apple" viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324.378-.082.758-.153 1.134-.24.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234-.16.01-.318.035-.475.066-.76.15-1.52.303-2.28.456l-2.325.47-1.374.278c-.016.003-.032.01-.048.013-.277.077-.377.203-.39.49-.002.042 0 .086 0 .13-.002 2.602 0 5.204-.003 7.805 0 .42-.047.836-.215 1.227-.278.64-.77 1.04-1.434 1.233-.35.1-.71.16-1.075.172-.96.036-1.755-.6-1.92-1.544-.14-.812.23-1.685 1.154-2.075.357-.15.73-.232 1.108-.31.287-.06.575-.116.86-.177.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882 0-.123.013-.25.042-.37.07-.285.273-.448.546-.518.255-.066.515-.112.774-.165.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403.22-.043.442-.088.663-.106.31-.025.523.17.554.482.008.073.012.148.012.223.002 1.91.002 3.822 0 5.732z" fill="currentColor"/></symbol>
+        <symbol id="logo-ytmusic" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z" fill="currentColor"/></symbol>
+        <symbol id="logo-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></symbol>
+        <symbol id="logo-bandcamp" viewBox="0 0 24 24"><path d="M0 18.75l7.437-13.5H24l-7.437 13.5H0z" fill="currentColor"/></symbol>
+      </defs>
+    </svg>
+
     <button class="rail-toggle" type="button" data-rail-toggle aria-expanded="false" aria-controls="rail" aria-label="Open navigation">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-        <path d="M4 7h16M4 12h16M4 17h16"/>
-      </svg>
+      <svg aria-hidden="true"><use href="#i-menu"/></svg>
     </button>
 
     <aside class="rail" id="rail" data-rail aria-label="Primary navigation">
       <div>
-        <a class="wordmark" href="#" data-rail-link="album-silver">
-          <span class="wordmark-a">a</span>
-          Funeral Star
-          <span class="wordmark-genre">death · black · folk metal</span>
-        </a>
+        <button type="button" class="rail-home" data-rail-link="home" aria-label="A Funeral Star — home">
+          <img class="rail-home-logo" src="assets/img/logo-white.png" alt="A Funeral Star">
+          <p class="rail-home-genre">death · black · folk metal</p>
+        </button>
 
-        <section class="rail-section" aria-label="Albums">
+        <section class="rail-section" aria-label="Discography">
           <p class="rail-label">Discography</p>
           <button type="button" class="rail-link" data-rail-link="album-consumed">
-            <span class="rail-num">I</span>
-            <span class="rail-text">
-              <span class="rail-title">Consumed by a Funeral Star</span>
-              <span class="rail-sub">Cosmic Collapse</span>
-            </span>
+            <span class="rail-title">Consumed <em>by a</em> Funeral Star</span>
+            <span class="rail-sub">Album · Cosmic Collapse</span>
           </button>
           <button type="button" class="rail-link" data-rail-link="album-homeless">
-            <span class="rail-num">II</span>
-            <span class="rail-text">
-              <span class="rail-title">Homeless and Hopeless</span>
-              <span class="rail-sub">Societal Collapse</span>
-            </span>
+            <span class="rail-title">Homeless <em>and</em> Hopeless</span>
+            <span class="rail-sub">Album · Societal Collapse</span>
           </button>
-          <button type="button" class="rail-link is-active" data-rail-link="album-silver">
-            <span class="rail-num">III</span>
-            <span class="rail-text">
-              <span class="rail-title">The Land of Silver and Sorrow</span>
-              <span class="rail-sub">Romantic Collapse</span>
-            </span>
+          <button type="button" class="rail-link" data-rail-link="album-silver">
+            <span class="rail-title">The Land <em>of</em> Silver <em>and</em> Sorrow</span>
+            <span class="rail-sub">Album · Romantic Collapse</span>
+          </button>
+          <button type="button" class="rail-link" data-rail-link="release-helljoseon">
+            <span class="rail-title">Hell Joseon</span>
+            <span class="rail-sub">EP · Korean Sessions</span>
+          </button>
+          <button type="button" class="rail-link" data-rail-link="release-entropy">
+            <span class="rail-title">Entropy Cuts</span>
+            <span class="rail-sub">Album · Consumed Variants</span>
+          </button>
+          <button type="button" class="rail-link" data-rail-link="release-reyna">
+            <span class="rail-title">Plomo <em>y</em> Polvo: Reyna</span>
+            <span class="rail-sub">Single · Día de Muertos Cut</span>
           </button>
         </section>
 
@@ -81,20 +95,16 @@
             Merch Store
           </button>
           <button type="button" class="rail-link rail-link-flat" data-rail-link="videos">
-            <span class="rail-num">◐</span>
-            <span class="rail-text"><span class="rail-title">Videos & Shorts</span></span>
+            <span class="rail-title">Videos &amp; Shorts</span>
           </button>
           <button type="button" class="rail-link rail-link-flat" data-rail-link="lyrics-index">
-            <span class="rail-num">◊</span>
-            <span class="rail-text"><span class="rail-title">Lyrics</span></span>
+            <span class="rail-title">Lyrics</span>
           </button>
           <button type="button" class="rail-link rail-link-flat" data-rail-link="connect">
-            <span class="rail-num">✉</span>
-            <span class="rail-text"><span class="rail-title">Mailing List</span></span>
+            <span class="rail-title">Mailing List</span>
           </button>
           <button type="button" class="rail-link rail-link-flat" data-rail-link="about">
-            <span class="rail-num">⌬</span>
-            <span class="rail-text"><span class="rail-title">About</span></span>
+            <span class="rail-title">About</span>
           </button>
         </section>
       </div>
@@ -114,21 +124,150 @@
     </aside>
 
     <main class="stage" id="stage">
+      <!-- ============ HOME ============ -->
+      <section class="view is-active home" data-view-target="home" aria-label="Home">
+        <header class="home-hero">
+          <figure class="home-hero-banner">
+            <img src="assets/img/sitebanner.webp" alt="A Funeral Star — new music and merch" width="2172" height="724">
+          </figure>
+          <div class="home-hero-tagline">
+            <p class="home-hero-tagline-text">Songs about people trapped <em>by the gravity</em> of their situations.</p>
+            <span class="home-hero-tagline-meta">Experimental Death Metal · D.C.</span>
+          </div>
+        </header>
+
+        <section class="home-block">
+          <div class="home-block-head">
+            <p class="home-block-eyebrow">Featured Tracks</p>
+            <h2 class="home-block-title">Start <em>here</em></h2>
+          </div>
+          <div class="featured-tracks">
+            <a class="featured-track" href="https://open.spotify.com/track/4QLBXHvfms8OJZH0LiFZhc" target="_blank" rel="noreferrer" data-platform="Spotify" data-album="Consumed by a Funeral Star">
+              <span class="featured-track-play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
+              <span class="featured-track-text">
+                <span class="featured-track-title">Consumed <em>by a</em> Funeral Star</span>
+                <span class="featured-track-album">Cosmic Collapse</span>
+              </span>
+              <span class="featured-track-meta">Spotify</span>
+            </a>
+            <a class="featured-track" href="https://open.spotify.com/track/2jKvE8n3AlXqzjuQayx4WJ" target="_blank" rel="noreferrer" data-platform="Spotify" data-album="Homeless and Hopeless">
+              <span class="featured-track-play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
+              <span class="featured-track-text">
+                <span class="featured-track-title">Move <em>or</em> Rot</span>
+                <span class="featured-track-album">Societal Collapse</span>
+              </span>
+              <span class="featured-track-meta">Spotify</span>
+            </a>
+            <a class="featured-track" href="https://open.spotify.com/track/7lRFUpYJ303qdDCHeBoide" target="_blank" rel="noreferrer" data-platform="Spotify" data-album="The Land of Silver and Sorrow">
+              <span class="featured-track-play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
+              <span class="featured-track-text">
+                <span class="featured-track-title">Vals <em>del</em> Diablo</span>
+                <span class="featured-track-album">Romantic Collapse</span>
+              </span>
+              <span class="featured-track-meta">Spotify</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="home-block">
+          <div class="home-block-head">
+            <p class="home-block-eyebrow">Listen</p>
+            <h2 class="home-block-title">Stream <em>everywhere</em></h2>
+          </div>
+          <div class="listen-row">
+            <a class="listen-cta" href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noreferrer" data-platform="Spotify" data-album="Artist Page">
+              <span class="listen-cta-logo"><svg><use href="#logo-spotify"/></svg></span>
+              <span class="listen-cta-label">Spotify</span>
+            </a>
+            <a class="listen-cta" href="https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194" target="_blank" rel="noreferrer" data-platform="Apple Music" data-album="Artist Page">
+              <span class="listen-cta-logo"><svg><use href="#logo-apple"/></svg></span>
+              <span class="listen-cta-label">Apple Music</span>
+            </a>
+            <a class="listen-cta" href="https://music.youtube.com/playlist?list=OLAK5uy_n-WUAFpTLmRAcg6mhB0Hr-VXFlnd7x3pI" target="_blank" rel="noreferrer" data-platform="YouTube Music" data-album="Artist Page">
+              <span class="listen-cta-logo"><svg><use href="#logo-ytmusic"/></svg></span>
+              <span class="listen-cta-label">YT Music</span>
+            </a>
+            <a class="listen-cta" href="https://www.youtube.com/channel/UCHr58sw3YcdmXJvoggp1oew" target="_blank" rel="noreferrer" data-platform="YouTube" data-album="Channel">
+              <span class="listen-cta-logo"><svg><use href="#logo-youtube"/></svg></span>
+              <span class="listen-cta-label">YouTube</span>
+            </a>
+            <a class="listen-cta" href="https://afuneralstar.bandcamp.com" target="_blank" rel="noreferrer" data-platform="Bandcamp" data-album="Artist Page">
+              <span class="listen-cta-logo"><svg><use href="#logo-bandcamp"/></svg></span>
+              <span class="listen-cta-label">Bandcamp</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="home-block">
+          <div class="home-block-head">
+            <p class="home-block-eyebrow">Discography</p>
+            <h2 class="home-block-title">Releases</h2>
+            <button type="button" class="home-block-aside" data-rail-link="lyrics-index">All lyrics →</button>
+          </div>
+          <div class="release-grid">
+            <button type="button" class="release-tile" data-rail-link="album-consumed">
+              <span class="release-tile-art"><img src="assets/img/consumed-cover.jpg" alt="Consumed by a Funeral Star album art"></span>
+              <span class="release-tile-type">Album</span>
+              <span class="release-tile-title">Consumed <em>by a</em> Funeral Star</span>
+              <span class="release-tile-sub">Cosmic Collapse</span>
+            </button>
+            <button type="button" class="release-tile" data-rail-link="album-homeless">
+              <span class="release-tile-art"><img src="assets/img/homeless-cover.jpg" alt="Homeless and Hopeless album art"></span>
+              <span class="release-tile-type">Album</span>
+              <span class="release-tile-title">Homeless <em>and</em> Hopeless</span>
+              <span class="release-tile-sub">Societal Collapse</span>
+            </button>
+            <button type="button" class="release-tile" data-rail-link="album-silver">
+              <span class="release-tile-art"><img src="assets/img/silver-cover.jpg" alt="The Land of Silver and Sorrow album art"></span>
+              <span class="release-tile-type">Album</span>
+              <span class="release-tile-title">The Land <em>of</em> Silver <em>and</em> Sorrow</span>
+              <span class="release-tile-sub">Romantic Collapse</span>
+            </button>
+            <button type="button" class="release-tile" data-rail-link="release-helljoseon">
+              <span class="release-tile-art"><img src="assets/img/HellJoseon.png" alt="Hell Joseon EP cover"></span>
+              <span class="release-tile-type">EP</span>
+              <span class="release-tile-title">Hell Joseon</span>
+              <span class="release-tile-sub">Korean Sessions</span>
+            </button>
+            <button type="button" class="release-tile" data-rail-link="release-entropy">
+              <span class="release-tile-art"><img src="assets/img/entropycuts.png" alt="Entropy Cuts album cover"></span>
+              <span class="release-tile-type">Album</span>
+              <span class="release-tile-title">Entropy Cuts</span>
+              <span class="release-tile-sub">Consumed Variants</span>
+            </button>
+            <button type="button" class="release-tile" data-rail-link="release-reyna">
+              <span class="release-tile-art"><img src="assets/img/ReynaCut.png" alt="Plomo y Polvo: Reyna single cover"></span>
+              <span class="release-tile-type">Single</span>
+              <span class="release-tile-title">Plomo <em>y</em> Polvo: Reyna</span>
+              <span class="release-tile-sub">Día de Muertos Cut</span>
+            </button>
+          </div>
+        </section>
+
+        <div class="home-connect">
+          <div class="home-connect-text">
+            <p class="home-connect-eyebrow">Mailing list</p>
+            <h3 class="home-connect-title">News on releases, shorts, <em>and</em> shows.</h3>
+          </div>
+          <button type="button" class="home-connect-button" data-rail-link="connect">Subscribe</button>
+        </div>
+      </section>
+
       <!-- ============ ALBUM: Consumed ============ -->
       <section class="view" data-view-target="album-consumed" aria-label="Consumed by a Funeral Star">
         <div class="album">
           <div class="album-cover">
             <img class="album-art" src="assets/img/consumed-cover.jpg" alt="Consumed by a Funeral Star album art" width="1200" height="1200">
             <div class="album-meta">
-              <p class="album-eyebrow">I — Cosmic Collapse</p>
+              <p class="album-eyebrow">Cosmic Collapse · Album</p>
               <h2 class="album-title">Consumed <em>by a</em> Funeral Star</h2>
               <p class="album-blurb">Cosmic black metal and death metal built around singularities, entropy, and gravitational tombs.</p>
               <div class="album-divider"></div>
               <div class="platforms">
-                <a class="platform platform-primary" href="https://open.spotify.com/album/6fuZyp5dx6VddapdwGRKTx" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="Spotify">Spotify</a>
-                <a class="platform" href="https://music.apple.com/us/album/consumed-by-a-funeral-star/6766791921" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="Apple Music">Apple</a>
-                <a class="platform" href="https://music.youtube.com/playlist?list=OLAK5uy_n4lLf8FxiEt2bu4poMSmHTJYdl3-_wVpQ" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="YouTube Music">YT Music</a>
-                <a class="platform" href="https://www.youtube.com/playlist?list=PLn4ObNGhe_haIVMCw_8TE-TLDjwXInTI3" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="YouTube">YouTube</a>
+                <a class="platform platform-primary" href="https://open.spotify.com/album/6fuZyp5dx6VddapdwGRKTx" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="Spotify" aria-label="Listen on Spotify"><svg><use href="#logo-spotify"/></svg></a>
+                <a class="platform" href="https://music.apple.com/us/album/consumed-by-a-funeral-star/6766791921" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="Apple Music" aria-label="Listen on Apple Music"><svg><use href="#logo-apple"/></svg></a>
+                <a class="platform" href="https://music.youtube.com/playlist?list=OLAK5uy_n4lLf8FxiEt2bu4poMSmHTJYdl3-_wVpQ" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="YouTube Music" aria-label="Listen on YouTube Music"><svg><use href="#logo-ytmusic"/></svg></a>
+                <a class="platform" href="https://www.youtube.com/playlist?list=PLn4ObNGhe_haIVMCw_8TE-TLDjwXInTI3" target="_blank" rel="noreferrer" data-album="Consumed by a Funeral Star" data-platform="YouTube" aria-label="Watch on YouTube"><svg><use href="#logo-youtube"/></svg></a>
               </div>
             </div>
           </div>
@@ -156,15 +295,15 @@
           <div class="album-cover">
             <img class="album-art" src="assets/img/homeless-cover.jpg" alt="Homeless and Hopeless album art" width="1200" height="1200">
             <div class="album-meta">
-              <p class="album-eyebrow">II — Societal Collapse</p>
+              <p class="album-eyebrow">Societal Collapse · Album</p>
               <h2 class="album-title">Homeless <em>and</em> Hopeless</h2>
               <p class="album-blurb">Death metal, hardcore punk, crust, and d-beat pressure from the human scale.</p>
               <div class="album-divider"></div>
               <div class="platforms">
-                <a class="platform platform-primary" href="https://open.spotify.com/album/1p9YdRV5ECDo2aTwbOWEDZ" target="_blank" rel="noreferrer" data-album="Homeless and Hopeless" data-platform="Spotify">Spotify</a>
-                <span class="platform platform-disabled" aria-disabled="true">Apple</span>
-                <a class="platform" href="https://music.youtube.com/playlist?list=OLAK5uy_kwNGjT-rIlKIMQ5VfyJMNuPKxF98MB1zY" target="_blank" rel="noreferrer" data-album="Homeless and Hopeless" data-platform="YouTube Music">YT Music</a>
-                <a class="platform" href="https://www.youtube.com/playlist?list=PLn4ObNGhe_hYybuG6mL0RDvjKLlQ624JJ" target="_blank" rel="noreferrer" data-album="Homeless and Hopeless" data-platform="YouTube">YouTube</a>
+                <a class="platform platform-primary" href="https://open.spotify.com/album/1p9YdRV5ECDo2aTwbOWEDZ" target="_blank" rel="noreferrer" data-album="Homeless and Hopeless" data-platform="Spotify" aria-label="Listen on Spotify"><svg><use href="#logo-spotify"/></svg></a>
+                <span class="platform platform-disabled" aria-disabled="true" aria-label="Apple Music coming soon"><svg><use href="#logo-apple"/></svg></span>
+                <a class="platform" href="https://music.youtube.com/playlist?list=OLAK5uy_kwNGjT-rIlKIMQ5VfyJMNuPKxF98MB1zY" target="_blank" rel="noreferrer" data-album="Homeless and Hopeless" data-platform="YouTube Music" aria-label="Listen on YouTube Music"><svg><use href="#logo-ytmusic"/></svg></a>
+                <a class="platform" href="https://www.youtube.com/playlist?list=PLn4ObNGhe_hYybuG6mL0RDvjKLlQ624JJ" target="_blank" rel="noreferrer" data-album="Homeless and Hopeless" data-platform="YouTube" aria-label="Watch on YouTube"><svg><use href="#logo-youtube"/></svg></a>
               </div>
             </div>
           </div>
@@ -188,20 +327,20 @@
       </section>
 
       <!-- ============ ALBUM: Silver and Sorrow ============ -->
-      <section class="view is-active" data-view-target="album-silver" aria-label="The Land of Silver and Sorrow">
+      <section class="view" data-view-target="album-silver" aria-label="The Land of Silver and Sorrow">
         <div class="album">
           <div class="album-cover">
             <img class="album-art" src="assets/img/silver-cover.jpg" alt="The Land of Silver and Sorrow album art" width="1200" height="1200">
             <div class="album-meta">
-              <p class="album-eyebrow">III — Romantic Collapse</p>
+              <p class="album-eyebrow">Romantic Collapse · Album</p>
               <h2 class="album-title">The Land <em>of</em> Silver <em>and</em> Sorrow</h2>
               <p class="album-blurb">Romantic subjects trapped inside the violence of their border narco town, where love and survival pull against the same gravity.</p>
               <div class="album-divider"></div>
               <div class="platforms">
-                <a class="platform platform-primary" href="https://open.spotify.com/album/0ZBk9PCZo596PlkhXHi5y8" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="Spotify">Spotify</a>
-                <a class="platform" href="https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="Apple Music">Apple</a>
-                <a class="platform" href="https://music.youtube.com/playlist?list=OLAK5uy_n-WUAFpTLmRAcg6mhB0Hr-VXFlnd7x3pI" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="YouTube Music">YT Music</a>
-                <a class="platform" href="https://www.youtube.com/playlist?list=PLn4ObNGhe_ha6o0Y-gVfGQ8TedDfJI5kW" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="YouTube">YouTube</a>
+                <a class="platform platform-primary" href="https://open.spotify.com/album/0ZBk9PCZo596PlkhXHi5y8" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="Spotify" aria-label="Listen on Spotify"><svg><use href="#logo-spotify"/></svg></a>
+                <a class="platform" href="https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="Apple Music" aria-label="Listen on Apple Music"><svg><use href="#logo-apple"/></svg></a>
+                <a class="platform" href="https://music.youtube.com/playlist?list=OLAK5uy_n-WUAFpTLmRAcg6mhB0Hr-VXFlnd7x3pI" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="YouTube Music" aria-label="Listen on YouTube Music"><svg><use href="#logo-ytmusic"/></svg></a>
+                <a class="platform" href="https://www.youtube.com/playlist?list=PLn4ObNGhe_ha6o0Y-gVfGQ8TedDfJI5kW" target="_blank" rel="noreferrer" data-album="The Land of Silver and Sorrow" data-platform="YouTube" aria-label="Watch on YouTube"><svg><use href="#logo-youtube"/></svg></a>
               </div>
             </div>
           </div>
@@ -226,6 +365,81 @@
         </div>
       </section>
 
+      <!-- ============ EP: Hell Joseon ============ -->
+      <section class="view" data-view-target="release-helljoseon" aria-label="Hell Joseon EP">
+        <div class="release-compact">
+          <img class="album-art" src="assets/img/HellJoseon.png" alt="Hell Joseon EP cover" width="1200" height="1200">
+          <div class="release-compact-body">
+            <p class="album-eyebrow">EP · Korean Sessions</p>
+            <h2 class="album-title">Hell Joseon</h2>
+            <p class="release-compact-prose"><em>헬조선.</em> Korean-language reworkings drawn from the world of <em>Homeless and Hopeless</em> — Seoul nights, generational despair, the particular weight of trying to stay alive in a country that does not love you back.</p>
+            <div class="album-divider"></div>
+            <div class="platforms">
+              <a class="platform platform-primary" href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noreferrer" data-album="Hell Joseon" data-platform="Spotify" aria-label="Listen on Spotify"><svg><use href="#logo-spotify"/></svg></a>
+              <a class="platform" href="https://music.apple.com/us/artist/a-funeral-star" target="_blank" rel="noreferrer" data-album="Hell Joseon" data-platform="Apple Music" aria-label="Listen on Apple Music"><svg><use href="#logo-apple"/></svg></a>
+              <a class="platform" href="https://www.youtube.com/channel/UCHr58sw3YcdmXJvoggp1oew" target="_blank" rel="noreferrer" data-album="Hell Joseon" data-platform="YouTube" aria-label="Watch on YouTube"><svg><use href="#logo-youtube"/></svg></a>
+            </div>
+            <div class="view-continue">
+              <p class="view-continue-label">Related</p>
+              <div class="view-continue-list">
+                <button type="button" data-rail-link="album-homeless">Homeless and Hopeless →</button>
+                <button type="button" data-rail-link="home">All releases →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ ALBUM: Entropy Cuts ============ -->
+      <section class="view" data-view-target="release-entropy" aria-label="Entropy Cuts">
+        <div class="release-compact">
+          <img class="album-art" src="assets/img/entropycuts.png" alt="Consumed by a Funeral Star — Entropy Cuts cover" width="1200" height="1200">
+          <div class="release-compact-body">
+            <p class="album-eyebrow">Album · Consumed Variants</p>
+            <h2 class="album-title">Entropy Cuts</h2>
+            <p class="release-compact-prose">A companion record to <em>Consumed by a Funeral Star</em> — alternate takes, longer arrangements, and stripped versions that pull the same gravity from a different angle.</p>
+            <div class="album-divider"></div>
+            <div class="platforms">
+              <a class="platform platform-primary" href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noreferrer" data-album="Entropy Cuts" data-platform="Spotify" aria-label="Listen on Spotify"><svg><use href="#logo-spotify"/></svg></a>
+              <a class="platform" href="https://music.apple.com/us/artist/a-funeral-star" target="_blank" rel="noreferrer" data-album="Entropy Cuts" data-platform="Apple Music" aria-label="Listen on Apple Music"><svg><use href="#logo-apple"/></svg></a>
+              <a class="platform" href="https://www.youtube.com/channel/UCHr58sw3YcdmXJvoggp1oew" target="_blank" rel="noreferrer" data-album="Entropy Cuts" data-platform="YouTube" aria-label="Watch on YouTube"><svg><use href="#logo-youtube"/></svg></a>
+            </div>
+            <div class="view-continue">
+              <p class="view-continue-label">Related</p>
+              <div class="view-continue-list">
+                <button type="button" data-rail-link="album-consumed">Consumed by a Funeral Star →</button>
+                <button type="button" data-rail-link="home">All releases →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SINGLE: Plomo y Polvo Reyna ============ -->
+      <section class="view" data-view-target="release-reyna" aria-label="Plomo y Polvo: Reyna">
+        <div class="release-compact">
+          <img class="album-art" src="assets/img/ReynaCut.png" alt="Plomo y Polvo: Reyna single cover" width="1200" height="1200">
+          <div class="release-compact-body">
+            <p class="album-eyebrow">Single · Día de Muertos Cut</p>
+            <h2 class="album-title">Plomo <em>y</em> Polvo: Reyna</h2>
+            <p class="release-compact-prose">A reinterpretation of <em>Plomo y Polvo</em> through a queen of the dead — sugar-skull, roses, and the calm of a soul already at the threshold.</p>
+            <div class="album-divider"></div>
+            <div class="platforms">
+              <a class="platform platform-primary" href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noreferrer" data-album="Plomo y Polvo: Reyna" data-platform="Spotify" aria-label="Listen on Spotify"><svg><use href="#logo-spotify"/></svg></a>
+              <a class="platform" href="https://music.apple.com/us/artist/a-funeral-star" target="_blank" rel="noreferrer" data-album="Plomo y Polvo: Reyna" data-platform="Apple Music" aria-label="Listen on Apple Music"><svg><use href="#logo-apple"/></svg></a>
+              <a class="platform" href="https://www.youtube.com/channel/UCHr58sw3YcdmXJvoggp1oew" target="_blank" rel="noreferrer" data-album="Plomo y Polvo: Reyna" data-platform="YouTube" aria-label="Watch on YouTube"><svg><use href="#logo-youtube"/></svg></a>
+            </div>
+            <div class="view-continue">
+              <p class="view-continue-label">Related</p>
+              <div class="view-continue-list">
+                <button type="button" data-rail-link="album-silver">The Land of Silver and Sorrow →</button>
+                <button type="button" data-rail-link="home">All releases →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ============ MERCH ============ -->
       <section class="view" data-view-target="merch" aria-label="Merch store">
         <div class="view-head">
@@ -239,21 +453,21 @@
             <h3>DistroKid Store</h3>
             <p>Official storefront for shirts, totes, mugs, and release drops.</p>
             <div class="merch-actions">
-              <a class="platform platform-primary" href="https://direct.distrokid.com/afuneralstar/home" target="_blank" rel="noreferrer" data-merch="distrokid">Open Store</a>
+              <a class="merch-button" href="https://direct.distrokid.com/afuneralstar/home" target="_blank" rel="noreferrer" data-merch="distrokid">Open Store</a>
             </div>
           </article>
           <article class="merch-card">
             <h3>Bandcamp</h3>
             <p>Digital albums, direct support, and one-off release pages.</p>
             <div class="merch-actions">
-              <a class="platform" href="https://afuneralstar.bandcamp.com" target="_blank" rel="noreferrer" data-merch="bandcamp">Open Bandcamp</a>
+              <a class="merch-button merch-button-ghost" href="https://afuneralstar.bandcamp.com" target="_blank" rel="noreferrer" data-merch="bandcamp">Open Bandcamp</a>
             </div>
           </article>
           <article class="merch-card">
             <h3>Ko-fi</h3>
             <p>Tip the band directly. Funds studio time and short-form video.</p>
             <div class="merch-actions">
-              <a class="platform" href="https://ko-fi.com/afuneralstar" target="_blank" rel="noreferrer" data-merch="ko-fi">Open Ko-fi</a>
+              <a class="merch-button merch-button-ghost" href="https://ko-fi.com/afuneralstar" target="_blank" rel="noreferrer" data-merch="ko-fi">Open Ko-fi</a>
             </div>
           </article>
         </div>
@@ -288,6 +502,15 @@
           <figure class="short-card"><video controls loop playsinline preload="metadata" poster="assets/img/shorts/drifting-fading-short.jpg" data-short-video data-short-title="Drifting, Fading"><source src="assets/video/shorts/drifting-fading-short.mp4" type="video/mp4"></video><figcaption><strong>Drifting, Fading</strong><span>Consumed by a Funeral Star</span></figcaption></figure>
           <figure class="short-card"><video controls loop playsinline preload="metadata" poster="assets/img/shorts/into-void-youtube-short.jpg" data-short-video data-short-title="Into Void"><source src="assets/video/shorts/into-void-youtube-short.mp4" type="video/mp4"></video><figcaption><strong>Into Void</strong><span>Consumed by a Funeral Star</span></figcaption></figure>
         </div>
+
+        <div class="view-continue">
+          <p class="view-continue-label">Continue</p>
+          <div class="view-continue-list">
+            <button type="button" data-rail-link="home">Home →</button>
+            <button type="button" data-rail-link="album-silver">Latest album →</button>
+            <button type="button" data-rail-link="merch">Merch →</button>
+          </div>
+        </div>
       </section>
 
       <!-- ============ LYRICS INDEX ============ -->
@@ -301,7 +524,7 @@
         <input type="search" class="lyrics-search" placeholder="Search by title…" data-lyrics-search aria-label="Search lyrics">
 
         <div class="lyrics-group">
-          <h3 class="lyrics-group-title">I — Consumed by a Funeral Star</h3>
+          <h3 class="lyrics-group-title">Consumed by a Funeral Star</h3>
           <ol class="lyrics-list">
             <li data-lyrics-row="no dawn"><button type="button" data-lyrics="no-dawn" data-lyrics-album="Consumed by a Funeral Star" data-lyrics-title="No Dawn" data-lyrics-href="lyrics/consumed-by-a-funeral-star/no-dawn.html"><span class="ll-num">01</span>No Dawn</button></li>
             <li data-lyrics-row="halo of ancient doom"><button type="button" data-lyrics="halo-of-ancient-doom" data-lyrics-album="Consumed by a Funeral Star" data-lyrics-title="Halo of Ancient Doom" data-lyrics-href="lyrics/consumed-by-a-funeral-star/halo-of-ancient-doom.html"><span class="ll-num">02</span>Halo of Ancient Doom</button></li>
@@ -319,7 +542,7 @@
         </div>
 
         <div class="lyrics-group">
-          <h3 class="lyrics-group-title">II — Homeless and Hopeless</h3>
+          <h3 class="lyrics-group-title">Homeless and Hopeless</h3>
           <ol class="lyrics-list">
             <li data-lyrics-row="promise meets pavement"><button type="button" data-lyrics="promise-meets-pavement" data-lyrics-album="Homeless and Hopeless" data-lyrics-title="Promise Meets Pavement" data-lyrics-href="lyrics/homeless-and-hopeless/promise-meets-pavement.html"><span class="ll-num">02</span>Promise Meets Pavement</button></li>
             <li data-lyrics-row="move or rot"><button type="button" data-lyrics="move-or-rot" data-lyrics-album="Homeless and Hopeless" data-lyrics-title="Move or Rot" data-lyrics-href="lyrics/homeless-and-hopeless/move-or-rot.html"><span class="ll-num">03</span>Move or Rot</button></li>
@@ -337,7 +560,7 @@
         </div>
 
         <div class="lyrics-group">
-          <h3 class="lyrics-group-title">III — The Land of Silver and Sorrow</h3>
+          <h3 class="lyrics-group-title">The Land of Silver and Sorrow</h3>
           <ol class="lyrics-list">
             <li data-lyrics-row="night of the dead"><button type="button" data-lyrics="night-of-the-dead" data-lyrics-album="The Land of Silver and Sorrow" data-lyrics-title="Night of the Dead" data-lyrics-href="lyrics/the-land-of-silver-and-sorrow/night-of-the-dead.html"><span class="ll-num">01</span>Night of the Dead</button></li>
             <li data-lyrics-row="saints and sinners"><button type="button" data-lyrics="saints-and-sinners" data-lyrics-album="The Land of Silver and Sorrow" data-lyrics-title="Saints and Sinners" data-lyrics-href="lyrics/the-land-of-silver-and-sorrow/saints-and-sinners.html"><span class="ll-num">02</span>Saints and Sinners</button></li>
@@ -355,6 +578,15 @@
             <li data-lyrics-row="seeds the devil has sown"><button type="button" data-lyrics="seeds-the-devil-has-sown" data-lyrics-album="The Land of Silver and Sorrow" data-lyrics-title="Seeds the Devil has Sown" data-lyrics-href="lyrics/the-land-of-silver-and-sorrow/seeds-the-devil-has-sown.html"><span class="ll-num">14</span>Seeds the Devil has Sown</button></li>
             <li data-lyrics-row="days of the living"><button type="button" data-lyrics="days-of-the-living" data-lyrics-album="The Land of Silver and Sorrow" data-lyrics-title="Days of the Living" data-lyrics-href="lyrics/the-land-of-silver-and-sorrow/days-of-the-living.html"><span class="ll-num">15</span>Days of the Living</button></li>
           </ol>
+        </div>
+
+        <div class="view-continue">
+          <p class="view-continue-label">Continue</p>
+          <div class="view-continue-list">
+            <button type="button" data-rail-link="home">Home →</button>
+            <button type="button" data-rail-link="album-silver">Latest album →</button>
+            <button type="button" data-rail-link="connect">Mailing list →</button>
+          </div>
         </div>
       </section>
 
@@ -385,6 +617,15 @@
             <a href="mailto:contact@afuneralstar.com">contact@afuneralstar.com</a>
           </div>
         </div>
+
+        <div class="view-continue">
+          <p class="view-continue-label">Continue</p>
+          <div class="view-continue-list">
+            <button type="button" data-rail-link="home">Home →</button>
+            <button type="button" data-rail-link="album-silver">Latest album →</button>
+            <button type="button" data-rail-link="merch">Merch →</button>
+          </div>
+        </div>
       </section>
 
       <!-- ============ ABOUT ============ -->
@@ -402,8 +643,17 @@
         <ul class="about-meta">
           <li>Based — Washington, D.C.</li>
           <li>Genre — Death · Black · Folk Metal</li>
-          <li>Records — Three full-lengths, ongoing</li>
+          <li>Records — Three full-lengths, an EP, a single, ongoing</li>
         </ul>
+
+        <div class="view-continue">
+          <p class="view-continue-label">Continue</p>
+          <div class="view-continue-list">
+            <button type="button" data-rail-link="home">Home →</button>
+            <button type="button" data-rail-link="album-silver">Latest album →</button>
+            <button type="button" data-rail-link="connect">Mailing list →</button>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -415,9 +665,7 @@
         <h2 class="drawer-title" id="drawerTitle" data-drawer-title>—</h2>
         <p class="drawer-album" data-drawer-album>—</p>
         <button class="drawer-close" type="button" data-drawer-close aria-label="Close lyrics">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <path d="M6 6l12 12M6 18L18 6"/>
-          </svg>
+          <svg aria-hidden="true"><use href="#i-close"/></svg>
         </button>
       </header>
       <div class="drawer-body" data-drawer-body>Loading…</div>
