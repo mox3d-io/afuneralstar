@@ -26,6 +26,13 @@ const albums = [
     sourceDir: "content/lyrics/the-land-of-silver-and-sorrow",
     cover: "silver-cover.jpg",
   },
+  {
+    slug: "entropy-cuts",
+    title: "Consumed by a Funeral Star — Entropy Cuts",
+    collapse: "Consumed Variants",
+    sourceDir: "content/lyrics/entropy-cuts",
+    cover: "entropycuts.png",
+  },
 ];
 
 const escapeHtml = (value) =>
