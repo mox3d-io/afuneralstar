@@ -90,6 +90,22 @@ const clarityTag = `
       })(window, document, "clarity", "script", "wokypjnuyi");
     </script>`;
 
+const buildTrackJsonLd = ({ album, track, lyrics, relativeUrl }) =>
+  JSON.stringify(
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicRecording",
+      name: track.title,
+      url: `${siteUrl}/${relativeUrl}`,
+      byArtist: { "@type": "MusicGroup", name: "A Funeral Star", url: siteUrl },
+      inAlbum: { "@type": "MusicAlbum", name: album.title },
+      lyrics: { "@type": "CreativeWork", text: lyrics.trim() },
+      genre: ["Death Metal", "Black Metal", "Folk Metal"],
+    },
+    null,
+    2,
+  );
+
 const pageTemplate = ({ album, track, lyrics, relativeUrl }) => `<!doctype html>
 <html lang="en">
   <head>
@@ -99,10 +115,18 @@ const pageTemplate = ({ album, track, lyrics, relativeUrl }) => `<!doctype html>
     <meta name="description" content="${escapeHtml(track.title)} lyrics by A Funeral Star from ${escapeHtml(album.title)}.">
     <meta property="og:title" content="${escapeHtml(track.title)} Lyrics | A Funeral Star">
     <meta property="og:description" content="${escapeHtml(album.title)} / ${escapeHtml(album.collapse)}">
-    <meta property="og:image" content="../../assets/img/${album.cover}">
+    <meta property="og:image" content="${siteUrl}/assets/img/${album.cover}">
     <meta property="og:type" content="music.song">
+    <meta property="og:url" content="${siteUrl}/${relativeUrl}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${escapeHtml(track.title)} Lyrics | A Funeral Star">
+    <meta name="twitter:description" content="${escapeHtml(album.title)} / ${escapeHtml(album.collapse)}">
+    <meta name="twitter:image" content="${siteUrl}/assets/img/${album.cover}">
     <link rel="canonical" href="${siteUrl}/${relativeUrl}">
     <meta name="theme-color" content="#050506">${googleTag}${clarityTag}
+    <script type="application/ld+json">
+${buildTrackJsonLd({ album, track, lyrics, relativeUrl })}
+    </script>
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <script src="../../assets/js/site.js" defer></script>
   </head>
@@ -250,7 +274,41 @@ const createLyricsPages = async () => {
   );
   await writeFile(path.join(root, "index.html"), indexHtml);
 
+  await writeSitemap(generated);
+
   return generated;
+};
+
+const writeSitemap = async (tracks) => {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [
+    { loc: `${siteUrl}/`, changefreq: "weekly", priority: "1.0" },
+    { loc: `${siteUrl}/lyrics/`, changefreq: "monthly", priority: "0.7" },
+    ...tracks.map((t) => ({
+      loc: `${siteUrl}/${t.relativeUrl}`,
+      changefreq: "monthly",
+      priority: "0.6",
+    })),
+  ];
+
+  const body = urls
+    .map(
+      (u) => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`,
+    )
+    .join("\n");
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${body}
+</urlset>
+`;
+
+  await writeFile(path.join(root, "sitemap.xml"), xml);
 };
 
 const generated = await createLyricsPages();
