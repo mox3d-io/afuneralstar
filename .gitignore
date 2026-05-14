@@ -8,6 +8,9 @@ H&H Tshirt.png
 S&S Tote.png
 assets/img/banner2.png
 
+# Source PNGs for the inspirational-art gallery — WebPs ship instead
+assets/img/inspirationalart/*.png
+
 # OS / editor junk
 .DS_Store
 Thumbs.db

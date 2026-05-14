@@ -172,6 +172,52 @@
     }
   });
 
+  // ---------- Gallery + lightbox ----------
+
+  const lightbox = document.querySelector("[data-lightbox]");
+  const lightboxImage = document.querySelector("[data-lightbox-image]");
+  const lightboxClose = document.querySelector("[data-lightbox-close]");
+  const lightboxPrev = document.querySelector("[data-lightbox-prev]");
+  const lightboxNext = document.querySelector("[data-lightbox-next]");
+  const lightboxCounter = document.querySelector("[data-lightbox-counter]");
+  const galleryTiles = Array.from(document.querySelectorAll(".gallery-tile"));
+  let galleryIndex = 0;
+
+  const openLightbox = (i) => {
+    if (!lightbox || galleryTiles.length === 0) return;
+    galleryIndex = ((i % galleryTiles.length) + galleryTiles.length) % galleryTiles.length;
+    const tile = galleryTiles[galleryIndex];
+    const src = tile.dataset.src;
+    const idx = tile.dataset.galleryIndex;
+    lightboxImage.src = src;
+    lightboxImage.alt = `Inspirational art ${idx}`;
+    lightboxCounter.textContent = `${idx} / ${galleryTiles.length}`;
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    track("gallery_view", { piece: idx });
+  };
+
+  const closeLightbox = () => {
+    lightbox?.classList.remove("is-open");
+    lightbox?.setAttribute("aria-hidden", "true");
+  };
+
+  galleryTiles.forEach((tile, i) => {
+    tile.addEventListener("click", () => openLightbox(i));
+  });
+  lightboxClose?.addEventListener("click", closeLightbox);
+  lightboxPrev?.addEventListener("click", () => openLightbox(galleryIndex - 1));
+  lightboxNext?.addEventListener("click", () => openLightbox(galleryIndex + 1));
+  lightbox?.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox?.classList.contains("is-open")) return;
+    if (e.key === "Escape") closeLightbox();
+    else if (e.key === "ArrowLeft") openLightbox(galleryIndex - 1);
+    else if (e.key === "ArrowRight") openLightbox(galleryIndex + 1);
+  });
+
   // ---------- Newsletter ----------
 
   document.querySelector("[data-newsletter-form]")?.addEventListener("submit", () => {
