@@ -110,7 +110,7 @@ const pageTemplate = ({ album, track, lyrics, relativeUrl }) => `<!doctype html>
     <a class="skip-link" href="#main">Skip to lyrics</a>
     <header class="site-header" data-site-header>
       <a class="brand-mark" href="../../index.html#top" aria-label="A Funeral Star home">
-        <img src="../../assets/img/logo-main.png" alt="" width="180" height="120">
+        <img src="../../assets/img/logo-main.webp" alt="" width="180" height="120">
         <span>A Funeral Star</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
@@ -161,7 +161,7 @@ const lyricsIndexTemplate = (tracks) => `<!doctype html>
   <body class="lyrics-page">
     <header class="site-header" data-site-header>
       <a class="brand-mark" href="../index.html#top" aria-label="A Funeral Star home">
-        <img src="../assets/img/logo-main.png" alt="" width="180" height="120">
+        <img src="../assets/img/logo-main.webp" alt="" width="180" height="120">
         <span>A Funeral Star</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
