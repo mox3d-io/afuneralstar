@@ -180,6 +180,18 @@
   const lightboxPrev = document.querySelector("[data-lightbox-prev]");
   const lightboxNext = document.querySelector("[data-lightbox-next]");
   const lightboxCounter = document.querySelector("[data-lightbox-counter]");
+
+  // Shuffle the gallery on each load so fans see a fresh surface.
+  const galleryGrid = document.querySelector("[data-gallery]");
+  if (galleryGrid) {
+    const kids = Array.from(galleryGrid.children);
+    for (let i = kids.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [kids[i], kids[j]] = [kids[j], kids[i]];
+    }
+    kids.forEach((k) => galleryGrid.appendChild(k));
+  }
+
   const galleryTiles = Array.from(document.querySelectorAll(".gallery-tile"));
   let galleryIndex = 0;
 
