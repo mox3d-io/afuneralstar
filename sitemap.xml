@@ -1,309 +1,366 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://www.afuneralstar.com/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/sitebanner.webp</image:loc></image:image>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.webp</image:loc></image:image>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.webp</image:loc></image:image>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.webp</image:loc></image:image>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/HellJoseon.webp</image:loc></image:image>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.webp</image:loc></image:image>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/ReynaCut.webp</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/no-dawn.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/no-dawn.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/halo-of-ancient-doom.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/halo-of-ancient-doom.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/drifting-fading.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/drifting-fading.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/into-void.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/into-void.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/dragged-below.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/dragged-below.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/gravity-tomb.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/gravity-tomb.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/infinity-closes.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/infinity-closes.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/consumed-by-a-funeral-star.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/consumed-by-a-funeral-star.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/singularity.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/singularity.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/hymns-of-entropic-night.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/hymns-of-entropic-night.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/frostbite-void.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/frostbite-void.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/consumed-by-a-funeral-star/collapse-then-ignite.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/consumed-by-a-funeral-star/collapse-then-ignite.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/consumed-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/promise-meets-pavement.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/promise-meets-pavement.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/move-or-rot.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/move-or-rot.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/homeless-and-hopeless.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/homeless-and-hopeless.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/fury-not-for-sale.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/fury-not-for-sale.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/night-air-ceiling.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/night-air-ceiling.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/the-ritual.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/the-ritual.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/the-universe-did-not-notice.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/the-universe-did-not-notice.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/hold-that-pose-for-heavens-sake.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/hold-that-pose-for-heavens-sake.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/sleepwalking.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/sleepwalking.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/starlit-grave.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/starlit-grave.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/a-funeral-star.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/a-funeral-star.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/homeless-and-hopeless/washington-weeps.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/homeless-and-hopeless/washington-weeps.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/homeless-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/night-of-the-dead.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/night-of-the-dead.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/saints-and-sinners.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/saints-and-sinners.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/vals-del-diablo.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/vals-del-diablo.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/empty-streets-broken-dreams.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/empty-streets-broken-dreams.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/the-cost-of-silver.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/the-cost-of-silver.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/the-land-of-silver-and-sorrow.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/the-land-of-silver-and-sorrow.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/close-your-eyes-and-pretend-to-sleep.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/close-your-eyes-and-pretend-to-sleep.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/plomo-y-polvo.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/plomo-y-polvo.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/aqui-no-avisa.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/aqui-no-avisa.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/cradle-to-casket.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/cradle-to-casket.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/allpamanta.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/allpamanta.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/clavada-en-tu-voz.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/clavada-en-tu-voz.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/lines-in-the-sand.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/lines-in-the-sand.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/seeds-the-devil-has-sown.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/seeds-the-devil-has-sown.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/days-of-the-living.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/the-land-of-silver-and-sorrow/days-of-the-living.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/silver-cover.jpg</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/no-dawn-ii.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/no-dawn-ii.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/cosmic-thrall.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/cosmic-thrall.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/voids-awaken.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/voids-awaken.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/sanity-overthrown.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/sanity-overthrown.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/no-one-noticed.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/no-one-noticed.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/gravity-unravels.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/gravity-unravels.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/entropy.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/entropy.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/black-stars-bleed-above.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/black-stars-bleed-above.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/the-king-breathes.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/the-king-breathes.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
   <url>
-    <loc>https://www.afuneralstar.com/lyrics/entropy-cuts/drown-collapse.html</loc>
-    <lastmod>2026-05-14</lastmod>
+    <loc>https://afuneralstar.com/lyrics/entropy-cuts/drown-collapse.html</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image><image:loc>https://afuneralstar.com/assets/img/entropycuts.png</image:loc></image:image>
   </url>
 </urlset>

@@ -2,7 +2,7 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
-const siteUrl = "https://www.afuneralstar.com";
+const siteUrl = "https://afuneralstar.com";
 
 const albums = [
   {
@@ -281,13 +281,34 @@ const createLyricsPages = async () => {
 
 const writeSitemap = async (tracks) => {
   const today = new Date().toISOString().slice(0, 10);
+  const homeImages = [
+    `${siteUrl}/assets/img/sitebanner.webp`,
+    `${siteUrl}/assets/img/consumed-cover.webp`,
+    `${siteUrl}/assets/img/homeless-cover.webp`,
+    `${siteUrl}/assets/img/silver-cover.webp`,
+    `${siteUrl}/assets/img/HellJoseon.webp`,
+    `${siteUrl}/assets/img/entropycuts.webp`,
+    `${siteUrl}/assets/img/ReynaCut.webp`,
+  ];
+
   const urls = [
-    { loc: `${siteUrl}/`, changefreq: "weekly", priority: "1.0" },
-    { loc: `${siteUrl}/lyrics/`, changefreq: "monthly", priority: "0.7" },
+    {
+      loc: `${siteUrl}/`,
+      changefreq: "weekly",
+      priority: "1.0",
+      images: homeImages,
+    },
+    {
+      loc: `${siteUrl}/lyrics/`,
+      changefreq: "monthly",
+      priority: "0.7",
+      images: [],
+    },
     ...tracks.map((t) => ({
       loc: `${siteUrl}/${t.relativeUrl}`,
       changefreq: "monthly",
       priority: "0.6",
+      images: [`${siteUrl}/assets/img/${t.album.cover}`],
     })),
   ];
 
@@ -297,13 +318,16 @@ const writeSitemap = async (tracks) => {
     <loc>${u.loc}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
+    <priority>${u.priority}</priority>${u.images
+      .map((img) => `\n    <image:image><image:loc>${img}</image:loc></image:image>`)
+      .join("")}
   </url>`,
     )
     .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${body}
 </urlset>
 `;
