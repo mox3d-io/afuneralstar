@@ -266,7 +266,7 @@ const drawerHtml = `<div class="drawer-scrim" data-drawer-scrim aria-hidden="tru
     </aside>`;
 
 const lightboxHtml = `<div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-hidden="true" aria-label="Art viewer">
-      <img class="lightbox-image" data-lightbox-image alt="">
+      <img class="lightbox-image" data-lightbox-image alt="Inspirational art">
       <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close">×</button>
       <button class="lightbox-prev" type="button" data-lightbox-prev aria-label="Previous">‹</button>
       <button class="lightbox-next" type="button" data-lightbox-next aria-label="Next">›</button>
@@ -994,7 +994,7 @@ ${buildTrackJsonLd({ album, track, lyrics, relativeUrl })}
     <a class="skip-link" href="#main">Skip to lyrics</a>
     <header class="site-header" data-site-header>
       <a class="brand-mark" href="/" aria-label="A Funeral Star home">
-        <img src="/assets/img/logo-main.webp" alt="" width="180" height="120">
+        <img src="/assets/img/logo-main.webp" alt="A Funeral Star" width="180" height="120">
         <span>A Funeral Star</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
@@ -1045,7 +1045,7 @@ const lyricsIndexTemplate = (tracksByAlbum) => `<!doctype html>
   <body class="lyrics-page">
     <header class="site-header" data-site-header>
       <a class="brand-mark" href="/" aria-label="A Funeral Star home">
-        <img src="/assets/img/logo-main.webp" alt="" width="180" height="120">
+        <img src="/assets/img/logo-main.webp" alt="A Funeral Star" width="180" height="120">
         <span>A Funeral Star</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
