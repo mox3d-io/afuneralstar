@@ -377,16 +377,12 @@ const albumTrackRow = (track, album) =>
   `            <li class="track"><span class="track-num">${String(track.number).padStart(2, "0")}</span><span class="track-title">${escapeHtml(track.title)}</span><span class="track-actions"><button class="track-btn is-lyrics" type="button" data-lyrics="${slugify(track.title)}" data-lyrics-album="${escapeHtml(album.title)}" data-lyrics-title="${escapeHtml(track.title)}" data-lyrics-href="/lyrics/${album.slug}/${slugify(track.title)}.html" aria-label="View lyrics">Lyrics</button></span></li>`;
 
 const albumPage = (album, tracks) => {
-  const h1 = `${album.title} — ${album.collapse}`;
   const description = `${album.title} by A Funeral Star. ${album.blurb}`;
   const canonical = `${siteUrl}/releases/${album.urlSlug}/`;
-  const ogImage = `${siteUrl}/assets/img/${album.cover.replace(".webp", ".jpg").replace(".jpg", album.slug === "entropy-cuts" || album.cover === "entropycuts.webp" ? ".png" : ".jpg")}`;
-  // OG image stays PNG/JPG for social compat
-  const ogImageSafe = album.cover === "consumed-cover.webp" ? `${siteUrl}/assets/img/consumed-cover.jpg`
-    : album.cover === "homeless-cover.webp" ? `${siteUrl}/assets/img/homeless-cover.jpg`
-    : album.cover === "silver-cover.webp" ? `${siteUrl}/assets/img/silver-cover.jpg`
-    : album.cover === "entropycuts.webp" ? `${siteUrl}/assets/img/entropycuts.png`
-    : `${siteUrl}/assets/img/${album.cover}`;
+  // og:image uses the same WebP that visitors get — modern social
+  // platforms (Twitter/X, Facebook, iMessage, Slack, Discord, LinkedIn)
+  // all support WebP in share cards.
+  const ogImage = `${siteUrl}/assets/img/${album.cover}`;
 
   const jsonLd = JSON.stringify(
     {
@@ -444,7 +440,7 @@ ${continueFooter("Continue", relatedLinks)}
   return pageShell({
     title: `${album.title} | A Funeral Star`,
     description,
-    ogImage: ogImageSafe,
+    ogImage,
     canonical,
     jsonLd,
     railActive: `release-${album.urlSlug === "consumed" ? "consumed" : album.urlSlug === "homeless" ? "homeless" : album.urlSlug === "silver-and-sorrow" ? "silver" : album.urlSlug === "entropy-cuts" ? "entropy" : album.urlSlug}`,
@@ -455,9 +451,7 @@ ${continueFooter("Continue", relatedLinks)}
 const releasePage = (release) => {
   const description = `${release.title} by A Funeral Star. ${release.blurb}`;
   const canonical = `${siteUrl}/releases/${release.urlSlug}/`;
-  const ogImage = release.cover === "HellJoseon.webp" ? `${siteUrl}/assets/img/HellJoseon.png` :
-                  release.cover === "ReynaCut.webp" ? `${siteUrl}/assets/img/ReynaCut.png` :
-                  `${siteUrl}/assets/img/${release.cover}`;
+  const ogImage = `${siteUrl}/assets/img/${release.cover}`;
 
   const tracksHtml = release.tracks
     ? `          <ol class="tracks">
@@ -529,7 +523,7 @@ ${continueFooter("Continue", relatedLinks)}
 const homePage = () => {
   const description = "A Funeral Star. Songs about people trapped by the gravity of their situations. Death metal, black metal, folk metal — albums, videos, lyrics, merch.";
   const canonical = `${siteUrl}/`;
-  const ogImage = `${siteUrl}/assets/img/sitebanner.png`;
+  const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
   const jsonLd = JSON.stringify(
     {
@@ -537,8 +531,8 @@ const homePage = () => {
       "@type": "MusicGroup",
       name: "A Funeral Star",
       url: siteUrl,
-      logo: `${siteUrl}/assets/img/logo-main.png`,
-      image: `${siteUrl}/assets/img/sitebanner.png`,
+      logo: `${siteUrl}/assets/img/logo-main.webp`,
+      image: `${siteUrl}/assets/img/sitebanner.webp`,
       description: "Songs about people trapped by the gravity of their situations.",
       genre: ["Death Metal", "Black Metal", "Folk Metal"],
       email: "contact@afuneralstar.com",
@@ -709,20 +703,20 @@ const homePage = () => {
 const videosPage = () => {
   const description = "Music videos and shorts from A Funeral Star. Start with the funeral dance, then take the rest in 15-second cuts.";
   const canonical = `${siteUrl}/videos/`;
-  const ogImage = `${siteUrl}/assets/img/sitebanner.png`;
+  const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
   const shorts = [
-    ["vals-del-diablo-short.jpg", "vals-del-diablo-short.mp4", "Vals del Diablo", "Silver and Sorrow"],
-    ["lines-in-the-sand-short.jpg", "lines-in-the-sand-short.mp4", "Lines in the Sand", "Silver and Sorrow"],
-    ["clavada-final.jpg", "clavada-final.mp4", "Clavada en Tu Voz", "Silver and Sorrow"],
-    ["hold-that-pose-new.jpg", "hold-that-pose-new.mp4", "Hold That Pose", "Homeless and Hopeless"],
-    ["the-universe-did-not-notice-korean.jpg", "the-universe-did-not-notice-korean.mp4", "The Universe Did Not Notice", "Homeless and Hopeless"],
-    ["consumed-short.jpg", "consumed-short.mp4", "Consumed", "Consumed by a Funeral Star"],
-    ["drifting-fading-short.jpg", "drifting-fading-short.mp4", "Drifting, Fading", "Consumed by a Funeral Star"],
-    ["into-void-youtube-short.jpg", "into-void-youtube-short.mp4", "Into Void", "Consumed by a Funeral Star"],
-    ["collapsethenignite.jpg", "collapsethenignite.mp4", "Collapse Then Ignite", "Consumed by a Funeral Star"],
-    ["noonenoticed-final.jpg", "noonenoticed_final.mp4", "No One Noticed", "Entropy Cuts"],
-    ["pretendtosleep.jpg", "pretendtosleep.mp4", "Close Your Eyes & Pretend to Sleep", "The Land of Silver and Sorrow"],
+    ["vals-del-diablo-short.webp", "vals-del-diablo-short.mp4", "Vals del Diablo", "Silver and Sorrow"],
+    ["lines-in-the-sand-short.webp", "lines-in-the-sand-short.mp4", "Lines in the Sand", "Silver and Sorrow"],
+    ["clavada-final.webp", "clavada-final.mp4", "Clavada en Tu Voz", "Silver and Sorrow"],
+    ["hold-that-pose-new.webp", "hold-that-pose-new.mp4", "Hold That Pose", "Homeless and Hopeless"],
+    ["the-universe-did-not-notice-korean.webp", "the-universe-did-not-notice-korean.mp4", "The Universe Did Not Notice", "Homeless and Hopeless"],
+    ["consumed-short.webp", "consumed-short.mp4", "Consumed", "Consumed by a Funeral Star"],
+    ["drifting-fading-short.webp", "drifting-fading-short.mp4", "Drifting, Fading", "Consumed by a Funeral Star"],
+    ["into-void-youtube-short.webp", "into-void-youtube-short.mp4", "Into Void", "Consumed by a Funeral Star"],
+    ["collapsethenignite.webp", "collapsethenignite.mp4", "Collapse Then Ignite", "Consumed by a Funeral Star"],
+    ["noonenoticed-final.webp", "noonenoticed_final.mp4", "No One Noticed", "Entropy Cuts"],
+    ["pretendtosleep.webp", "pretendtosleep.mp4", "Close Your Eyes & Pretend to Sleep", "The Land of Silver and Sorrow"],
   ];
 
   const shortsHtml = shorts
@@ -773,7 +767,7 @@ ${continueFooter("Continue", [
 const galleryPage = () => {
   const description = "Inspirational art from A Funeral Star — daydreams and nightmares to inspire.";
   const canonical = `${siteUrl}/gallery/`;
-  const ogImage = `${siteUrl}/assets/img/sitebanner.png`;
+  const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
   const tiles = Array.from({ length: 60 }, (_, i) => {
     const n = String(i + 1).padStart(2, "0");
@@ -811,7 +805,7 @@ ${continueFooter("Continue", [
 const merchPage = () => {
   const description = "Merch and records from A Funeral Star. Shirts, totes, mugs, digital albums, and direct support.";
   const canonical = `${siteUrl}/merch/`;
-  const ogImage = `${siteUrl}/assets/img/sitebanner.png`;
+  const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
   const bodyContent = `      <section class="view is-active" aria-label="Merch store">
         <div class="view-head">
@@ -864,7 +858,7 @@ ${continueFooter("Continue", [
 const mailingListPage = () => {
   const description = "Mailing list signup for A Funeral Star. News on releases, shorts, and shows. No spam.";
   const canonical = `${siteUrl}/mailing-list/`;
-  const ogImage = `${siteUrl}/assets/img/sitebanner.png`;
+  const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
   const bodyContent = `      <section class="view is-active" aria-label="Mailing list and contact">
         <div class="view-head">
@@ -913,7 +907,7 @@ ${continueFooter("Continue", [
 const aboutPage = () => {
   const description = "About A Funeral Star — experimental death metal band from Washington D.C. Songs about people trapped by the gravity of their situations.";
   const canonical = `${siteUrl}/about/`;
-  const ogImage = `${siteUrl}/assets/img/sitebanner.png`;
+  const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
   const bodyContent = `      <section class="view is-active" aria-label="About">
         <div class="view-head">
@@ -967,14 +961,9 @@ const buildTrackJsonLd = ({ album, track, lyrics, relativeUrl }) =>
     2,
   );
 
-// OG image for lyric pages: keep .jpg/.png for social compat
-const lyricOgImage = (album) => {
-  if (album.cover === "consumed-cover.webp") return `${siteUrl}/assets/img/consumed-cover.jpg`;
-  if (album.cover === "homeless-cover.webp") return `${siteUrl}/assets/img/homeless-cover.jpg`;
-  if (album.cover === "silver-cover.webp") return `${siteUrl}/assets/img/silver-cover.jpg`;
-  if (album.cover === "entropycuts.webp") return `${siteUrl}/assets/img/entropycuts.png`;
-  return `${siteUrl}/assets/img/${album.cover}`;
-};
+// og:image points at the same WebP visitors load — modern social
+// platforms render WebP share cards correctly.
+const lyricOgImage = (album) => `${siteUrl}/assets/img/${album.cover}`;
 
 const lyricPageTemplate = ({ album, track, lyrics, relativeUrl }) => `<!doctype html>
 <html lang="en">
