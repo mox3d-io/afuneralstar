@@ -235,7 +235,7 @@ ${railLink("/releases/reyna/", "Plomo y Polvo: Reyna", "Single · Día de Muerto
         <section class="rail-section" aria-label="Browse">
           <p class="rail-label">Browse</p>
           <a class="rail-merch${active === "merch" ? " is-active" : ""}" href="/merch/">Merch Store</a>
-${railLinkFlat("/videos/", "Videos &amp; Shorts", "videos", active)}
+${railLinkFlat("/videos/", "Watch &amp; Listen", "videos", active)}
 ${railLinkFlat("/lyrics/", "Lyrics", "lyrics", active)}
 ${railLinkFlat("/gallery/", "Gallery", "gallery", active)}
 ${railLinkFlat("/mailing-list/", "Mailing List", "mailing-list", active)}
@@ -701,7 +701,7 @@ const homePage = () => {
 };
 
 const videosPage = () => {
-  const description = "Music videos and shorts from A Funeral Star. Start with the funeral dance, then take the rest in 15-second cuts.";
+  const description = "Listen to Vals del Diablo and watch shorts from A Funeral Star. Featured Spotify track plus 11 short clips drawn from across the discography.";
   const canonical = `${siteUrl}/videos/`;
   const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
@@ -725,11 +725,11 @@ const videosPage = () => {
     )
     .join("\n");
 
-  const bodyContent = `      <section class="view is-active" aria-label="Videos and shorts">
+  const bodyContent = `      <section class="view is-active" aria-label="Watch and listen">
         <div class="view-head">
-          <p class="view-eyebrow">Watch</p>
-          <h1 class="view-title">Videos <em>&amp;</em> Shorts</h1>
-          <p class="view-lede">Start with the funeral dance, then take the rest in 15-second cuts.</p>
+          <p class="view-eyebrow">Featured</p>
+          <h1 class="view-title">Watch <em>&amp;</em> Listen</h1>
+          <p class="view-lede">Press play on the funeral dance, then take the rest in 15-second cuts.</p>
         </div>
 
         <div class="video-feature">
@@ -759,7 +759,7 @@ ${continueFooter("Continue", [
       </section>`;
 
   return pageShell({
-    title: "Videos & Shorts | A Funeral Star",
+    title: "Watch & Listen | A Funeral Star",
     description,
     ogImage,
     canonical,
@@ -1009,7 +1009,7 @@ ${buildTrackJsonLd({ album, track, lyrics, relativeUrl })}
       </button>
       <nav class="primary-nav" id="primary-nav" data-primary-nav>
         <a href="/releases/${album.urlSlug}/">Album</a>
-        <a href="/videos/">Videos</a>
+        <a href="/videos/">Watch &amp; Listen</a>
         <a href="/merch/">Merch</a>
         <a href="/mailing-list/">Mailing list</a>
         <a href="/about/">About</a>
@@ -1057,7 +1057,7 @@ const lyricsIndexTemplate = (tracksByAlbum) => `<!doctype html>
       </button>
       <nav class="primary-nav" id="primary-nav" data-primary-nav>
         <a href="/">Home</a>
-        <a href="/videos/">Videos</a>
+        <a href="/videos/">Watch &amp; Listen</a>
         <a href="/merch/">Merch</a>
         <a href="/mailing-list/">Mailing list</a>
         <a href="/about/">About</a>
