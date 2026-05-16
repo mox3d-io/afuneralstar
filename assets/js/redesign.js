@@ -21,32 +21,6 @@
     }
   };
 
-  // ---------- View switching ----------
-
-  const setView = (view, { from = "click" } = {}) => {
-    if (!view) return;
-    body.setAttribute("data-view", view);
-    document.querySelectorAll("[data-view-target]").forEach((el) => {
-      el.classList.toggle("is-active", el.dataset.viewTarget === view);
-    });
-    document.querySelectorAll("[data-rail-link]").forEach((el) => {
-      el.classList.toggle("is-active", el.dataset.railLink === view);
-    });
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-    track("view_change", { view, from });
-  };
-
-  document.querySelectorAll("[data-rail-link]").forEach((el) => {
-    el.addEventListener("click", () => {
-      setView(el.dataset.railLink);
-      if (rail?.classList.contains("is-open")) closeRail();
-    });
-  });
-
-  document.querySelectorAll("[data-jump]").forEach((el) => {
-    el.addEventListener("click", () => setView(el.dataset.jump, { from: "stage" }));
-  });
-
   // ---------- Rail (mobile drawer) ----------
 
   const openRail = () => {
@@ -59,6 +33,11 @@
   };
   railToggle?.addEventListener("click", () => {
     rail?.classList.contains("is-open") ? closeRail() : openRail();
+  });
+
+  // Close rail when a nav link is clicked (on mobile)
+  rail?.addEventListener("click", (e) => {
+    if (e.target.closest("a")) closeRail();
   });
 
   // ---------- Lyrics drawer ----------
@@ -106,13 +85,6 @@
   drawerClose?.addEventListener("click", closeDrawer);
   drawerScrim?.addEventListener("click", closeDrawer);
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      if (drawer?.classList.contains("is-open")) closeDrawer();
-      else if (rail?.classList.contains("is-open")) closeRail();
-    }
-  });
-
   document.querySelectorAll("[data-lyrics]").forEach((btn) => {
     btn.addEventListener("click", () => {
       openDrawer({
@@ -124,22 +96,7 @@
     });
   });
 
-  // ---------- Lyrics index filter ----------
-
-  const searchInput = document.querySelector("[data-lyrics-search]");
-  searchInput?.addEventListener("input", () => {
-    const q = searchInput.value.trim().toLowerCase();
-    document.querySelectorAll("[data-lyrics-row]").forEach((row) => {
-      const haystack = row.dataset.lyricsRow;
-      row.classList.toggle("is-hidden", q && !haystack.includes(q));
-    });
-    document.querySelectorAll(".lyrics-group").forEach((group) => {
-      const visible = group.querySelectorAll("[data-lyrics-row]:not(.is-hidden)").length;
-      group.style.display = visible === 0 && q ? "none" : "";
-    });
-  });
-
-  // ---------- Shorts: auto-loop + pause-others ----------
+  // ---------- Shorts: pause-others + GA tracking ----------
 
   document.querySelectorAll("[data-short-video]").forEach((video) => {
     video.addEventListener("play", () => {
@@ -153,25 +110,6 @@
     });
   });
 
-  // ---------- Outbound analytics ----------
-
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest?.("a[href^='http']");
-    if (!a) return;
-    const dataset = a.dataset || {};
-    if (dataset.platform) {
-      track("album_platform_click", {
-        album: dataset.album,
-        platform: dataset.platform,
-        link_url: a.href,
-      });
-    } else if (dataset.merch) {
-      track("merch_click", { destination: dataset.merch, link_url: a.href });
-    } else if (dataset.social) {
-      track("social_click", { destination: dataset.social, link_url: a.href });
-    }
-  });
-
   // ---------- Gallery + lightbox ----------
 
   const lightbox = document.querySelector("[data-lightbox]");
@@ -181,7 +119,7 @@
   const lightboxNext = document.querySelector("[data-lightbox-next]");
   const lightboxCounter = document.querySelector("[data-lightbox-counter]");
 
-  // Shuffle the gallery on each load so fans see a fresh surface.
+  // Shuffle gallery on each page load (only relevant on /gallery/)
   const galleryGrid = document.querySelector("[data-gallery]");
   if (galleryGrid) {
     const kids = Array.from(galleryGrid.children);
@@ -199,14 +137,12 @@
     if (!lightbox || galleryTiles.length === 0) return;
     galleryIndex = ((i % galleryTiles.length) + galleryTiles.length) % galleryTiles.length;
     const tile = galleryTiles[galleryIndex];
-    const src = tile.dataset.src;
-    const idx = tile.dataset.galleryIndex;
-    lightboxImage.src = src;
-    lightboxImage.alt = `Inspirational art ${idx}`;
-    lightboxCounter.textContent = `${idx} / ${galleryTiles.length}`;
+    lightboxImage.src = tile.dataset.src;
+    lightboxImage.alt = `Inspirational art ${tile.dataset.galleryIndex}`;
+    lightboxCounter.textContent = `${tile.dataset.galleryIndex} / ${galleryTiles.length}`;
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
-    track("gallery_view", { piece: idx });
+    track("gallery_view", { piece: tile.dataset.galleryIndex });
   };
 
   const closeLightbox = () => {
@@ -223,11 +159,33 @@
   lightbox?.addEventListener("click", (e) => {
     if (e.target === lightbox) closeLightbox();
   });
+
+  // ---------- Keyboard: ESC, arrow keys ----------
+
   document.addEventListener("keydown", (e) => {
-    if (!lightbox?.classList.contains("is-open")) return;
-    if (e.key === "Escape") closeLightbox();
-    else if (e.key === "ArrowLeft") openLightbox(galleryIndex - 1);
-    else if (e.key === "ArrowRight") openLightbox(galleryIndex + 1);
+    if (e.key === "Escape") {
+      if (lightbox?.classList.contains("is-open")) closeLightbox();
+      else if (drawer?.classList.contains("is-open")) closeDrawer();
+      else if (rail?.classList.contains("is-open")) closeRail();
+    } else if (lightbox?.classList.contains("is-open")) {
+      if (e.key === "ArrowLeft") openLightbox(galleryIndex - 1);
+      else if (e.key === "ArrowRight") openLightbox(galleryIndex + 1);
+    }
+  });
+
+  // ---------- Outbound analytics ----------
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest?.("a[href^='http']");
+    if (!a) return;
+    const d = a.dataset || {};
+    if (d.platform) {
+      track("album_platform_click", { album: d.album, platform: d.platform, link_url: a.href });
+    } else if (d.merch) {
+      track("merch_click", { destination: d.merch, link_url: a.href });
+    } else if (d.social) {
+      track("social_click", { destination: d.social, link_url: a.href });
+    }
   });
 
   // ---------- Newsletter ----------
@@ -235,11 +193,4 @@
   document.querySelector("[data-newsletter-form]")?.addEventListener("submit", () => {
     track("newsletter_submit");
   });
-
-  // ---------- Initial view from hash ----------
-
-  const hash = window.location.hash.replace("#", "");
-  if (hash && document.querySelector(`[data-view-target="${hash}"]`)) {
-    setView(hash, { from: "deeplink" });
-  }
 })();
