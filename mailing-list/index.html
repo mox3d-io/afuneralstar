@@ -38,8 +38,6 @@
     </script>
   </head>
   <body data-page="mailing-list">
-    <a class="skip-link" href="#stage">Skip to content</a>
-
     <noscript>
       <section style="padding:2rem 1.5rem;background:#14161c;color:#e8ebf1;text-align:center;font-family:Georgia,serif;border-bottom:1px solid rgba(228,232,242,0.16)">
         <h2 style="font-size:1.4rem;margin:0 0 0.6rem;letter-spacing:0.04em">A Funeral Star</h2>
@@ -65,70 +63,59 @@
       </defs>
     </svg>
 
-    <button class="rail-toggle" type="button" data-rail-toggle aria-expanded="false" aria-controls="rail" aria-label="Open navigation">
-      <svg aria-hidden="true"><use href="#i-menu"/></svg>
-    </button>
-
-    <aside class="rail" id="rail" data-rail aria-label="Primary navigation">
-      <div>
-        <a class="rail-home" href="/" aria-label="A Funeral Star — home">
-          <img class="rail-home-logo" src="/assets/img/logo-main.webp" alt="A Funeral Star" width="800" height="533">
-        </a>
-
-        <nav class="rail-social rail-social-top" aria-label="Follow and listen">
+    <a class="skip-link" href="#stage">Skip to content</a>
+    <header class="topbar" data-topbar>
+      <a class="brand" href="/" aria-label="A Funeral Star — home">
+        <span class="brand-spark" aria-hidden="true"></span>
+        <span class="brand-name">A Funeral Star</span>
+      </a>
+      <nav class="topnav" aria-label="Primary">
+        <a href="/releases/now-we-ignite/">Releases</a>
+        <a href="/lyrics/">Lyrics</a>
+        <a href="/merch/">Merch</a>
+        <a href="/about/">About</a>
+      </nav>
+      <div class="topbar-right">
+        <nav class="topbar-social" aria-label="Listen and follow">
           <a href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noopener" data-social="spotify" aria-label="Spotify"><svg><use href="#logo-spotify"/></svg></a>
-          <a href="https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194" target="_blank" rel="noopener" data-social="apple" aria-label="Apple Music"><svg><use href="#logo-apple"/></svg></a>
+          <a href="https://music.apple.com/us/artist/a-funeral-star" target="_blank" rel="noopener" data-social="apple" aria-label="Apple Music"><svg><use href="#logo-apple"/></svg></a>
           <a href="https://www.youtube.com/@AFuneralStar" target="_blank" rel="noopener" data-social="youtube" aria-label="YouTube"><svg><use href="#logo-youtube"/></svg></a>
           <a href="https://www.tiktok.com/@afuneralstar" target="_blank" rel="noopener" data-social="tiktok" aria-label="TikTok"><svg><use href="#logo-tiktok"/></svg></a>
           <a href="https://x.com/afuneralstar" target="_blank" rel="noopener" data-social="x" aria-label="X"><svg><use href="#logo-x"/></svg></a>
           <a href="https://afuneralstar.bandcamp.com" target="_blank" rel="noopener" data-social="bandcamp" aria-label="Bandcamp"><svg><use href="#logo-bandcamp"/></svg></a>
           <a href="https://ko-fi.com/afuneralstar" target="_blank" rel="noopener" data-social="kofi" aria-label="Ko-fi"><svg><use href="#logo-kofi"/></svg></a>
         </nav>
-
-        <section class="rail-section" aria-label="Discography">
-          <p class="rail-label">Discography</p>
-          <a class="rail-link" href="/releases/consumed/">
-            <span class="rail-title">Consumed by a Funeral Star</span>
-            <span class="rail-sub">Album · Cosmic Collapse</span>
-          </a>
-          <a class="rail-link" href="/releases/homeless/">
-            <span class="rail-title">Homeless and Hopeless</span>
-            <span class="rail-sub">Album · Societal Collapse</span>
-          </a>
-          <a class="rail-link" href="/releases/silver-and-sorrow/">
-            <span class="rail-title">The Land of Silver and Sorrow</span>
-            <span class="rail-sub">Album · Romantic Collapse</span>
-          </a>
-          <a class="rail-link" href="/releases/hell-joseon/">
-            <span class="rail-title">Hell Joseon</span>
-            <span class="rail-sub">EP · Civic Collapse</span>
-          </a>
-          <a class="rail-link" href="/releases/entropy-cuts/">
-            <span class="rail-title">Entropy Cuts</span>
-            <span class="rail-sub">Album · Consumed Variants</span>
-          </a>
-          <a class="rail-link" href="/releases/reyna/">
-            <span class="rail-title">Plomo y Polvo: Reyna</span>
-            <span class="rail-sub">Single · Día de Muertos Cut</span>
-          </a>
-        </section>
-
-        <section class="rail-section" aria-label="Browse">
-          <p class="rail-label">Browse</p>
-          <a class="rail-merch" href="/merch/">Merch Store</a>
-          <a class="rail-link rail-link-flat" href="/videos/"><span class="rail-title">Watch &amp; Listen</span></a>
-          <a class="rail-link rail-link-flat" href="/lyrics/"><span class="rail-title">Lyrics</span></a>
-          <a class="rail-link rail-link-flat" href="/gallery/"><span class="rail-title">Gallery</span></a>
-          <a class="rail-link rail-link-flat is-active" href="/mailing-list/"><span class="rail-title">Mailing List</span></a>
-          <a class="rail-link rail-link-flat" href="/about/"><span class="rail-title">About</span></a>
-        </section>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
       </div>
-
-      <div class="rail-foot">
-        <p class="rail-contact">
-          <a href="mailto:contact@afuneralstar.com">contact@afuneralstar.com</a>
-        </p>
-      </div>
+    </header>
+    <div class="menu-scrim" data-menu-scrim aria-hidden="true"></div>
+    <aside class="mobile-menu" id="mobile-menu" data-menu role="dialog" aria-modal="true" aria-hidden="true" aria-label="Menu">
+      <button class="menu-close" type="button" data-menu-close aria-label="Close menu"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <p class="menu-label">The Ignition Trilogy</p>
+      <a class="menu-link" href="/releases/now-we-ignite/">Now We Ignite</a>
+      <p class="menu-label">The Collapse Trilogy</p>
+      <a class="menu-link" href="/releases/consumed/">Consumed by a Funeral Star</a>
+      <a class="menu-link" href="/releases/homeless/">Homeless and Hopeless</a>
+      <a class="menu-link" href="/releases/silver-and-sorrow/">The Land of Silver and Sorrow</a>
+      <p class="menu-label">Other Transmissions</p>
+      <a class="menu-link" href="/releases/hell-joseon/">Hell Joseon</a>
+      <a class="menu-link" href="/releases/entropy-cuts/">Entropy Cuts</a>
+      <a class="menu-link" href="/releases/reyna/">Plomo y Polvo: Reyna</a>
+      <p class="menu-label">Browse</p>
+      <a class="menu-link" href="/lyrics/">Lyrics</a>
+      <a class="menu-link" href="/merch/">Merch Store</a>
+      <a class="menu-link" href="/mailing-list/">Mailing List</a>
+      <a class="menu-link" href="/about/">About</a>
+      <nav class="menu-social" aria-label="Follow and listen">
+          <a href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noopener" data-social="spotify" aria-label="Spotify"><svg><use href="#logo-spotify"/></svg></a>
+          <a href="https://music.apple.com/us/artist/a-funeral-star" target="_blank" rel="noopener" data-social="apple" aria-label="Apple Music"><svg><use href="#logo-apple"/></svg></a>
+          <a href="https://www.youtube.com/@AFuneralStar" target="_blank" rel="noopener" data-social="youtube" aria-label="YouTube"><svg><use href="#logo-youtube"/></svg></a>
+          <a href="https://www.tiktok.com/@afuneralstar" target="_blank" rel="noopener" data-social="tiktok" aria-label="TikTok"><svg><use href="#logo-tiktok"/></svg></a>
+          <a href="https://x.com/afuneralstar" target="_blank" rel="noopener" data-social="x" aria-label="X"><svg><use href="#logo-x"/></svg></a>
+          <a href="https://afuneralstar.bandcamp.com" target="_blank" rel="noopener" data-social="bandcamp" aria-label="Bandcamp"><svg><use href="#logo-bandcamp"/></svg></a>
+          <a href="https://ko-fi.com/afuneralstar" target="_blank" rel="noopener" data-social="kofi" aria-label="Ko-fi"><svg><use href="#logo-kofi"/></svg></a>
+        </nav>
+      <p class="menu-contact"><a href="mailto:contact@afuneralstar.com">contact@afuneralstar.com</a></p>
     </aside>
 
     <main class="stage" id="stage">
@@ -163,12 +150,56 @@
           <p class="view-continue-label">Continue</p>
           <div class="view-continue-list">
             <a href="/">Home →</a>
-            <a href="/releases/silver-and-sorrow/">Latest album →</a>
+            <a href="/releases/now-we-ignite/">Latest album →</a>
             <a href="/merch/">Merch →</a>
           </div>
         </div>
       </section>
     </main>
+
+    <footer class="site-foot" aria-label="Site footer">
+      <div class="foot-top">
+        <a class="brand" href="/" aria-label="A Funeral Star — home"><span class="brand-spark" aria-hidden="true"></span><span class="brand-name">A Funeral Star</span></a>
+        <nav class="foot-social" aria-label="Follow and listen">
+          <a href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noopener" data-social="spotify" aria-label="Spotify"><svg><use href="#logo-spotify"/></svg></a>
+          <a href="https://music.apple.com/us/artist/a-funeral-star" target="_blank" rel="noopener" data-social="apple" aria-label="Apple Music"><svg><use href="#logo-apple"/></svg></a>
+          <a href="https://www.youtube.com/@AFuneralStar" target="_blank" rel="noopener" data-social="youtube" aria-label="YouTube"><svg><use href="#logo-youtube"/></svg></a>
+          <a href="https://www.tiktok.com/@afuneralstar" target="_blank" rel="noopener" data-social="tiktok" aria-label="TikTok"><svg><use href="#logo-tiktok"/></svg></a>
+          <a href="https://x.com/afuneralstar" target="_blank" rel="noopener" data-social="x" aria-label="X"><svg><use href="#logo-x"/></svg></a>
+          <a href="https://afuneralstar.bandcamp.com" target="_blank" rel="noopener" data-social="bandcamp" aria-label="Bandcamp"><svg><use href="#logo-bandcamp"/></svg></a>
+          <a href="https://ko-fi.com/afuneralstar" target="_blank" rel="noopener" data-social="kofi" aria-label="Ko-fi"><svg><use href="#logo-kofi"/></svg></a>
+        </nav>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <p class="foot-col-label">The Ignition Trilogy</p>
+          <a href="/releases/now-we-ignite/">Now We Ignite</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-col-label">The Collapse Trilogy</p>
+          <a href="/releases/consumed/">Consumed by a Funeral Star</a>
+          <a href="/releases/homeless/">Homeless and Hopeless</a>
+          <a href="/releases/silver-and-sorrow/">The Land of Silver and Sorrow</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-col-label">Other Transmissions</p>
+          <a href="/releases/hell-joseon/">Hell Joseon</a>
+          <a href="/releases/entropy-cuts/">Entropy Cuts</a>
+          <a href="/releases/reyna/">Plomo y Polvo: Reyna</a>
+        </div>
+        <div class="foot-col">
+          <p class="foot-col-label">Browse</p>
+          <a href="/lyrics/">Lyrics</a>
+          <a href="/merch/">Merch Store</a>
+          <a href="/mailing-list/">Mailing List</a>
+          <a href="/about/">About</a>
+        </div>
+      </div>
+      <div class="foot-base">
+        <a href="mailto:contact@afuneralstar.com">contact@afuneralstar.com</a>
+        <span>© A Funeral Star · Washington, D.C.</span>
+      </div>
+    </footer>
 
     <div class="drawer-scrim" data-drawer-scrim aria-hidden="true"></div>
     <aside class="drawer" data-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="drawerTitle">
@@ -182,16 +213,9 @@
       </header>
       <div class="drawer-body" data-drawer-body>Loading…</div>
     </aside>
-    <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-hidden="true" aria-label="Art viewer">
-      <img class="lightbox-image" data-lightbox-image alt="Inspirational art">
-      <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close">×</button>
-      <button class="lightbox-prev" type="button" data-lightbox-prev aria-label="Previous">‹</button>
-      <button class="lightbox-next" type="button" data-lightbox-next aria-label="Next">›</button>
-      <p class="lightbox-counter" data-lightbox-counter>—</p>
+    <div class="player-overlay" data-player role="dialog" aria-modal="true" aria-hidden="true" aria-label="Spotify player">
+      <button class="player-close" type="button" data-player-close aria-label="Close player"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div class="player-frame" data-player-frame></div>
     </div>
-    <nav class="bottom-bar" aria-label="Quick actions">
-      <a class="bottom-bar-merch" href="/merch/">Merch</a>
-      <a href="/mailing-list/">Mailing</a>
-    </nav>
   </body>
 </html>

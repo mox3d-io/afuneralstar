@@ -16,3 +16,6 @@ assets/img/inspirationalart/*.png
 Thumbs.db
 *~
 *.swp
+
+# Local redesign mockups + preview screenshots (not part of the site)
+mockup/
