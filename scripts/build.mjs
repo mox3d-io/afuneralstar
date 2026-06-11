@@ -134,7 +134,7 @@ const discographyGroups = [
     label: "The Ignition Trilogy",
     items: [
       { urlSlug: "now-we-ignite", title: "Now We Ignite", sub: "Cosmic Ignition", cover: "now-we-ignite-cover.webp", type: "Album" },
-      { coming: true, title: "Monuments", sub: "Societal Ignition", cover: "monuments-cover.webp", when: "Coming 2026" },
+      { coming: true, title: "Monuments", sub: "Societal Ignition", cover: "monuments-cover.webp", when: "June 19 · 2026" },
       { coming: true, sub: "Romantic Ignition" },
     ],
   },
@@ -160,6 +160,17 @@ const discographyGroups = [
 
 // The record currently spotlit in the hero / "latest album" cross-links.
 const featured = albums[0];
+
+// Upcoming record on the home splash — pre-save via DistroKid HyperFollow
+// until it lands on streaming. Midnight June 19, 2026 in Washington, D.C. (EDT).
+const upcoming = {
+  title: "Monuments",
+  sub: "Societal Ignition",
+  cover: "monuments-cover.webp",
+  hyperfollow: "https://distrokid.com/hyperfollow/afuneralstar/monuments",
+  releaseIso: "2026-06-19T04:00:00Z",
+  countdownSong: "Clock Don't Stop",
+};
 
 // ============ Helpers ============
 
@@ -207,7 +218,7 @@ const parseLyricFile = (filename) => {
 
 const fontsLink = `<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Spectral:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap">`;
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Spectral:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap">`;
 
 const trackingScripts = `<script async src="https://www.googletagmanager.com/gtag/js?id=G-888BCT159V"></script>
     <script>
@@ -705,9 +716,9 @@ ${continueFooter("Continue", relatedLinks)}
 };
 
 const homePage = () => {
-  const description = "A Funeral Star — experimental death, black, and folk metal from Washington, D.C. New album Now We Ignite, part of the Ignition Trilogy. Songs about people trapped by the gravity of their situations.";
+  const description = "A Funeral Star — experimental death, black, and folk metal from Washington, D.C. New album Monuments drops June 19, 2026 — pre-save it now. Songs about people trapped by the gravity of their situations.";
   const canonical = `${siteUrl}/`;
-  const ogImage = `${siteUrl}/assets/img/now-we-ignite-cover.webp`;
+  const ogImage = `${siteUrl}/assets/img/${upcoming.cover}`;
 
   const jsonLd = JSON.stringify(
     {
@@ -752,6 +763,7 @@ const homePage = () => {
         "https://ko-fi.com/afuneralstar",
       ],
       album: [
+        { "@type": "MusicAlbum", name: "Monuments", url: upcoming.hyperfollow, image: `${siteUrl}/assets/img/${upcoming.cover}`, datePublished: "2026-06-19" },
         { "@type": "MusicAlbum", name: "Now We Ignite", url: `${siteUrl}/releases/now-we-ignite/` },
         { "@type": "MusicAlbum", name: "Consumed by a Funeral Star", url: `${siteUrl}/releases/consumed/` },
         { "@type": "MusicAlbum", name: "Homeless and Hopeless", url: `${siteUrl}/releases/homeless/` },
@@ -801,33 +813,33 @@ ${g.items
         <div class="hero">
           <div class="hero-inner">
             <p class="eyebrow">A Funeral Star · The Ignition Trilogy</p>
-            <h1 class="hero-title">Now We <em>Ignite</em></h1>
-            <p class="collapse-tag">Cosmic Ignition</p>
+            <h1 class="hero-title hero-title-stone">Monuments</h1>
+            <p class="collapse-tag">${escapeHtml(upcoming.sub)}</p>
 
-            <a class="splash" href="${featured.spotify}" target="_blank" rel="noopener" data-spotify-embed="${featured.spotifyEmbed}" data-album="${escapeHtml(featured.title)}" data-platform="Spotify" aria-label="Play Now We Ignite on Spotify">
+            <div class="countdown" data-countdown="${upcoming.releaseIso}" role="timer" aria-label="Countdown to the release of Monuments">
+              <p class="countdown-tag">${escapeHtml(upcoming.countdownSong)}</p>
+              <div class="countdown-grid" data-countdown-grid>
+                <span class="cd-unit"><span class="cd-num" data-cd-days>--</span><span class="cd-label">Days</span></span>
+                <span class="cd-sep" aria-hidden="true">:</span>
+                <span class="cd-unit"><span class="cd-num" data-cd-hours>--</span><span class="cd-label">Hours</span></span>
+                <span class="cd-sep" aria-hidden="true">:</span>
+                <span class="cd-unit"><span class="cd-num" data-cd-mins>--</span><span class="cd-label">Min</span></span>
+                <span class="cd-sep" aria-hidden="true">:</span>
+                <span class="cd-unit"><span class="cd-num" data-cd-secs>--</span><span class="cd-label">Sec</span></span>
+              </div>
+              <p class="countdown-date">Midnight · June 19 2026 · Washington D.C.</p>
+            </div>
+
+            <a class="splash is-stone" href="${upcoming.hyperfollow}" target="_blank" rel="noopener" data-album="${escapeHtml(upcoming.title)}" data-platform="HyperFollow" aria-label="Pre-save Monuments on DistroKid HyperFollow">
               <span class="cosmos" aria-hidden="true">
                 <span class="glow"></span>
-                <span class="rings"><svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
-                  <ellipse cx="200" cy="200" rx="196" ry="116" transform="rotate(-48 200 200)"/>
-                  <ellipse cx="200" cy="200" rx="150" ry="80" transform="rotate(-48 200 200)"/>
-                  <ellipse cx="200" cy="200" rx="120" ry="160" transform="rotate(14 200 200)"/>
-                </svg></span>
-                <span class="jet"></span>
-                <span class="jet core"></span>
-                <span class="ice-star"></span>
               </span>
-              <img src="/assets/img/now-we-ignite-cover.webp" alt="Now We Ignite album art — a quasar igniting from a black hole" width="1254" height="1254" fetchpriority="high">
-              <span class="splash-cue"><svg aria-hidden="true"><use href="#i-play"/></svg> Play on Spotify</span>
+              <img src="/assets/img/${upcoming.cover}" alt="Monuments album art — a statue in an ornate embroidered coat" width="1254" height="1254" fetchpriority="high">
+              <span class="splash-cue">Pre-Save the Album</span>
             </a>
 
-            <p class="blurb">A quasar fires from the black hole that <em>consumed the funeral star</em>. The collapse reverses — light, outward, at the speed of birth.</p>
-
             <div class="listen">
-              <span class="listen-label">Listen</span>
-              <a class="plink is-primary" href="${featured.spotify}" target="_blank" rel="noopener" data-platform="Spotify" data-album="${escapeHtml(featured.title)}" aria-label="Spotify"><svg><use href="#logo-spotify"/></svg></a>
-              <a class="plink" href="https://music.apple.com/us/artist/a-funeral-star" target="_blank" rel="noopener" data-platform="Apple Music" data-album="${escapeHtml(featured.title)}" aria-label="Apple Music"><svg><use href="#logo-apple"/></svg></a>
-              <a class="plink" href="https://www.youtube.com/@AFuneralStar" target="_blank" rel="noopener" data-platform="YouTube" data-album="${escapeHtml(featured.title)}" aria-label="YouTube"><svg><use href="#logo-youtube"/></svg></a>
-              <a class="plink" href="https://afuneralstar.bandcamp.com" target="_blank" rel="noopener" data-platform="Bandcamp" data-album="${escapeHtml(featured.title)}" aria-label="Bandcamp"><svg><use href="#logo-bandcamp"/></svg></a>
+              <a class="presave-button" href="${upcoming.hyperfollow}" target="_blank" rel="noopener" data-album="${escapeHtml(upcoming.title)}" data-platform="HyperFollow">Pre-Save / Follow</a>
             </div>
           </div>
           <p class="scrollcue">The Discography ↓</p>
@@ -1244,6 +1256,7 @@ const writeSitemap = async (lyricTracks) => {
 
   const mainPages = [
     { loc: `${siteUrl}/`, priority: "1.0", changefreq: "weekly", images: [
+      `${siteUrl}/assets/img/monuments-cover.webp`,
       `${siteUrl}/assets/img/now-we-ignite-cover.webp`,
       `${siteUrl}/assets/img/consumed-cover.webp`,
       `${siteUrl}/assets/img/homeless-cover.webp`,

@@ -35,6 +35,7 @@
   --line-strong: rgba(236, 232, 225, 0.17);
 
   --display: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
+  --stone: "Cinzel", "Trajan Pro", "Cormorant Garamond", Georgia, serif;
   --body: "Spectral", "Source Serif Pro", Georgia, serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
@@ -214,6 +215,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   color: var(--star); text-shadow: 0 0 70px rgba(255, 140, 69, 0.2);
 }
 .hero-title em { font-style: italic; font-weight: 300; }
+/* Monuments: carved-inscription face — harder edge than the Garamond */
+.hero-title-stone {
+  font-family: var(--stone); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(2rem, 8.4vw, 5.6rem); line-height: 1; letter-spacing: 0.085em;
+  text-shadow: 0 0 70px rgba(255, 140, 69, 0.16);
+}
 .collapse-tag {
   margin: 0; display: inline-flex; align-items: center; gap: 0.7rem;
   font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.32em;
@@ -221,12 +228,39 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .collapse-tag::before, .collapse-tag::after { content: ""; width: 1.7rem; height: 1px; background: var(--line-strong); }
 
+/* release countdown (CLOCK DON'T STOP) */
+.countdown { display: grid; justify-items: center; gap: 0.65rem; margin-top: 0.7rem; }
+.countdown-tag {
+  margin: 0; font-family: var(--stone); font-weight: 600; font-size: 0.92rem;
+  letter-spacing: 0.4em; text-transform: uppercase; color: var(--ignite-bright);
+  padding-left: 0.4em; /* optically recenter the tracked-out caps */
+}
+.countdown-grid {
+  display: flex; align-items: flex-start; gap: clamp(0.5rem, 1.6vw, 1rem);
+  font-variant-numeric: tabular-nums;
+}
+.cd-unit { display: grid; justify-items: center; gap: 0.35rem; min-width: 3ch; }
+.cd-num {
+  font-family: var(--mono); font-weight: 500;
+  font-size: clamp(1.65rem, 4.4vw, 2.5rem); line-height: 1; color: var(--star);
+  text-shadow: 0 0 26px rgba(238, 106, 30, 0.3);
+}
+.cd-label { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
+.cd-sep { font-family: var(--mono); font-size: clamp(1.3rem, 3.4vw, 2rem); line-height: 1.2; color: var(--ignite-burnt); }
+.cd-live {
+  font-family: var(--stone); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(1.5rem, 3.6vw, 2.2rem); letter-spacing: 0.2em; color: var(--ignite-bright);
+}
+.countdown-date { margin: 0; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+
 /* splash (clickable album art) + cosmos */
 .splash {
   position: relative; display: block; margin: 1.8rem 0 0.7rem;
   width: clamp(260px, 34vw, 460px); aspect-ratio: 1;
   animation: float 9s ease-in-out infinite;
 }
+/* monuments don't float — the stone hangs heavy and still */
+.splash.is-stone { animation: none; }
 .cosmos { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 .glow {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
@@ -277,6 +311,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-size: clamp(1.08rem, 1.8vw, 1.32rem); line-height: 1.62; color: var(--paper-soft);
 }
 .blurb em { color: var(--paper); font-style: italic; }
+
+.presave-button {
+  padding: 0.95rem 2.4rem; border: 1px solid var(--ignite); color: var(--star);
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase;
+  transition: background 220ms var(--ease), box-shadow 260ms var(--ease);
+}
+.presave-button:hover { background: var(--ignite-ember); box-shadow: 0 0 30px var(--ignite-glow); }
 
 .listen { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.6rem; }
 .listen-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--dim); }
@@ -540,6 +581,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @media (max-width: 540px) {
   .track { grid-template-columns: 2rem 1fr auto; gap: 0.6rem; }
   .track-title { font-size: 1.08rem; }
+  /* rein in the tracked-out caps so hero lines fit a phone */
+  .eyebrow { font-size: 0.56rem; letter-spacing: 0.26em; }
+  .hero-title-stone { letter-spacing: 0.055em; }
+  .countdown-tag { font-size: 0.8rem; letter-spacing: 0.3em; }
+  .countdown-date { font-size: 0.5rem; letter-spacing: 0.2em; }
 }
 
 @media (prefers-reduced-motion: reduce) {

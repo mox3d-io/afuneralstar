@@ -174,6 +174,34 @@
     }
   });
 
+  // ---------- release countdown ----------
+  const countdown = document.querySelector("[data-countdown]");
+  if (countdown) {
+    const target = Date.parse(countdown.dataset.countdown);
+    const grid = countdown.querySelector("[data-countdown-grid]");
+    const days = countdown.querySelector("[data-cd-days]");
+    const hours = countdown.querySelector("[data-cd-hours]");
+    const mins = countdown.querySelector("[data-cd-mins]");
+    const secs = countdown.querySelector("[data-cd-secs]");
+    const pad = (n) => String(n).padStart(2, "0");
+    let timer;
+    const tick = () => {
+      const left = target - Date.now();
+      if (left <= 0) {
+        clearInterval(timer);
+        if (grid) grid.innerHTML = '<span class="cd-live">Out Now</span>';
+        return;
+      }
+      const s = Math.floor(left / 1000);
+      days.textContent = pad(Math.floor(s / 86400));
+      hours.textContent = pad(Math.floor((s % 86400) / 3600));
+      mins.textContent = pad(Math.floor((s % 3600) / 60));
+      secs.textContent = pad(s % 60);
+    };
+    tick();
+    timer = setInterval(tick, 1000);
+  }
+
   // ---------- newsletter ----------
   document.querySelector("[data-newsletter-form]")?.addEventListener("submit", () => {
     track("newsletter_submit");
