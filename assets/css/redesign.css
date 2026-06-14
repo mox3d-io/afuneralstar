@@ -423,6 +423,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .album-blurb { margin: 0.3rem 0 0.4rem; font-family: var(--body); font-style: italic; font-weight: 300; font-size: 1.08rem; line-height: 1.58; color: var(--paper-soft); max-width: 32rem; }
 .album-divider { width: 3rem; height: 1px; background: var(--ignite); margin: 0.4rem 0; }
 
+/* pre-save state (unreleased album) */
+.album-presave { display: grid; gap: 0.9rem; justify-items: start; }
+.album-presave .presave-button { justify-self: start; }
+.album-presave-note { margin: 0; max-width: 30rem; font-family: var(--body); font-style: italic; font-weight: 300; font-size: 0.98rem; line-height: 1.55; color: var(--muted); }
+
 .platforms { display: flex; flex-wrap: wrap; gap: 0.55rem; }
 .platform {
   display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem;
@@ -573,6 +578,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .album-meta { text-align: center; justify-items: center; }
   .album-divider { margin-inline: auto; }
   .platforms { justify-content: center; }
+  .album-presave { justify-items: center; text-align: center; }
+  .album-presave .presave-button { justify-self: center; }
   .home-connect { grid-template-columns: 1fr; text-align: center; justify-items: center; }
   .catalog-head { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
   .drawer { width: 100vw; }

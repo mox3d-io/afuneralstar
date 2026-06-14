@@ -33,6 +33,28 @@ const albums = [
     youtube: null,
   },
   {
+    slug: "monuments",
+    urlSlug: "monuments",
+    title: "Monuments",
+    collapse: "Societal Ignition",
+    trilogy: "ignition",
+    trilogyVol: "II",
+    type: "Album",
+    sourceDir: "content/lyrics/monuments",
+    cover: "monuments-cover.webp",
+    blurb: "The invisible hand made flesh — money, debt, the screen, and the monuments a society raises to its own greed. Societal Ignition, the second fire of the Ignition Trilogy: harder, heavier, closer to the ground.",
+    // Unreleased — pre-save via DistroKid HyperFollow until it lands on streaming.
+    // Midnight June 19, 2026 in Washington, D.C. (EDT).
+    presave: "https://distrokid.com/hyperfollow/afuneralstar/monuments",
+    releaseIso: "2026-06-19",
+    releaseLabel: "June 19, 2026",
+    spotify: null,
+    spotifyEmbed: null,
+    apple: null,
+    ytMusic: null,
+    youtube: null,
+  },
+  {
     slug: "consumed-by-a-funeral-star",
     urlSlug: "consumed",
     title: "Consumed by a Funeral Star",
@@ -556,6 +578,11 @@ const coverArt = (item) =>
               <img class="album-art" loading="lazy" src="/assets/img/${item.cover}" alt="${escapeHtml(item.title)} album art" width="1200" height="1200">
               <span class="album-art-cue"><svg aria-hidden="true"><use href="#i-play"/></svg> Play on Spotify</span>
             </a>`
+    : item.presave
+    ? `<a class="album-art-link" href="${item.presave}" target="_blank" rel="noopener" data-album="${escapeHtml(item.title)}" data-platform="HyperFollow" aria-label="Pre-save ${escapeHtml(item.title)} on HyperFollow">
+              <img class="album-art" loading="lazy" src="/assets/img/${item.cover}" alt="${escapeHtml(item.title)} album art" width="1200" height="1200">
+              <span class="album-art-cue">Pre-Save the Album</span>
+            </a>`
     : `<img class="album-art" loading="lazy" src="/assets/img/${item.cover}" alt="${escapeHtml(item.title)} album art" width="1200" height="1200">`;
 
 const albumTrackRow = (track, album) =>
@@ -589,6 +616,7 @@ const albumPage = (album, tracks) => {
       description: album.blurb,
       genre: ["Death Metal", "Black Metal", "Folk Metal"],
       byArtist: { "@type": "MusicGroup", name: "A Funeral Star", url: siteUrl },
+      ...(album.releaseIso ? { datePublished: album.releaseIso } : {}),
       numTracks: displayTracks.length,
       track: displayTracks.map((t) => ({
         "@type": "MusicRecording",
@@ -614,13 +642,18 @@ const albumPage = (album, tracks) => {
           <div class="album-cover">
             ${coverArt(album)}
             <div class="album-meta">
-              <p class="album-eyebrow">${escapeHtml(album.collapse)} · ${album.type}</p>
+              <p class="album-eyebrow">${escapeHtml(album.collapse)} · ${album.presave ? `Out ${escapeHtml(album.releaseLabel)}` : album.type}</p>
               <h1 class="album-title">${escapeHtml(album.title)}</h1>
               <p class="album-blurb">${escapeHtml(album.blurb)}</p>
               <div class="album-divider"></div>
-              <div class="platforms">
+${album.presave
+  ? `              <div class="album-presave">
+                <a class="presave-button" href="${album.presave}" target="_blank" rel="noopener" data-album="${escapeHtml(album.title)}" data-platform="HyperFollow">Pre-Save / Follow</a>
+                <p class="album-presave-note">Pre-save on Spotify, Apple Music and more — it lands in your library the moment it drops, midnight ${escapeHtml(album.releaseLabel)} in Washington, D.C.</p>
+              </div>`
+  : `              <div class="platforms">
 ${platformsHtml(album)}
-              </div>
+              </div>`}
             </div>
           </div>
 
@@ -1266,6 +1299,7 @@ const writeSitemap = async (lyricTracks) => {
       `${siteUrl}/assets/img/ReynaCut.webp`,
     ]},
     { loc: `${siteUrl}/releases/now-we-ignite/`, priority: "0.9", changefreq: "weekly", images: [`${siteUrl}/assets/img/now-we-ignite-cover.webp`] },
+    { loc: `${siteUrl}/releases/monuments/`, priority: "0.9", changefreq: "weekly", images: [`${siteUrl}/assets/img/monuments-cover.webp`] },
     { loc: `${siteUrl}/releases/consumed/`, priority: "0.9", changefreq: "monthly", images: [`${siteUrl}/assets/img/consumed-cover.webp`] },
     { loc: `${siteUrl}/releases/homeless/`, priority: "0.9", changefreq: "monthly", images: [`${siteUrl}/assets/img/homeless-cover.webp`] },
     { loc: `${siteUrl}/releases/silver-and-sorrow/`, priority: "0.9", changefreq: "monthly", images: [`${siteUrl}/assets/img/silver-cover.webp`] },
