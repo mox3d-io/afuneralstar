@@ -130,7 +130,7 @@ const otherReleases = [
     tracks: ["Hell Joseon", "Hell Joseon (B-Side)"],
     spotify: "https://open.spotify.com/album/5BX3n0PFDNTjA3NLH8af0K",
     spotifyEmbed: "album/5BX3n0PFDNTjA3NLH8af0K",
-    apple: null,
+    apple: "https://music.apple.com/us/album/hell-joseon-ep/6768542238",
     youtube: null,
   },
   {
