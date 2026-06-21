@@ -174,33 +174,41 @@
     }
   });
 
-  // ---------- release countdown ----------
-  const countdown = document.querySelector("[data-countdown]");
-  if (countdown) {
-    const target = Date.parse(countdown.dataset.countdown);
-    const grid = countdown.querySelector("[data-countdown-grid]");
-    const days = countdown.querySelector("[data-cd-days]");
-    const hours = countdown.querySelector("[data-cd-hours]");
-    const mins = countdown.querySelector("[data-cd-mins]");
-    const secs = countdown.querySelector("[data-cd-secs]");
-    const pad = (n) => String(n).padStart(2, "0");
-    let timer;
-    const tick = () => {
-      const left = target - Date.now();
-      if (left <= 0) {
-        clearInterval(timer);
-        if (grid) grid.innerHTML = '<span class="cd-live">Out Now</span>';
-        return;
-      }
-      const s = Math.floor(left / 1000);
-      days.textContent = pad(Math.floor(s / 86400));
-      hours.textContent = pad(Math.floor((s % 86400) / 3600));
-      mins.textContent = pad(Math.floor((s % 3600) / 60));
-      secs.textContent = pad(s % 60);
-    };
-    tick();
-    timer = setInterval(tick, 1000);
-  }
+  // ---------- YouTube lyric-video facade (click-to-load, inline swap) ----------
+  // Privacy-first: youtube-nocookie, no YT JS until intent. Swaps the poster for
+  // an autoplaying iframe in place (NOT the Spotify [data-player] overlay, which
+  // is hardwired to open.spotify.com/embed and a 470px-tall frame).
+  document.querySelectorAll("[data-yt-facade]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.yt;
+      const hero = btn.closest(".video-hero");
+      if (!id || !hero) return;
+      const title = btn.dataset.ytTitle || "A Funeral Star — official video";
+      const album = btn.dataset.album || "";
+      const slug = btn.dataset.ytSlug || id;
+      const iframe = document.createElement("iframe");
+      iframe.className = "video-frame";
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      iframe.title = title;
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      iframe.frameBorder = "0";
+      hero.replaceChildren(iframe);
+      iframe.focus();
+      // The outbound delegate matches a[href^=http], not a <button>, so this is the
+      // source of truth for the play, mirroring openPlayer()'s clarity upgrade.
+      track("video_play", { video: title, album, platform: "YouTube", id });
+      clarity("set", "video_play", slug);
+      clarity("upgrade", "video_play");
+    });
+  });
+
+  // ---------- internal hero / placeholder link clicks (keep the lyrics signal) ----------
+  document.querySelectorAll("[data-hero-link]").forEach((a) => {
+    a.addEventListener("click", () => {
+      track("hero_link_click", { target: a.dataset.heroLink, link_url: a.getAttribute("href") });
+      clarity("set", "hero_link", a.dataset.heroLink);
+    });
+  });
 
   // ---------- newsletter ----------
   document.querySelector("[data-newsletter-form]")?.addEventListener("submit", () => {
