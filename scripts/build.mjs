@@ -28,7 +28,7 @@ const albums = [
     instrumentals: [{ number: 1, title: "Supernova (Birth)" }],
     spotify: "https://open.spotify.com/album/3a5JAyUN6Wd45aTpIoqvIH",
     spotifyEmbed: "album/3a5JAyUN6Wd45aTpIoqvIH",
-    apple: null,
+    apple: "https://music.apple.com/us/album/now-we-ignite/6771795997",
     ytMusic: null,
     youtube: null,
   },
