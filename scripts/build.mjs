@@ -43,13 +43,11 @@ const albums = [
     sourceDir: "content/lyrics/monuments",
     cover: "monuments-cover.webp",
     blurb: "The invisible hand made flesh — money, debt, the screen, and the monuments a society raises to its own greed. Societal Ignition, the second fire of the Ignition Trilogy: harder, heavier, closer to the ground.",
-    // Released June 19, 2026. The HyperFollow smart link now routes to streaming
-    // (Spotify, Apple Music, etc.); we keep it until a direct album URL exists.
-    streamLink: "https://distrokid.com/hyperfollow/afuneralstar/monuments",
+    // Released June 19, 2026. Standard album wiring: cover opens the in-page
+    // Spotify embed overlay; the share link drives the platform buttons.
     releaseIso: "2026-06-19",
-    releaseLabel: "June 19, 2026",
-    spotify: null,
-    spotifyEmbed: null,
+    spotify: "https://open.spotify.com/album/4DgAAAEicNy7NQUdJIz67m",
+    spotifyEmbed: "album/4DgAAAEicNy7NQUdJIz67m",
     apple: null,
     ytMusic: null,
     youtube: null,
@@ -578,11 +576,6 @@ const coverArt = (item) =>
               <img class="album-art" loading="lazy" src="/assets/img/${item.cover}" alt="${escapeHtml(item.title)} album art" width="1200" height="1200">
               <span class="album-art-cue">Pre-Save the Album</span>
             </a>`
-    : item.streamLink
-    ? `<a class="album-art-link" href="${item.streamLink}" target="_blank" rel="noopener" data-album="${escapeHtml(item.title)}" data-platform="HyperFollow" aria-label="Listen to ${escapeHtml(item.title)}">
-              <img class="album-art" loading="lazy" src="/assets/img/${item.cover}" alt="${escapeHtml(item.title)} album art" width="1200" height="1200">
-              <span class="album-art-cue"><svg aria-hidden="true"><use href="#i-play"/></svg> Listen Now</span>
-            </a>`
     : `<img class="album-art" loading="lazy" src="/assets/img/${item.cover}" alt="${escapeHtml(item.title)} album art" width="1200" height="1200">`;
 
 const albumTrackRow = (track, album) =>
@@ -642,7 +635,7 @@ const albumPage = (album, tracks) => {
           <div class="album-cover">
             ${coverArt(album)}
             <div class="album-meta">
-              <p class="album-eyebrow">${escapeHtml(album.collapse)} · ${album.presave ? `Out ${escapeHtml(album.releaseLabel)}` : album.streamLink ? "Out Now" : album.type}</p>
+              <p class="album-eyebrow">${escapeHtml(album.collapse)} · ${album.presave ? `Out ${escapeHtml(album.releaseLabel)}` : album.type}</p>
               <h1 class="album-title">${escapeHtml(album.title)}</h1>
               <p class="album-blurb">${escapeHtml(album.blurb)}</p>
               <div class="album-divider"></div>
@@ -650,11 +643,6 @@ ${album.presave
   ? `              <div class="album-presave">
                 <a class="presave-button" href="${album.presave}" target="_blank" rel="noopener" data-album="${escapeHtml(album.title)}" data-platform="HyperFollow">Pre-Save / Follow</a>
                 <p class="album-presave-note">Pre-save on Spotify, Apple Music and more — it lands in your library the moment it drops, midnight ${escapeHtml(album.releaseLabel)} in Washington, D.C.</p>
-              </div>`
-  : album.streamLink
-  ? `              <div class="album-presave">
-                <a class="presave-button" href="${album.streamLink}" target="_blank" rel="noopener" data-album="${escapeHtml(album.title)}" data-platform="HyperFollow">Listen Now</a>
-                <p class="album-presave-note">Out now — stream ${escapeHtml(album.title)} on Spotify, Apple Music, and everywhere else.</p>
               </div>`
   : `              <div class="platforms">
 ${platformsHtml(album)}
@@ -801,7 +789,7 @@ const homePage = () => {
         "https://ko-fi.com/afuneralstar",
       ],
       album: [
-        { "@type": "MusicAlbum", name: "Monuments", url: `${siteUrl}/releases/monuments/`, image: `${siteUrl}/assets/img/monuments-cover.webp`, datePublished: "2026-06-19" },
+        { "@type": "MusicAlbum", name: "Monuments", url: `${siteUrl}/releases/monuments/`, image: `${siteUrl}/assets/img/monuments-cover.webp`, datePublished: "2026-06-19", sameAs: "https://open.spotify.com/album/4DgAAAEicNy7NQUdJIz67m" },
         { "@type": "MusicAlbum", name: "Now We Ignite", url: `${siteUrl}/releases/now-we-ignite/` },
         { "@type": "MusicAlbum", name: "Consumed by a Funeral Star", url: `${siteUrl}/releases/consumed/` },
         { "@type": "MusicAlbum", name: "Homeless and Hopeless", url: `${siteUrl}/releases/homeless/` },
@@ -871,7 +859,7 @@ ${g.items
 
             <nav class="hero-links" aria-label="Where to next">
               <a class="hero-link is-primary" href="/lyrics/monuments/the-hidden-hand.html" data-hero-link="lyrics-hidden-hand">Lyrics</a>
-              <a class="hero-link is-primary" href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noopener" data-platform="Spotify" data-album="Monuments">Spotify</a>
+              <a class="hero-link is-primary" href="https://open.spotify.com/album/4DgAAAEicNy7NQUdJIz67m" target="_blank" rel="noopener" data-platform="Spotify" data-album="Monuments">Spotify</a>
               <a class="hero-link" href="https://distrokid.com/hyperfollow/afuneralstar/monuments" target="_blank" rel="noopener" data-platform="HyperFollow" data-album="Monuments">All Platforms</a>
               <a class="hero-link" href="/about/" data-hero-link="about">About</a>
               <a class="hero-link" href="/merch/" data-hero-link="merch">Merch</a>
