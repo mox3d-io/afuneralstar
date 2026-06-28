@@ -1111,50 +1111,27 @@ ${continueFooter("Continue", [
 };
 
 const aboutPage = () => {
-  const description = "About A Funeral Star: experimental death metal from Washington, D.C. Five records deep. Songs about people trapped by the gravity of their situations.";
+  const description = "About A Funeral Star: experimental death metal from Washington, D.C. Songs about people trapped by the gravity of their situations.";
   const canonical = `${siteUrl}/about/`;
   const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
   const bodyContent = `      <section class="view is-active" aria-label="About">
         <div class="view-head">
           <p class="view-eyebrow">About</p>
-          <h1 class="view-title">A Funeral <em>Star</em></h1>
-          <p class="view-lede">Experimental death metal from Washington, D.C. Five records deep, still circling the same force.</p>
+          <h1 class="view-title">A Funeral Star</h1>
         </div>
 
-        <div class="about-grid">
-          <div class="about-prose">
-            <p>Experimental death metal from Washington, D.C. Songs about people trapped by the gravity of their situations, like living inside a funeral star.</p>
-            <p>The music moves from the street to the ritual to the event horizon: poverty, grief, addiction, history, collapse. Every record is another orbit around the same force.</p>
-            <p>Five full-lengths deep, and the third Ignition record is still cooling. <a href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noopener" data-social="spotify">Start on Spotify</a>, or read the words on the <a href="/lyrics/">lyrics</a> sheet.</p>
-          </div>
-
-          <aside class="about-aside">
-            <div class="about-stat"><b>5</b><span>Full-lengths</span></div>
-
-            <figure class="about-figure">
-              <img src="/assets/img/monuments-cover.webp" width="320" height="320" loading="lazy" decoding="async" alt="Monuments, a portrait statue in an ornate embroidered coat">
-              <figcaption>Monuments · Societal Ignition · 2026</figcaption>
-            </figure>
-
-            <dl class="about-facts about-meta">
-              <div><dt>Based</dt><dd>Washington, D.C.</dd></div>
-              <div><dt>Sound</dt><dd>Death · Black · Folk Metal</dd></div>
-              <div><dt>Records</dt><dd>Five full-lengths, an EP, a single, ongoing</dd></div>
-              <div><dt>Latest</dt><dd>Monuments · 2026</dd></div>
-            </dl>
-
-            <p class="about-social-label">Listen &amp; follow</p>
-            ${socialNav("about-social", "Listen and follow")}
-          </aside>
+        <div class="about-prose">
+          <p>Experimental death metal from Washington, D.C. Songs about people trapped by the gravity of their situations.</p>
         </div>
+
+        <p class="about-social-label">Listen &amp; follow</p>
+        ${socialNav("about-social", "Listen and follow")}
 
 ${continueFooter("Continue", [
+  { href: "/", text: "Home" },
   { href: "/lyrics/", text: "All lyrics" },
-  { href: "https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz", text: "Spotify", external: true, social: "spotify" },
-  { href: "https://www.tiktok.com/@afuneralstar", text: "TikTok", external: true, social: "tiktok" },
-  { href: "https://x.com/afuneralstar", text: "X", external: true, social: "x" },
-  { href: "/mailing-list/", text: "Mailing list" },
+  { href: "/merch/", text: "Merch" },
 ])}
       </section>`;
 

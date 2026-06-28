@@ -420,10 +420,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .connect-contact a:hover { color: var(--ignite-bright); }
 
 /* about */
-.about-prose { max-width: 40rem; font-size: 1.18rem; line-height: 1.78; color: var(--paper); }
-.about-prose p { margin: 0 0 1.2rem; }
-.about-prose p:first-of-type::first-letter { font-family: var(--display); font-weight: 600; font-size: 3.6em; line-height: 0.8; float: left; margin: 0.05em 0.12em 0 0; color: var(--ignite-bright); }
-.about-meta { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); list-style: none; padding-left: 0; display: grid; gap: 0.45rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.about-prose { max-width: 44rem; font-size: 1.18rem; line-height: 1.78; color: var(--paper); }
+.about-prose p { margin: 0; }
 
 /* cross-links footer */
 .view-continue { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
@@ -619,35 +617,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .hero-link.is-primary { border-color: var(--ignite); color: var(--ignite-bright); }
 .hero-link.is-primary:hover { background: var(--ignite-ember); color: var(--star); box-shadow: 0 0 24px var(--ignite-glow); }
 
-/* ============ ABOUT dossier ============ */
-.about-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
-.about-grid .about-prose { max-width: 40rem; }
-
-.about-aside { display: grid; gap: 1.5rem; }
-
-.about-stat { display: grid; gap: 0.3rem; }
-.about-stat b { font-family: var(--stone); font-weight: 700; font-size: 3rem; line-height: 1; color: var(--ignite-bright); }
-.about-stat span { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
-
-.about-figure { display: grid; gap: 0.5rem; margin: 0; }
-.about-figure img {
-  border: 1px solid var(--line-strong);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 70px rgba(238,106,30,0.1);
-}
-.about-figure figcaption {
-  font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.24em;
-  text-transform: uppercase; color: var(--muted);
-}
-
-/* facts as a definition grid (cleaner than a bare list); keep .about-meta for the top border + scale */
-.about-facts { display: grid; gap: 0.55rem; margin: 0; }
-.about-facts div { display: flex; gap: 0.8rem; align-items: baseline; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; }
-.about-facts dt { margin: 0; color: var(--ignite); min-width: 6.5rem; }
-.about-facts dd { margin: 0; color: var(--paper-soft); }
-
-.about-social-label { margin: 0.2rem 0 -0.6rem; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ignite); }
-
-/* "Listen & follow" cluster reuses the .foot-social icon idiom */
+/* ============ ABOUT — "Listen & follow" socials (reuses the .foot-social idiom) ============ */
+.about-social-label { margin: 2.2rem 0 0.85rem; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ignite); }
 .about-social { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .about-social a {
   width: 2.5rem; height: 2.5rem; display: grid; place-items: center;
@@ -656,14 +627,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .about-social a svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
 .about-social a:hover { color: var(--brand, var(--star)); border-color: currentColor; transform: translateY(-2px); }
-
-@media (min-width: 881px) {
-  .about-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 16rem); }
-  .about-aside { position: sticky; top: calc(var(--bar-h) + 1.5rem); }
-}
-@media (max-width: 880px) {
-  .about-figure img { max-width: 300px; margin-inline: auto; }
-}
 
 /* ============ Romantic Ignition placeholder ============ */
 .placeholder { max-width: 46rem; margin: 0 auto; text-align: center; display: grid; gap: 1.05rem; justify-items: center; padding: 1.5rem 0 1rem; }
