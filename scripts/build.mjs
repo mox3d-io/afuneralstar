@@ -23,7 +23,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/now-we-ignite",
     cover: "now-we-ignite-cover.webp",
-    blurb: "A quasar fires from the black hole that consumed the funeral star — the collapse reverses into ignition. Part of A Funeral Star's Ignition Trilogy.",
+    blurb: "A quasar fires from the black hole that consumed the funeral star, and the collapse reverses into ignition.",
     // Track 1 is an instrumental overture with no lyric sheet.
     instrumentals: [{ number: 1, title: "Supernova (Birth)" }],
     spotify: "https://open.spotify.com/album/3a5JAyUN6Wd45aTpIoqvIH",
@@ -42,7 +42,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/monuments",
     cover: "monuments-cover.webp",
-    blurb: "The invisible hand made flesh — money, debt, the screen, and the monuments a society raises to its own greed. Societal Ignition, the second fire of the Ignition Trilogy: harder, heavier, closer to the ground.",
+    blurb: "The invisible hand made flesh: money, debt, the screen, and the monuments a society raises to its own greed. The second fire of Ignition, harder and heavier, closer to the ground.",
     // Released June 19, 2026. Standard album wiring: cover opens the in-page
     // Spotify embed overlay; the share link drives the platform buttons.
     releaseIso: "2026-06-19",
@@ -103,13 +103,13 @@ const albums = [
   {
     slug: "entropy-cuts",
     urlSlug: "entropy-cuts",
-    title: "Consumed by a Funeral Star — Entropy Cuts",
+    title: "Consumed by a Funeral Star: Entropy Cuts",
     collapse: "Consumed Variants",
     trilogy: "other",
     type: "Album",
     sourceDir: "content/lyrics/entropy-cuts",
     cover: "entropycuts.webp",
-    blurb: "A companion record to Consumed by a Funeral Star — alternate takes, longer arrangements, and stripped versions that pull the same gravity from a different angle.",
+    blurb: "A companion record to Consumed by a Funeral Star: alternate takes, longer arrangements, and stripped versions that pull the same gravity from a different angle.",
     spotify: "https://open.spotify.com/album/6hW4VZgY7uhuPpDvRwJh1Q",
     spotifyEmbed: "album/6hW4VZgY7uhuPpDvRwJh1Q",
     apple: null,
@@ -127,7 +127,7 @@ const otherReleases = [
     trilogy: "other",
     type: "EP",
     cover: "HellJoseon.webp",
-    blurb: "On feeling trapped by the architecture of the society itself — careers already scored, credentials already counted, queues you were standing in before you were born. Same gravity as Homeless and Hopeless, pulled from a different angle.",
+    blurb: "On feeling trapped by the architecture of the society itself: careers already scored, credentials already counted, queues you were standing in before you were born. Same gravity as Homeless and Hopeless, pulled from a different angle.",
     tracks: ["Hell Joseon", "Hell Joseon (B-Side)"],
     spotify: "https://open.spotify.com/album/5BX3n0PFDNTjA3NLH8af0K",
     spotifyEmbed: "album/5BX3n0PFDNTjA3NLH8af0K",
@@ -142,7 +142,7 @@ const otherReleases = [
     trilogy: "other",
     type: "Single",
     cover: "ReynaCut.webp",
-    blurb: "A reinterpretation of Plomo y Polvo through a queen of the dead — sugar-skull, roses, and the calm of a soul already at the threshold.",
+    blurb: "A reinterpretation of Plomo y Polvo through a queen of the dead: sugar-skull, roses, and the calm of a soul already at the threshold.",
     spotify: null,
     apple: null,
     youtube: null,
@@ -153,20 +153,20 @@ const otherReleases = [
 const discographyGroups = [
   {
     key: "ignition",
-    label: "The Ignition Trilogy",
+    label: "Ignition",
     items: [
-      { urlSlug: "now-we-ignite", title: "Now We Ignite", sub: "Cosmic Ignition", cover: "now-we-ignite-cover.webp", type: "Album" },
-      { urlSlug: "monuments", title: "Monuments", sub: "Societal Ignition", cover: "monuments-cover.webp", type: "Album" },
-      { coming: true, href: "/romantic-ignition/", sub: "Romantic Ignition" },
+      { urlSlug: "now-we-ignite", title: "Now We Ignite", sub: "Cosmic", cover: "now-we-ignite-cover.webp", type: "Album" },
+      { urlSlug: "monuments", title: "Monuments", sub: "Societal", cover: "monuments-cover.webp", type: "Album" },
+      { coming: true, href: "/romantic-ignition/", title: "Saudade By The Sea", sub: "Romantic", when: "Coming Soon" },
     ],
   },
   {
     key: "collapse",
-    label: "The Collapse Trilogy",
+    label: "Collapse",
     items: [
-      { urlSlug: "consumed", title: "Consumed by a Funeral Star", sub: "Cosmic Collapse", cover: "consumed-cover.webp", type: "Album" },
-      { urlSlug: "homeless", title: "Homeless and Hopeless", sub: "Societal Collapse", cover: "homeless-cover.webp", type: "Album" },
-      { urlSlug: "silver-and-sorrow", title: "The Land of Silver and Sorrow", sub: "Romantic Collapse", cover: "silver-cover.webp", type: "Album" },
+      { urlSlug: "consumed", title: "Consumed by a Funeral Star", sub: "Cosmic", cover: "consumed-cover.webp", type: "Album" },
+      { urlSlug: "homeless", title: "Homeless and Hopeless", sub: "Societal", cover: "homeless-cover.webp", type: "Album" },
+      { urlSlug: "silver-and-sorrow", title: "The Land of Silver and Sorrow", sub: "Romantic", cover: "silver-cover.webp", type: "Album" },
     ],
   },
   {
@@ -292,7 +292,7 @@ const railLinkFlat = (href, title, activeId, currentActive) => {
 
 const buildRail = (active = "") => `<aside class="rail" id="rail" data-rail aria-label="Primary navigation">
       <div>
-        <a class="rail-home" href="/" aria-label="A Funeral Star — home">
+        <a class="rail-home" href="/" aria-label="A Funeral Star home">
           <img class="rail-home-logo" src="/assets/img/logo-main.webp" alt="A Funeral Star" width="800" height="533">
         </a>
 
@@ -340,8 +340,8 @@ const drawerHtml = `<div class="drawer-scrim" data-drawer-scrim aria-hidden="tru
     <aside class="drawer" data-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="drawerTitle">
       <header class="drawer-head">
         <p class="drawer-eyebrow">Lyrics</p>
-        <h2 class="drawer-title" id="drawerTitle" data-drawer-title>—</h2>
-        <p class="drawer-album" data-drawer-album>—</p>
+        <h2 class="drawer-title" id="drawerTitle" data-drawer-title>…</h2>
+        <p class="drawer-album" data-drawer-album>…</p>
         <button class="drawer-close" type="button" data-drawer-close aria-label="Close lyrics">
           <svg aria-hidden="true"><use href="#i-close"/></svg>
         </button>
@@ -354,7 +354,7 @@ const lightboxHtml = `<div class="lightbox" data-lightbox role="dialog" aria-mod
       <button class="lightbox-close" type="button" data-lightbox-close aria-label="Close">×</button>
       <button class="lightbox-prev" type="button" data-lightbox-prev aria-label="Previous">‹</button>
       <button class="lightbox-next" type="button" data-lightbox-next aria-label="Next">›</button>
-      <p class="lightbox-counter" data-lightbox-counter>—</p>
+      <p class="lightbox-counter" data-lightbox-counter>…</p>
     </div>`;
 
 const bottomBarHtml = `<nav class="bottom-bar" aria-label="Quick actions">
@@ -392,7 +392,7 @@ const releaseLinks = discographyGroups.map((g) => ({
 
 const buildTopbar = (active = "") => `<a class="skip-link" href="#stage">Skip to content</a>
     <header class="topbar" data-topbar>
-      <a class="brand" href="/" aria-label="A Funeral Star — home">
+      <a class="brand" href="/" aria-label="A Funeral Star home">
         <span class="brand-spark" aria-hidden="true"></span>
         <span class="brand-name">A Funeral Star</span>
       </a>
@@ -421,7 +421,7 @@ ${browseItems.map(([href, text]) => `      <a class="menu-link" href="${href}">$
 
 const buildFooter = () => `<footer class="site-foot" aria-label="Site footer">
       <div class="foot-top">
-        <a class="brand" href="/" aria-label="A Funeral Star — home"><span class="brand-spark" aria-hidden="true"></span><span class="brand-name">A Funeral Star</span></a>
+        <a class="brand" href="/" aria-label="A Funeral Star home"><span class="brand-spark" aria-hidden="true"></span><span class="brand-name">A Funeral Star</span></a>
         ${socialNav("foot-social")}
       </div>
       <div class="foot-cols">
@@ -446,13 +446,13 @@ const spotifyOverlayHtml = `<div class="player-overlay" data-player role="dialog
       <div class="player-frame" data-player-frame></div>
     </div>`;
 
-// Redirect stub for sunset sections (gallery, videos) — keeps inbound links alive.
+// Redirect stub for sunset sections (gallery, videos) - keeps inbound links alive.
 const redirectStub = (label, to = "/") => `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${escapeHtml(label)} — A Funeral Star</title>
+    <title>${escapeHtml(label)} · A Funeral Star</title>
     <meta name="robots" content="noindex,follow">
     <link rel="canonical" href="${siteUrl}${to}">
     <meta http-equiv="refresh" content="0; url=${to}">
@@ -565,7 +565,7 @@ ${links.map((l) => {
           </div>
         </div>`;
 
-// Album cover — clickable into the Spotify player overlay when a record is on
+// Album cover - clickable into the Spotify player overlay when a record is on
 // Spotify, otherwise a plain image. Used by album + compact release pages.
 const coverArt = (item) =>
   item.spotify
@@ -588,7 +588,7 @@ const albumTrackRow = (track, album) =>
 const albumPage = (album, tracks) => {
   const description = `${album.title} by A Funeral Star. ${album.blurb}`;
   const canonical = `${siteUrl}/releases/${album.urlSlug}/`;
-  // og:image uses the same WebP that visitors get — modern social
+  // og:image uses the same WebP that visitors get - modern social
   // platforms (Twitter/X, Facebook, iMessage, Slack, Discord, LinkedIn)
   // all support WebP in share cards.
   const ogImage = `${siteUrl}/assets/img/${album.cover}`;
@@ -644,7 +644,7 @@ const albumPage = (album, tracks) => {
 ${album.presave
   ? `              <div class="album-presave">
                 <a class="presave-button" href="${album.presave}" target="_blank" rel="noopener" data-album="${escapeHtml(album.title)}" data-platform="HyperFollow">Pre-Save / Follow</a>
-                <p class="album-presave-note">Pre-save on Spotify, Apple Music and more — it lands in your library the moment it drops, midnight ${escapeHtml(album.releaseLabel)} in Washington, D.C.</p>
+                <p class="album-presave-note">Pre-save on Spotify, Apple Music and more. It lands in your library the moment it drops, midnight ${escapeHtml(album.releaseLabel)} in Washington, D.C.</p>
               </div>`
   : `              <div class="platforms">
 ${platformsHtml(album)}
@@ -745,7 +745,7 @@ ${continueFooter("Continue", relatedLinks)}
 };
 
 const homePage = () => {
-  const description = "A Funeral Star — experimental death, black, and folk metal from Washington, D.C. New album Monuments out now — watch the lyric video for The Hidden Hand. Songs about people trapped by the gravity of their situations.";
+  const description = "A Funeral Star: experimental death, black, and folk metal from Washington, D.C. New album Monuments out now. Watch the lyric video for The Hidden Hand. Songs about people trapped by the gravity of their situations.";
   const canonical = `${siteUrl}/`;
   const ogImage = `${siteUrl}/assets/img/monuments-cover.webp`;
 
@@ -797,7 +797,7 @@ const homePage = () => {
         { "@type": "MusicAlbum", name: "Consumed by a Funeral Star", url: `${siteUrl}/releases/consumed/` },
         { "@type": "MusicAlbum", name: "Homeless and Hopeless", url: `${siteUrl}/releases/homeless/` },
         { "@type": "MusicAlbum", name: "The Land of Silver and Sorrow", url: `${siteUrl}/releases/silver-and-sorrow/` },
-        { "@type": "MusicAlbum", name: "Consumed by a Funeral Star — Entropy Cuts", url: `${siteUrl}/releases/entropy-cuts/` },
+        { "@type": "MusicAlbum", name: "Consumed by a Funeral Star: Entropy Cuts", url: `${siteUrl}/releases/entropy-cuts/` },
         { "@type": "MusicAlbum", name: "Hell Joseon", url: `${siteUrl}/releases/hell-joseon/` },
         { "@type": "MusicRecording", name: "Plomo y Polvo: Reyna", url: `${siteUrl}/releases/reyna/` },
       ],
@@ -816,14 +816,18 @@ ${g.items
     // Announced-but-unreleased record: shows its art + a "Coming" badge, not linked.
     if (i.coming && i.cover) {
       return `            <div class="icon is-upcoming">
-              <span class="icon-art"><img loading="lazy" width="600" height="600" src="/assets/img/${i.cover}" alt="${escapeHtml(i.title)} — ${escapeHtml(i.when || "coming soon")}"><span class="icon-badge">${escapeHtml(i.when || "Coming")}</span></span>
+              <span class="icon-art"><img loading="lazy" width="600" height="600" src="/assets/img/${i.cover}" alt="${escapeHtml(i.title)}, ${escapeHtml(i.when || "coming soon")}"><span class="icon-badge">${escapeHtml(i.when || "Coming")}</span></span>
               <span class="icon-name">${escapeHtml(i.title)}</span>
               <span class="icon-sub">${escapeHtml(i.sub)}</span>
             </div>`;
     }
     // Placeholder slot that links somewhere (e.g. a "still working on it" page).
     if (i.coming && i.href) {
-      return `            <a class="icon is-coming" href="${i.href}"><span class="icon-art"><span>In progress</span></span><span class="icon-name">${i.sub ? escapeHtml(i.sub) : "&nbsp;"}</span></a>`;
+      return `            <a class="icon is-coming" href="${i.href}">
+              <span class="icon-art"><span>${escapeHtml(i.when || "Coming Soon")}</span></span>
+              <span class="icon-name">${escapeHtml(i.title || i.sub)}</span>
+              <span class="icon-sub">${escapeHtml(i.sub)}</span>
+            </a>`;
     }
     // Placeholder slot with no art/concept yet.
     if (i.coming) {
@@ -847,18 +851,18 @@ ${g.items
           <div class="hero-inner">
             <p class="eyebrow">A Funeral Star · Societal Ignition</p>
             <h1 class="hero-title hero-title-stone is-mini">Monuments</h1>
-            <p class="collapse-tag">Out Now · The Ignition Trilogy, Vol. II</p>
+            <p class="collapse-tag">Out Now · Ignition · Vol. II</p>
 
             <figure class="video-hero">
-              <button class="video-facade" type="button" data-yt-facade data-yt="X8lGWaxxqzI" data-yt-title="The Hidden Hand — A Funeral Star (Official Lyric Video)" data-yt-slug="the-hidden-hand" data-platform="YouTube" data-album="Monuments" aria-label="Play The Hidden Hand — A Funeral Star, official lyric video">
-                <img class="video-poster" src="https://i.ytimg.com/vi/X8lGWaxxqzI/maxresdefault.jpg" width="1280" height="720" fetchpriority="high" decoding="async" alt="The Hidden Hand — A Funeral Star lyric video" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/X8lGWaxxqzI/hqdefault.jpg'">
+              <button class="video-facade" type="button" data-yt-facade data-yt="X8lGWaxxqzI" data-yt-title="The Hidden Hand · A Funeral Star (Official Lyric Video)" data-yt-slug="the-hidden-hand" data-platform="YouTube" data-album="Monuments" aria-label="Play The Hidden Hand, A Funeral Star official lyric video">
+                <img class="video-poster" src="https://i.ytimg.com/vi/X8lGWaxxqzI/maxresdefault.jpg" width="1280" height="720" fetchpriority="high" decoding="async" alt="The Hidden Hand, A Funeral Star lyric video" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/X8lGWaxxqzI/hqdefault.jpg'">
                 <span class="video-scrim" aria-hidden="true"></span>
                 <img class="video-sleeve" src="/assets/img/monuments-cover.webp" width="72" height="72" loading="lazy" decoding="async" aria-hidden="true" alt="">
                 <span class="video-play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
                 <span class="video-cap"><span class="video-cap-dot" aria-hidden="true"></span>Now Playing · Official Lyric Video</span>
               </button>
             </figure>
-            <p class="video-title">&ldquo;The Hidden Hand&rdquo; — Official Lyric Video</p>
+            <p class="video-title">&ldquo;The Hidden Hand&rdquo; · Official Lyric Video</p>
 
             <nav class="hero-links" aria-label="Where to next">
               <a class="hero-link is-primary" href="/lyrics/monuments/the-hidden-hand.html" data-hero-link="lyrics-hidden-hand">Lyrics</a>
@@ -873,8 +877,7 @@ ${g.items
 
         <div class="catalog">
           <div class="catalog-head">
-            <h2>Two trilogies, <em>one gravity</em></h2>
-            <span>Discography</span>
+            <h2>Discography</h2>
           </div>
 ${discoHtml}
         </div>
@@ -882,7 +885,7 @@ ${discoHtml}
         <div class="home-connect">
           <div class="home-connect-text">
             <p class="home-connect-eyebrow">Mailing list</p>
-            <h3 class="home-connect-title">News on releases, shorts, <em>and</em> the rest of the Ignition Trilogy.</h3>
+            <h3 class="home-connect-title">News on new releases, shorts, <em>and</em> what comes next.</h3>
           </div>
           <a class="home-connect-button" href="/mailing-list/">Subscribe</a>
         </div>
@@ -968,7 +971,7 @@ ${continueFooter("Continue", [
 };
 
 const galleryPage = () => {
-  const description = "Inspirational art from A Funeral Star — daydreams and nightmares to inspire.";
+  const description = "Inspirational art from A Funeral Star: daydreams and nightmares to inspire.";
   const canonical = `${siteUrl}/gallery/`;
   const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
@@ -1085,7 +1088,7 @@ const mailingListPage = () => {
           </form>
 
           <div class="connect-contact">
-            <p>Booking, press, or general inquiries —</p>
+            <p>Booking, press, or general inquiries:</p>
             <a href="mailto:contact@afuneralstar.com">contact@afuneralstar.com</a>
           </div>
         </div>
@@ -1108,7 +1111,7 @@ ${continueFooter("Continue", [
 };
 
 const aboutPage = () => {
-  const description = "About A Funeral Star — experimental death metal from Washington, D.C. Five records deep. Songs about people trapped by the gravity of their situations.";
+  const description = "About A Funeral Star: experimental death metal from Washington, D.C. Five records deep. Songs about people trapped by the gravity of their situations.";
   const canonical = `${siteUrl}/about/`;
   const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
@@ -1116,28 +1119,28 @@ const aboutPage = () => {
         <div class="view-head">
           <p class="view-eyebrow">About</p>
           <h1 class="view-title">A Funeral <em>Star</em></h1>
-          <p class="view-lede">Experimental death metal from Washington, D.C. — five records deep, still circling the same force.</p>
+          <p class="view-lede">Experimental death metal from Washington, D.C. Five records deep, still circling the same force.</p>
         </div>
 
         <div class="about-grid">
           <div class="about-prose">
-            <p>Experimental death metal from Washington, D.C. — songs about people trapped by the gravity of their situations, like living inside a funeral star.</p>
+            <p>Experimental death metal from Washington, D.C. Songs about people trapped by the gravity of their situations, like living inside a funeral star.</p>
             <p>The music moves from the street to the ritual to the event horizon: poverty, grief, addiction, history, collapse. Every record is another orbit around the same force.</p>
-            <p>Five full-lengths deep — two trilogies, one gravity — and the third Ignition is still cooling. <a href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noopener" data-social="spotify">Start on Spotify</a>, or read the words on the <a href="/lyrics/">lyrics</a> sheet.</p>
+            <p>Five full-lengths deep, and the third Ignition record is still cooling. <a href="https://open.spotify.com/artist/3u1NrsCtmIR1u3UBBccghz" target="_blank" rel="noopener" data-social="spotify">Start on Spotify</a>, or read the words on the <a href="/lyrics/">lyrics</a> sheet.</p>
           </div>
 
           <aside class="about-aside">
             <div class="about-stat"><b>5</b><span>Full-lengths</span></div>
 
             <figure class="about-figure">
-              <img src="/assets/img/monuments-cover.webp" width="320" height="320" loading="lazy" decoding="async" alt="Monuments — a portrait statue in an ornate embroidered coat">
+              <img src="/assets/img/monuments-cover.webp" width="320" height="320" loading="lazy" decoding="async" alt="Monuments, a portrait statue in an ornate embroidered coat">
               <figcaption>Monuments · Societal Ignition · 2026</figcaption>
             </figure>
 
             <dl class="about-facts about-meta">
               <div><dt>Based</dt><dd>Washington, D.C.</dd></div>
               <div><dt>Sound</dt><dd>Death · Black · Folk Metal</dd></div>
-              <div><dt>Records</dt><dd>Five full-lengths, an EP, a single — ongoing</dd></div>
+              <div><dt>Records</dt><dd>Five full-lengths, an EP, a single, ongoing</dd></div>
               <div><dt>Latest</dt><dd>Monuments · 2026</dd></div>
             </dl>
 
@@ -1165,20 +1168,20 @@ ${continueFooter("Continue", [
   });
 };
 
-// Romantic Ignition (Vol III) — not written yet. A clickable placeholder so the
-// home tile isn't a dead end. noindex (it's a teaser, not a real release page).
+// Saudade By The Sea (the third Ignition record): not written yet. A clickable
+// placeholder so the home tile isn't a dead end. noindex (a teaser, not a release).
 const romanticIgnitionPage = () => {
-  const description = "Romantic Ignition — the third movement of the Ignition Trilogy, still being written. In the meantime: Romantic Collapse — The Land of Silver and Sorrow.";
+  const description = "Saudade By The Sea, the third Ignition record, still being written. In the meantime: The Land of Silver and Sorrow.";
   const canonical = `${siteUrl}/romantic-ignition/`;
   const ogImage = `${siteUrl}/assets/img/silver-cover.webp`;
 
-  const bodyContent = `      <section class="view is-active" aria-label="Romantic Ignition">
+  const bodyContent = `      <section class="view is-active" aria-label="Saudade By The Sea">
         <div class="placeholder">
-          <p class="view-eyebrow">The Ignition Trilogy · Vol. III</p>
-          <h1 class="view-title">Romantic <em>Ignition</em></h1>
-          <p class="placeholder-sub">The third monument is still cooling.</p>
-          <p class="placeholder-lede">Still working on the heartbreak songs. I mean — love songs. Right. Love.</p>
-          <p class="placeholder-note">It's still being written — the slow way. No date yet.</p>
+          <p class="view-eyebrow">Ignition · Vol. III</p>
+          <h1 class="view-title">Saudade By The <em>Sea</em></h1>
+          <p class="placeholder-sub">The third one is still cooling.</p>
+          <p class="placeholder-lede">Still working on the heartbreak songs. I mean, love songs. Right. Love.</p>
+          <p class="placeholder-note">It's still being written, the slow way. No date yet.</p>
           <div class="placeholder-actions">
             <a class="presave-button" href="/mailing-list/" data-hero-link="romantic-mailing">Get told when it ignites →</a>
           </div>
@@ -1186,19 +1189,19 @@ const romanticIgnitionPage = () => {
 
         <div class="meantime">
           <p class="view-eyebrow">In the meantime</p>
-          <h2 class="meantime-title">Romantic <em>Collapse</em> — The Land of Silver and Sorrow</h2>
-          <p class="meantime-lede">A love letter to the music of Mexico — threads of Ranchera, Bolero, and Mariachi — carrying the heartbreak of a world where love doesn't live easy.</p>
+          <h2 class="meantime-title">The Land of Silver and <em>Sorrow</em></h2>
+          <p class="meantime-lede">A love letter to the music of Mexico, with threads of Ranchera, Bolero, and Mariachi, carrying the heartbreak of a world where love doesn't live easy.</p>
 
           <figure class="video-hero">
-            <button class="video-facade" type="button" data-yt-facade data-yt="PhYMzXG9sVU" data-yt-title="Vals del Diablo — A Funeral Star" data-yt-slug="vals-del-diablo" data-platform="YouTube" data-album="The Land of Silver and Sorrow" aria-label="Play Vals del Diablo — A Funeral Star, official video">
-              <img class="video-poster" src="https://i.ytimg.com/vi/PhYMzXG9sVU/maxresdefault.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Vals del Diablo — A Funeral Star" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/PhYMzXG9sVU/hqdefault.jpg'">
+            <button class="video-facade" type="button" data-yt-facade data-yt="PhYMzXG9sVU" data-yt-title="Vals del Diablo (A Funeral Star)" data-yt-slug="vals-del-diablo" data-platform="YouTube" data-album="The Land of Silver and Sorrow" aria-label="Play Vals del Diablo, A Funeral Star official video">
+              <img class="video-poster" src="https://i.ytimg.com/vi/PhYMzXG9sVU/maxresdefault.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Vals del Diablo, A Funeral Star" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/PhYMzXG9sVU/hqdefault.jpg'">
               <span class="video-scrim" aria-hidden="true"></span>
               <img class="video-sleeve" src="/assets/img/silver-cover.webp" width="72" height="72" loading="lazy" decoding="async" aria-hidden="true" alt="">
               <span class="video-play" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
               <span class="video-cap"><span class="video-cap-dot" aria-hidden="true"></span>Now Playing · Vals del Diablo</span>
             </button>
           </figure>
-          <p class="video-title">&ldquo;Vals del Diablo&rdquo; — The Land of Silver and Sorrow</p>
+          <p class="video-title">&ldquo;Vals del Diablo&rdquo; · The Land of Silver and Sorrow</p>
 
           <div class="placeholder-actions">
             <a class="presave-button" href="/releases/silver-and-sorrow/" data-hero-link="romantic-silver">Hear the album →</a>
@@ -1214,7 +1217,7 @@ ${continueFooter("Meanwhile", [
       </section>`;
 
   return pageShell({
-    title: "Romantic Ignition | A Funeral Star",
+    title: "Saudade By The Sea | A Funeral Star",
     description,
     ogImage,
     canonical,
@@ -1242,7 +1245,7 @@ const buildTrackJsonLd = ({ album, track, lyrics, relativeUrl }) =>
     2,
   );
 
-// og:image points at the same WebP visitors load — modern social
+// og:image points at the same WebP visitors load - modern social
 // platforms render WebP share cards correctly.
 const lyricOgImage = (album) => `${siteUrl}/assets/img/${album.cover}`;
 
@@ -1485,7 +1488,7 @@ const main = async () => {
     await writeFile(path.join(dir, "index.html"), builder());
   }
 
-  // 3b. Sunset sections — redirect stubs keep inbound links alive.
+  // 3b. Sunset sections - redirect stubs keep inbound links alive.
   for (const [slug, label] of [
     ["videos", "Watch & Listen"],
     ["gallery", "The art gallery"],

@@ -183,7 +183,7 @@
       const id = btn.dataset.yt;
       const hero = btn.closest(".video-hero");
       if (!id || !hero) return;
-      const title = btn.dataset.ytTitle || "A Funeral Star — official video";
+      const title = btn.dataset.ytTitle || "A Funeral Star official video";
       const album = btn.dataset.album || "";
       const slug = btn.dataset.ytSlug || id;
       const iframe = document.createElement("iframe");
