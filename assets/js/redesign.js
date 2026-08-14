@@ -238,4 +238,29 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
   measure();
+
+  // ---------- horizon gate (home only) ----------
+  // One gesture does everything: dismisses the gate and chains a click into
+  // the hero facade, whose autoplay=1 iframe inherits the user activation,
+  // so the album starts WITH sound. Session-scoped: internal nav never
+  // re-gates. If JS is off, a noscript style hides the gate entirely.
+  const gate = document.querySelector("[data-gate]");
+  if (gate) {
+    if (sessionStorage.getItem("horizonCrossed") === "1") {
+      gate.remove();
+    } else {
+      body.classList.add("gate-locked");
+      clarity("set", "saw_horizon_gate", "yes");
+      gate.querySelector("[data-gate-enter]")?.addEventListener("click", () => {
+        sessionStorage.setItem("horizonCrossed", "1");
+        track("horizon_crossed", {});
+        clarity("set", "crossed_horizon", "yes");
+        clarity("upgrade", "crossed_horizon");
+        gate.classList.add("is-crossing");
+        body.classList.remove("gate-locked");
+        document.querySelector("[data-yt-facade]")?.click();
+        setTimeout(() => gate.remove(), 750);
+      });
+    }
+  }
 })();

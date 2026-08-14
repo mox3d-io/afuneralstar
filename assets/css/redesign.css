@@ -650,3 +650,148 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .hero-link { padding: 0.7rem 1.1rem; letter-spacing: 0.2em; }
   .video-sleeve { bottom: 2.2rem; }
 }
+
+/* ---------- horizon gate ---------- */
+.horizon-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(96, 74, 141, 0.14), transparent 42%),
+    radial-gradient(ellipse at 50% 42%, rgba(20, 22, 34, 0.9), #030308 70%),
+    #030308;
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+.horizon-gate.is-crossing { opacity: 0; pointer-events: none; }
+body.gate-locked { overflow: hidden; }
+.gate-void {
+  position: relative;
+  width: min(38vmin, 210px);
+  height: min(38vmin, 210px);
+  margin-bottom: 0.4rem;
+}
+.gate-core {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: #000;
+  box-shadow:
+    0 0 24px 6px rgba(148, 118, 214, 0.25),
+    0 0 70px 18px rgba(96, 74, 141, 0.18),
+    inset 0 0 18px 6px rgba(0, 0, 0, 0.95);
+}
+.gate-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(196, 176, 240, 0.35);
+  border-top-color: rgba(228, 214, 255, 0.85);
+  filter: blur(0.4px);
+  animation: gate-spin 9s linear infinite;
+}
+@keyframes gate-spin { to { transform: rotate(360deg); } }
+.gate-name {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.15rem, 3.4vw, 1.7rem);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #e8ebf1;
+  text-indent: 0.34em;
+}
+.gate-enter {
+  appearance: none;
+  cursor: pointer;
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.82rem, 2.4vw, 1rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-indent: 0.28em;
+  color: #dcd2f2;
+  background: transparent;
+  border: 1px solid rgba(196, 176, 240, 0.45);
+  border-radius: 999px;
+  padding: 0.85rem 2.1rem 0.8rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  animation: gate-breathe 3.2s ease-in-out infinite;
+}
+.gate-enter:hover, .gate-enter:focus-visible {
+  color: #fff;
+  border-color: rgba(228, 214, 255, 0.9);
+  box-shadow: 0 0 22px 4px rgba(148, 118, 214, 0.28);
+  outline: none;
+}
+@keyframes gate-breathe {
+  0%, 100% { box-shadow: 0 0 10px 1px rgba(148, 118, 214, 0.12); }
+  50% { box-shadow: 0 0 20px 4px rgba(148, 118, 214, 0.26); }
+}
+.gate-sub {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(197, 201, 211, 0.55);
+}
+@media (prefers-reduced-motion: reduce) {
+  .gate-ring, .gate-enter { animation: none; }
+}
+
+/* ---------- merch product grid ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1.1rem;
+  margin: 0 0 0.8rem;
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  text-decoration: none;
+  background: rgba(20, 22, 28, 0.55);
+  border: 1px solid rgba(228, 232, 242, 0.1);
+  border-radius: 14px;
+  padding: 0.9rem 0.9rem 0.8rem;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.product-card:hover, .product-card:focus-visible {
+  border-color: rgba(196, 176, 240, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+.product-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(10, 10, 14, 0.6);
+}
+.product-name {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c5c9d3;
+  text-align: center;
+}
+.product-note {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.02rem;
+  color: rgba(197, 201, 211, 0.6);
+}
+
+/* ---------- album-page full-album video ---------- */
+.album .video-hero { max-width: 720px; margin: 1.4rem auto 0.8rem; float: none; }
+.album .video-title { text-align: center; max-width: 720px; margin: 0 auto 0.5rem; }
