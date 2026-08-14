@@ -676,89 +676,121 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .horizon-gate.is-crossing { opacity: 0; pointer-events: none; }
 body.gate-locked { overflow: hidden; }
 
-/* the black hole: shadow, photon ring, equatorial disk, lensed far-side arc */
+/* the black hole: spinning streaked accretion disk, shadow, photon ring, lensed arc */
 .gate-hole {
   position: relative;
-  width: min(64vmin, 420px);
-  height: min(46vmin, 300px);
-  margin-bottom: 1.2rem;
+  width: min(70vmin, 460px);
+  height: min(48vmin, 315px);
+  margin-bottom: 1.1rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  perspective: 900px;
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
   animation: gh-breathe 7s ease-in-out infinite;
 }
-.gate-hole > span { position: absolute; }
+.gate-hole:focus-visible { outline: 1px solid rgba(255, 178, 102, 0.7); outline-offset: 8px; border-radius: 50%; }
+.gate-hole > span { position: absolute; pointer-events: none; }
+
+/* spinning disk: streaked matter, 3D-flattened; -front is the near half passing before the sphere */
+.gh-disk3d, .gh-disk3d-front {
+  left: 50%; top: 50%;
+  width: 104%; aspect-ratio: 1;
+  transform: translate(-50%, -50%) rotateX(76deg);
+  border-radius: 50%;
+}
+.gh-disk3d { z-index: 1; }
+.gh-disk3d-front { z-index: 4; clip-path: inset(50% 0 0 0); }
+.gh-disk3d::before, .gh-disk3d-front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(
+      rgba(255, 240, 218, 0) 0deg, rgba(255, 238, 206, 0.7) 6deg,
+      rgba(196, 96, 30, 0.28) 13deg, rgba(255, 240, 218, 0) 20deg),
+    radial-gradient(circle closest-side,
+      transparent 34%, rgba(255, 172, 84, 0.6) 44%,
+      rgba(255, 224, 178, 0.95) 52%, rgba(186, 88, 26, 0.55) 68%,
+      rgba(96, 40, 10, 0.28) 80%, transparent 92%);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
+          mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
+  filter: blur(2.2px) saturate(1.15);
+  animation: gh-spin 1.9s linear infinite;
+}
+/* doppler beaming: frame-fixed hot side the matter streaks through */
+.gh-disk3d::after, .gh-disk3d-front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(94deg,
+    rgba(255, 252, 244, 0.75) 6%, rgba(255, 210, 150, 0.28) 34%,
+    transparent 55%, rgba(30, 10, 2, 0.55) 82%);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
+          mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
+  mix-blend-mode: hard-light;
+}
+@keyframes gh-spin { to { transform: rotate(-360deg); } }
+
 .gh-shadow {
   left: 50%; top: 50%;
-  width: 40%; aspect-ratio: 1;
+  width: 38%; aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: #000;
-  box-shadow: inset 0 0 26px 10px #000, 0 0 34px 4px rgba(255, 158, 74, 0.12);
+  box-shadow: inset 0 0 26px 10px #000, 0 0 44px 6px rgba(255, 158, 74, 0.16);
   z-index: 3;
 }
 .gh-halo {
   left: 50%; top: 50%;
-  width: 46%; aspect-ratio: 1;
+  width: 41%; aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: conic-gradient(from 210deg,
     rgba(255, 248, 236, 0.95), rgba(255, 196, 122, 0.75) 22%,
     rgba(206, 106, 38, 0.58) 48%, rgba(168, 80, 26, 0.5) 62%,
     rgba(255, 214, 156, 0.7) 82%, rgba(255, 248, 236, 0.95));
-  -webkit-mask: radial-gradient(circle, transparent 59%, #000 63%, #000 70%, transparent 75%);
-          mask: radial-gradient(circle, transparent 59%, #000 63%, #000 70%, transparent 75%);
-  filter: blur(1.2px);
-  z-index: 4;
-  animation: gh-orbit 16s linear infinite;
-}
-.gh-disk {
-  left: 50%; top: 50%;
-  width: 150%; height: 34%;
-  transform: translate(-50%, -50%) rotate(-4deg);
-  border-radius: 50%;
-  background: linear-gradient(92deg,
-    rgba(255, 247, 232, 0.85) 4%, rgba(255, 194, 122, 0.55) 24%,
-    rgba(180, 86, 28, 0.32) 52%, rgba(90, 36, 8, 0.18) 76%, transparent 96%);
-  filter: blur(14px);
-  z-index: 1;
-}
-.gh-disk-core {
-  left: 50%; top: 50%;
-  width: 132%; height: 7.5%;
-  transform: translate(-50%, -32%) rotate(-4deg);
-  border-radius: 50%;
-  background: linear-gradient(92deg,
-    #fff8ec 3%, #ffd9a3 20%, #ff9e46 40%,
-    rgba(190, 92, 30, 0.75) 62%, rgba(96, 40, 10, 0.4) 84%, transparent 97%);
-  filter: blur(2.2px);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 87%, #000 91%, #000 96%, transparent 100%);
+          mask: radial-gradient(circle closest-side, transparent 87%, #000 91%, #000 96%, transparent 100%);
+  filter: blur(0.8px);
   z-index: 5;
-  animation: gh-shimmer 6s ease-in-out infinite;
+  animation: gh-orbit 7s linear infinite;
+  transition: filter 0.35s ease;
 }
 .gh-arc {
   left: 50%; top: 50%;
-  width: 49%; aspect-ratio: 1;
-  transform: translate(-50%, -61%);
+  width: 45%; aspect-ratio: 1;
+  transform: translate(-50%, -57%);
   border-radius: 50%;
   background: conic-gradient(from 240deg,
     rgba(255, 244, 228, 0.85), rgba(255, 190, 112, 0.6) 30%,
     rgba(190, 92, 30, 0.45) 55%, rgba(255, 216, 160, 0.65) 85%,
     rgba(255, 244, 228, 0.85));
-  -webkit-mask: radial-gradient(circle, transparent 62%, #000 70%, #000 82%, transparent 88%);
-          mask: radial-gradient(circle, transparent 62%, #000 70%, #000 82%, transparent 88%);
-  clip-path: inset(0 0 55% 0);
-  filter: blur(2.4px);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 80%, #000 87%, #000 95%, transparent 100%);
+          mask: radial-gradient(circle closest-side, transparent 80%, #000 87%, #000 95%, transparent 100%);
+  clip-path: inset(0 0 54% 0);
+  filter: blur(2px);
   opacity: 0.85;
   z-index: 2;
-  animation: gh-orbit 22s linear infinite reverse;
+  animation: gh-arc-orbit 11s linear infinite reverse;
 }
 @keyframes gh-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
-.gh-arc { animation-name: gh-arc-orbit; }
-@keyframes gh-arc-orbit { to { transform: translate(-50%, -56%) rotate(360deg); } }
-@keyframes gh-shimmer {
-  0%, 100% { filter: blur(2.2px) brightness(1); }
-  50% { filter: blur(2.2px) brightness(1.22); }
-}
+@keyframes gh-arc-orbit { to { transform: translate(-50%, -60%) rotate(360deg); } }
+
+/* hover: the hole answers */
+.gate-hole:hover, .gate-hole:focus-visible { transform: scale(1.055); }
+.gate-hole:hover .gh-disk3d::before,
+.gate-hole:hover .gh-disk3d-front::before,
+.gate-hole:focus-visible .gh-disk3d::before,
+.gate-hole:focus-visible .gh-disk3d-front::before { animation-duration: 0.8s; filter: blur(1.4px) saturate(1.35) brightness(1.18); }
+.gate-hole:hover .gh-halo, .gate-hole:focus-visible .gh-halo { filter: blur(1px) brightness(1.45); animation-duration: 3s; }
+.gate-hole:hover .gh-shadow, .gate-hole:focus-visible .gh-shadow { box-shadow: inset 0 0 26px 10px #000, 0 0 64px 12px rgba(255, 170, 84, 0.3); }
 @keyframes gh-breathe {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.012); }
+  50% { transform: scale(1.014); }
 }
 
 .gate-name {
@@ -805,7 +837,8 @@ body.gate-locked { overflow: hidden; }
   color: rgba(197, 201, 211, 0.5);
 }
 @media (prefers-reduced-motion: reduce) {
-  .gh-halo, .gh-arc, .gh-disk-core, .gate-hole, .gate-enter { animation: none; }
+  .gh-halo, .gh-arc, .gate-hole, .gate-enter { animation: none; }
+  .gh-disk3d::before, .gh-disk3d-front::before { animation: none; }
 }
 
 /* ---------- merch product grid ---------- */

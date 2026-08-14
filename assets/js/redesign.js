@@ -373,7 +373,7 @@
     } else {
       body.classList.add("gate-locked");
       clarity("set", "saw_horizon_gate", "yes");
-      gate.querySelector("[data-gate-enter]")?.addEventListener("click", () => {
+      const cross = () => {
         sessionStorage.setItem("horizonCrossed", "1");
         track("horizon_crossed", {});
         clarity("set", "crossed_horizon", "yes");
@@ -382,7 +382,8 @@
         body.classList.remove("gate-locked");
         document.querySelector("[data-yt-facade]")?.click();
         setTimeout(() => gate.remove(), 750);
-      });
+      };
+      gate.querySelectorAll("[data-gate-enter]").forEach((b) => b.addEventListener("click", cross));
     }
   }
 })();
