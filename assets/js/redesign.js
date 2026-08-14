@@ -94,10 +94,14 @@
   };
   drawerClose?.addEventListener("click", closeDrawer);
   drawerScrim?.addEventListener("click", closeDrawer);
-  document.querySelectorAll("[data-lyrics]").forEach((btn) => {
-    btn.addEventListener("click", () =>
-      openDrawer({ slug: btn.dataset.lyrics, album: btn.dataset.lyricsAlbum, title: btn.dataset.lyricsTitle, href: btn.dataset.lyricsHref }),
-    );
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-lyrics]");
+    if (!btn) return;
+    if (drawer) {
+      openDrawer({ slug: btn.dataset.lyrics, album: btn.dataset.lyricsAlbum, title: btn.dataset.lyricsTitle, href: btn.dataset.lyricsHref });
+    } else if (typeof openVeil === "function" && btn.dataset.lyricsHref) {
+      openVeil(btn.dataset.lyricsHref);
+    }
   });
 
   // ---------- Spotify player overlay (click album art) ----------
@@ -178,17 +182,21 @@
   // Privacy-first: youtube-nocookie, no YT JS until intent. Swaps the poster for
   // an autoplaying iframe in place (NOT the Spotify [data-player] overlay, which
   // is hardwired to open.spotify.com/embed and a 470px-tall frame).
-  document.querySelectorAll("[data-yt-facade]").forEach((btn) => {
-    btn.addEventListener("click", () => {
+  // Delegated so facades inside injected overlay content work too.
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-yt-facade]");
+    if (btn) {
       const id = btn.dataset.yt;
       const hero = btn.closest(".video-hero");
       if (!id || !hero) return;
+      const inVeil = !!btn.closest("[data-veil]");
       const title = btn.dataset.ytTitle || "A Funeral Star official video";
       const album = btn.dataset.album || "";
       const slug = btn.dataset.ytSlug || id;
       const iframe = document.createElement("iframe");
       iframe.className = "video-frame";
-      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      if (!inVeil) iframe.dataset.heroMain = "1";
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`;
       iframe.title = title;
       iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
       iframe.frameBorder = "0";
@@ -199,7 +207,8 @@
       track("video_play", { video: title, album, platform: "YouTube", id });
       clarity("set", "video_play", slug);
       clarity("upgrade", "video_play");
-    });
+      if (inVeil) pauseHero();
+    }
   });
 
   // ---------- internal hero / placeholder link clicks (keep the lyrics signal) ----------
@@ -246,7 +255,7 @@
   const BANNERS = ["b2-e1","b2-e2","b2-e3","b2-hj2","b2-hj4","b2-m1","b2-m2","b2-m3",
                    "b2-sc1","b2-sc3","b2-sr2","b2-sr3","b2-grokscar2","b2-c1","b2-c2","b2-c3",
                    "b1-hj1","b1-scar1","b1-scar2"];
-  document.querySelectorAll("[data-banner-slot]").forEach((slot) => {
+  const serveBanners = (scope) => (scope || document).querySelectorAll("[data-banner-slot]").forEach((slot) => {
     const id = BANNERS[Math.floor(Math.random() * BANNERS.length)];
     const a = document.createElement("a");
     a.className = "merch-banner";
@@ -272,6 +281,85 @@
       clarity("upgrade", "banner_clicked");
     });
   });
+  serveBanners(document);
+
+  // ---------- persistent-splash veil (home only) ----------
+  // Internal navigation opens page content in a panel ABOVE the playing
+  // hero video; the music never stops. Direct subpage visits are normal
+  // pages. History stays shareable via pushState.
+  let pausedByVeil = false;
+  const heroCmd = (func) => {
+    const f = document.querySelector("iframe[data-hero-main]");
+    try { f?.contentWindow.postMessage(JSON.stringify({ event: "command", func, args: "" }), "*"); } catch (_) {}
+  };
+  const pauseHero = () => { heroCmd("pauseVideo"); pausedByVeil = true; };
+  window.pauseHero = pauseHero;
+  let veil = null, veilBody = null, veilTitle = null;
+  const buildVeil = () => {
+    veil = document.createElement("div");
+    veil.className = "page-veil";
+    veil.setAttribute("data-veil", "");
+    veil.innerHTML = `
+      <div class="veil-shell" role="dialog" aria-modal="false" aria-label="Page">
+        <div class="veil-top">
+          <p class="veil-title" data-veil-title></p>
+          <button class="veil-close" type="button" data-veil-close aria-label="Close and return to the void"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+        </div>
+        <div class="veil-body" data-veil-body></div>
+      </div>`;
+    document.body.appendChild(veil);
+    veilBody = veil.querySelector("[data-veil-body]");
+    veilTitle = veil.querySelector("[data-veil-title]");
+    veil.addEventListener("click", (e) => { if (e.target === veil || e.target.closest("[data-veil-close]")) closeVeil(true); });
+  };
+  const closeVeil = (push) => {
+    if (!veil) return;
+    veil.classList.remove("is-open");
+    document.body.classList.remove("veil-locked");
+    veilBody.replaceChildren();
+    if (pausedByVeil) { heroCmd("playVideo"); pausedByVeil = false; }
+    if (push) history.pushState({}, "", "/");
+  };
+  const openVeil = async (href, replace) => {
+    if (body.dataset.page !== "home") return false;
+    if (!veil) buildVeil();
+    veil.classList.add("is-open");
+    document.body.classList.add("veil-locked");
+    veilBody.innerHTML = '<p class="veil-loading">Loading...</p>';
+    track("overlay_nav", { href });
+    clarity("set", "overlay_page", href);
+    try {
+      const res = await fetch(href);
+      if (!res.ok) throw new Error("fetch failed");
+      const doc = new DOMParser().parseFromString(await res.text(), "text/html");
+      const main = doc.querySelector("main.stage");
+      if (!main) throw new Error("no stage");
+      veilTitle.textContent = (doc.querySelector("title")?.textContent || "").split("|")[0].trim();
+      veilBody.replaceChildren(...main.children);
+      veilBody.scrollTop = 0;
+      serveBanners(veilBody);
+      if (!replace) history.pushState({ veil: href }, "", href);
+    } catch (_) {
+      window.location.href = href;
+    }
+    return true;
+  };
+  if (body.dataset.page === "home") {
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href]");
+      if (!a) return;
+      const href = a.getAttribute("href");
+      if (!href || !href.startsWith("/") || href.startsWith("//")) return;
+      if (a.target === "_blank" || a.closest(".horizon-gate")) return;
+      if (href === "/" || href.startsWith("/#")) { e.preventDefault(); closeVeil(true); return; }
+      e.preventDefault();
+      openVeil(href);
+    });
+    window.addEventListener("popstate", (e) => {
+      if (e.state && e.state.veil) openVeil(e.state.veil, true);
+      else closeVeil(false);
+    });
+  }
 
   // ---------- horizon gate (home only) ----------
   // One gesture does everything: dismisses the gate and chains a click into
