@@ -687,7 +687,8 @@ body.gate-locked { overflow: hidden; }
   background: transparent;
   cursor: pointer;
   perspective: 900px;
-  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  filter: hue-rotate(0deg) brightness(1) saturate(1);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), filter 1.7s ease;
   animation: gh-breathe 7s ease-in-out infinite;
 }
 .gate-hole:focus-visible { outline: 1px solid rgba(255, 178, 102, 0.7); outline-offset: 8px; border-radius: 50%; }
@@ -709,7 +710,11 @@ body.gate-locked { overflow: hidden; }
 /* far half only: the front span redraws the near half, so clipping the
    back span prevents double-compositing (a bright seam at the midline);
    49.6% (not 50%) overlaps the halves sub-pixel to hide the AA hairline */
-.gh-disk3d{z-index:1;clip-path:inset(0 0 46% 0);}
+.gh-disk3d{
+  z-index:1;
+  -webkit-mask:linear-gradient(to bottom, #000 0 48%, transparent 54%);
+          mask:linear-gradient(to bottom, #000 0 48%, transparent 54%);
+}
 .gh-disk3d-front{
   z-index:4;
   clip-path:inset(46% 0 0 0); /* fallback bound; feather below does the real cut */
@@ -807,7 +812,10 @@ body.gate-locked { overflow: hidden; }
 @keyframes gh-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
 /* hover: the hole answers */
-.gate-hole:hover, .gate-hole:focus-visible { transform: scale(1.055); }
+.gate-hole:hover, .gate-hole:focus-visible {
+  transform: scale(1.055);
+  filter: hue-rotate(248deg) brightness(0.82) saturate(1.3);
+}
 .gate-hole:hover .gh-disk3d::after,
 .gate-hole:hover .gh-disk3d-front::after,
 .gate-hole:focus-visible .gh-disk3d::after,
@@ -824,7 +832,7 @@ body.gate-locked { overflow: hidden; }
 }
 
 .gate-name {
-  margin: 0;
+  margin: 0 0 0.6rem;
   font-family: "Pirata One", "Cinzel", serif;
   font-size: clamp(2.1rem, 7.5vw, 3.4rem);
   letter-spacing: 0.05em;
@@ -836,14 +844,14 @@ body.gate-locked { overflow: hidden; }
   appearance: none;
   cursor: pointer;
   font-family: "Pirata One", "Cinzel", serif;
-  font-size: clamp(1.05rem, 3.2vw, 1.4rem);
-  letter-spacing: 0.12em;
-  color: #d6c8ae;
-  background: rgba(12, 7, 4, 0.55);
-  border: 1px solid rgba(214, 196, 168, 0.4);
+  font-size: clamp(1.4rem, 4.4vw, 1.95rem);
+  letter-spacing: 0.14em;
+  color: #efe6d2;
+  background: rgba(16, 9, 5, 0.72);
+  border: 2px solid rgba(230, 212, 182, 0.62);
   border-radius: 3px;
-  padding: 0.72rem 2rem 0.62rem;
-  margin-top: 0.9rem;
+  padding: 0.85rem 2.6rem 0.72rem;
+  margin-top: 1rem;
   filter: url(#gate-rough);
   transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   animation: gate-breathe 3.4s ease-in-out infinite;
@@ -857,14 +865,6 @@ body.gate-locked { overflow: hidden; }
 @keyframes gate-breathe {
   0%, 100% { box-shadow: 0 0 10px 1px rgba(255, 140, 50, 0.1); }
   50% { box-shadow: 0 0 22px 4px rgba(255, 140, 50, 0.22); }
-}
-.gate-sub {
-  margin: 0.4rem 0 0;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(197, 201, 211, 0.5);
 }
 @media (prefers-reduced-motion: reduce) {
   .gh-halo, .gate-hole, .gate-enter { animation: none; }
