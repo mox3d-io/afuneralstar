@@ -795,3 +795,9 @@ body.gate-locked { overflow: hidden; }
 /* ---------- album-page full-album video ---------- */
 .album .video-hero { max-width: 720px; margin: 1.4rem auto 0.8rem; float: none; }
 .album .video-title { text-align: center; max-width: 720px; margin: 0 auto 0.5rem; }
+
+/* ---------- merch banner rotator ---------- */
+.banner-slot { margin: 2.2rem auto; max-width: 980px; padding: 0 1rem; }
+.merch-banner { display: block; border-radius: 16px; overflow: hidden; border: 1px solid rgba(228, 232, 242, 0.12); transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease; }
+.merch-banner:hover, .merch-banner:focus-visible { border-color: rgba(196, 176, 240, 0.55); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5); transform: translateY(-2px); outline: none; }
+.merch-banner img { display: block; width: 100%; height: auto; }

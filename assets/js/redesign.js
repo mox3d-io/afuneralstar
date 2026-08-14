@@ -239,6 +239,40 @@
   window.addEventListener("resize", onScroll, { passive: true });
   measure();
 
+  // ---------- merch banner rotator ----------
+  // Serves one random approved banner per pageview into every
+  // [data-banner-slot]; GA4 banner_view / banner_click events carry the
+  // banner id so CTR per creative = clicks / views in one report.
+  const BANNERS = ["b2-e1","b2-e2","b2-e3","b2-hj2","b2-hj4","b2-m1","b2-m2","b2-m3",
+                   "b2-sc1","b2-sc3","b2-sr2","b2-sr3","b2-grokscar2","b2-c1","b2-c2","b2-c3",
+                   "b1-hj1","b1-scar1","b1-scar2"];
+  document.querySelectorAll("[data-banner-slot]").forEach((slot) => {
+    const id = BANNERS[Math.floor(Math.random() * BANNERS.length)];
+    const a = document.createElement("a");
+    a.className = "merch-banner";
+    a.href = "https://direct.distrokid.com/afuneralstar/home";
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.dataset.banner = id;
+    a.setAttribute("aria-label", "A Funeral Star merch, opens the store");
+    const img = document.createElement("img");
+    img.src = `/assets/img/banners/${id}.webp`;
+    img.alt = "A Funeral Star merch";
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.width = 1280;
+    img.height = 854;
+    a.appendChild(img);
+    slot.replaceChildren(a);
+    track("banner_view", { banner: id });
+    clarity("set", "banner_served", id);
+    a.addEventListener("click", () => {
+      track("banner_click", { banner: id });
+      clarity("set", "banner_clicked", id);
+      clarity("upgrade", "banner_clicked");
+    });
+  });
+
   // ---------- horizon gate (home only) ----------
   // One gesture does everything: dismisses the gate and chains a click into
   // the hero facade, whose autoplay=1 iframe inherits the user activation,
