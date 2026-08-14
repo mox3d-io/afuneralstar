@@ -693,47 +693,86 @@ body.gate-locked { overflow: hidden; }
 .gate-hole:focus-visible { outline: 1px solid rgba(255, 178, 102, 0.7); outline-offset: 8px; border-radius: 50%; }
 .gate-hole > span { position: absolute; pointer-events: none; }
 
-/* spinning disk: streaked matter, 3D-flattened; -front is the near half passing before the sphere */
-.gh-disk3d, .gh-disk3d-front {
-  left: 50%; top: 50%;
-  width: 104%; aspect-ratio: 1;
-  transform: translate(-50%, -50%) rotateX(76deg);
-  border-radius: 50%;
+/* ====================================================================
+   Accretion disk: 3-arm logarithmic spiral flow
+   ==================================================================== */
+.gh-disk3d,
+.gh-disk3d-front{
+  position:absolute;
+  left:50%;top:50%;
+  width:104%;
+  aspect-ratio:1;
+  transform:translate(-50%,-50%) rotateX(76deg);
+  border-radius:50%;
+  pointer-events:none;
 }
-.gh-disk3d { z-index: 1; }
-.gh-disk3d-front { z-index: 4; clip-path: inset(50% 0 0 0); }
-.gh-disk3d::before, .gh-disk3d-front::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
+/* far half only: the front span redraws the near half, so clipping the
+   back span prevents double-compositing (a bright seam at the midline);
+   49.6% (not 50%) overlaps the halves sub-pixel to hide the AA hairline */
+.gh-disk3d{z-index:1;clip-path:inset(0 0 49.6% 0);}
+.gh-disk3d-front{z-index:4;clip-path:inset(50% 0 0 0);}
+
+.gh-disk3d::before,
+.gh-disk3d::after,
+.gh-disk3d-front::before,
+.gh-disk3d-front::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  will-change:transform;
+}
+
+/* Layer 1: gaseous continuum + two broad shear swells (slow) */
+.gh-disk3d::before,
+.gh-disk3d-front::before{
   background:
-    repeating-conic-gradient(
-      rgba(255, 240, 218, 0) 0deg, rgba(255, 238, 206, 0.7) 6deg,
-      rgba(196, 96, 30, 0.28) 13deg, rgba(255, 240, 218, 0) 20deg),
+    conic-gradient(from 0deg,
+      rgba(255,186,110,0)    0deg,
+      rgba(255,196,124,.16)  52deg,
+      rgba(255,166,80,.04)  128deg,
+      rgba(255,186,110,0)   168deg,
+      rgba(255,196,124,.11) 226deg,
+      rgba(255,166,80,.03)  292deg,
+      rgba(255,186,110,0)   360deg),
     radial-gradient(circle closest-side,
-      transparent 34%, rgba(255, 172, 84, 0.6) 44%,
-      rgba(255, 224, 178, 0.95) 52%, rgba(186, 88, 26, 0.55) 68%,
-      rgba(96, 40, 10, 0.28) 80%, transparent 92%);
-  -webkit-mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
-          mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
-  filter: blur(2.2px) saturate(1.15);
-  animation: gh-spin 1.9s linear infinite;
+      rgba(0,0,0,0)          0 33%,
+      rgba(255,248,236,.85) 37%,
+      rgba(255,204,138,.30) 45%,
+      rgba(255,158,70,.18)  58%,
+      rgba(180,85,26,.12)   74%,
+      rgba(90,36,8,.06)     86%,
+      rgba(90,36,8,0)       95%);
+  -webkit-mask:radial-gradient(circle closest-side,
+      transparent 0 34%,#000 40% 82%,transparent 95%);
+  mask:radial-gradient(circle closest-side,
+      transparent 0 34%,#000 40% 82%,transparent 95%);
+  filter:blur(3px);
+  animation:gh-disk-spin 2.7s linear infinite;
 }
-/* doppler beaming: frame-fixed hot side the matter streaks through */
-.gh-disk3d::after, .gh-disk3d-front::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: linear-gradient(94deg,
-    rgba(255, 252, 244, 0.75) 6%, rgba(255, 210, 150, 0.28) 34%,
-    transparent 55%, rgba(30, 10, 2, 0.55) 82%);
-  -webkit-mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
-          mask: radial-gradient(circle closest-side, transparent 36%, #000 43%, #000 74%, rgba(0,0,0,0.35) 86%, transparent 97%);
-  mix-blend-mode: hard-light;
+
+/* Layer 2: spiral arms (fast, primary rotation) */
+.gh-disk3d::after,
+.gh-disk3d-front::after{
+  background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cdefs%3E%3CradialGradient%20id='g'%20gradientUnits='userSpaceOnUse'%20cx='100'%20cy='100'%20r='100'%3E%3Cstop%20offset='.36'%20stop-color='%23fff8ec'/%3E%3Cstop%20offset='.46'%20stop-color='%23ffd9a0'/%3E%3Cstop%20offset='.58'%20stop-color='%23ff9e46'/%3E%3Cstop%20offset='.74'%20stop-color='%23b4551a'%20stop-opacity='.7'/%3E%3Cstop%20offset='.88'%20stop-color='%235a2408'%20stop-opacity='.3'/%3E%3Cstop%20offset='1'%20stop-color='%235a2408'%20stop-opacity='0'/%3E%3C/radialGradient%3E%3Cfilter%20id='b'%20x='-15%25'%20y='-15%25'%20width='130%25'%20height='130%25'%3E%3CfeGaussianBlur%20stdDeviation='2.2'/%3E%3C/filter%3E%3Cpath%20id='a'%20d='M151%20100%20150.3%20115.5%20145%20130.7%20135.2%20144.1%20121.4%20154.6%20104.6%20160.8%2085.9%20161.9%2066.9%20157.4%2049.2%20147.1%2034.7%20131.4%2025%20111.3%2021.3%2088.1%2024.7%2063.7%2035.6%2040.2%2053.7%2019.9L54.2%2020.8%2036.5%2041%2026.1%2064.4%2023.4%2088.4%2027.7%20110.9%2037.9%20129.9%2052.4%20144.1%2069.5%20152.8%2087.3%20155.8%20104%20153.4%20118.3%20146.6%20129.1%20136.4%20135.8%20124.4%20138.3%20111.8%20137%20100Z'/%3E%3C/defs%3E%3Cg%20filter='url(%23b)'%20fill='url(%23g)'%3E%3Cuse%20href='%23a'/%3E%3Cuse%20href='%23a'%20transform='rotate(120%20100%20100)'/%3E%3Cuse%20href='%23a'%20transform='rotate(240%20100%20100)'/%3E%3Cg%20opacity='.4'%3E%3Cuse%20href='%23a'%20transform='rotate(60%20100%20100)'/%3E%3Cuse%20href='%23a'%20transform='rotate(180%20100%20100)'/%3E%3Cuse%20href='%23a'%20transform='rotate(300%20100%20100)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") center/100% 100% no-repeat;
+  filter:blur(.4px) drop-shadow(0 0 10px rgba(255,140,50,.28));
+  animation:gh-disk-spin 1.9s linear infinite;
 }
-@keyframes gh-spin { to { transform: rotate(-360deg); } }
+
+@keyframes gh-disk-spin{
+  from{transform:rotate(0turn)}
+  to{transform:rotate(-1turn)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .gh-disk3d::before,
+  .gh-disk3d::after,
+  .gh-disk3d-front::before,
+  .gh-disk3d-front::after{
+    animation:none;
+  }
+}
+
 
 .gh-shadow {
   left: 50%; top: 50%;
@@ -782,10 +821,14 @@ body.gate-locked { overflow: hidden; }
 
 /* hover: the hole answers */
 .gate-hole:hover, .gate-hole:focus-visible { transform: scale(1.055); }
+.gate-hole:hover .gh-disk3d::after,
+.gate-hole:hover .gh-disk3d-front::after,
+.gate-hole:focus-visible .gh-disk3d::after,
+.gate-hole:focus-visible .gh-disk3d-front::after { animation-duration: 0.8s; filter: blur(0.4px) drop-shadow(0 0 14px rgba(255,150,60,.45)) brightness(1.15); }
 .gate-hole:hover .gh-disk3d::before,
 .gate-hole:hover .gh-disk3d-front::before,
 .gate-hole:focus-visible .gh-disk3d::before,
-.gate-hole:focus-visible .gh-disk3d-front::before { animation-duration: 0.8s; filter: blur(1.4px) saturate(1.35) brightness(1.18); }
+.gate-hole:focus-visible .gh-disk3d-front::before { animation-duration: 1.2s; }
 .gate-hole:hover .gh-halo, .gate-hole:focus-visible .gh-halo { filter: blur(1px) brightness(1.45); animation-duration: 3s; }
 .gate-hole:hover .gh-shadow, .gate-hole:focus-visible .gh-shadow { box-shadow: inset 0 0 26px 10px #000, 0 0 64px 12px rgba(255, 170, 84, 0.3); }
 @keyframes gh-breathe {
