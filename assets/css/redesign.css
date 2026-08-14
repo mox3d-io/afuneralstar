@@ -709,7 +709,7 @@ body.gate-locked { overflow: hidden; }
 /* far half only: the front span redraws the near half, so clipping the
    back span prevents double-compositing (a bright seam at the midline);
    49.6% (not 50%) overlaps the halves sub-pixel to hide the AA hairline */
-.gh-disk3d{z-index:1;clip-path:inset(0 0 49.6% 0);}
+.gh-disk3d{z-index:1;clip-path:inset(0 0 46% 0);}
 .gh-disk3d-front{
   z-index:4;
   clip-path:inset(46% 0 0 0); /* fallback bound; feather below does the real cut */
