@@ -283,6 +283,58 @@
   });
   serveBanners(document);
 
+  // ---------- external links open in new tabs (the album keeps playing) ----------
+  const externalize = (scope) => {
+    (scope || document).querySelectorAll('a[href^="http"]').forEach((a) => {
+      try {
+        const u = new URL(a.href);
+        if (u.hostname !== location.hostname) { a.target = "_blank"; a.rel = "noopener"; }
+      } catch (_) {}
+    });
+  };
+  externalize(document);
+
+  // ---------- hero variant lottery (home only) ----------
+  // Full album 65%; the proven catalog splits the rest. Every serve is
+  // tagged so hero_variant x video_play = per-video splash conversion.
+  const HERO_VARIANTS = [
+    { id: "6wByRBbj3KI", w: 65, title: "A Scar In The Star · Full Album", cap: "Full Album · 53 Minutes", album: "A Scar In The Star", line: "Eleven songs, and one that was never released. It only lives here." },
+    { id: "Y3Q0Bz4fjzM", w: 5, title: "I Become (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Now We Ignite", line: "I Become. Transformation under pressure." },
+    { id: "NQvLYPjYHfo", w: 5, title: "The House That Breathes Back (Lyric Video)", cap: "Now Playing · Lyric Video", album: "A Scar In The Star", line: "No one alone, but no one at home." },
+    { id: "X8lGWaxxqzI", w: 5, title: "The Hidden Hand (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Monuments", line: "The invisible hand made flesh." },
+    { id: "oTKtafXc-Mk", w: 5, title: "Clock Don't Stop (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Monuments", line: "Is time theft eating at you?" },
+    { id: "PhYMzXG9sVU", w: 5, title: "Vals del Diablo (Official Audio)", cap: "Now Playing · Official Audio", album: "The Land of Silver and Sorrow", line: "The devil's waltz, from the land of silver and sorrow." },
+    { id: "CNzLqINOzTM", w: 5, title: "The Signal Thins (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Now We Ignite", line: "The signal thins. The song remains." },
+    { id: "ZXzDGFwwdsI", w: 5, title: "A Dying Star (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Now We Ignite", line: "Every ending burns on the way down." },
+  ];
+  if (body.dataset.page === "home") {
+    const total = HERO_VARIANTS.reduce((s, v) => s + v.w, 0);
+    let roll = Math.random() * total;
+    const pick = HERO_VARIANTS.find((v) => (roll -= v.w) < 0) || HERO_VARIANTS[0];
+    track("hero_variant", { variant: pick.id, video: pick.title });
+    clarity("set", "hero_variant", pick.title);
+    if (pick.id !== HERO_VARIANTS[0].id) {
+      const facade = document.querySelector("[data-yt-facade]");
+      if (facade) {
+        facade.dataset.yt = pick.id;
+        facade.dataset.ytTitle = pick.title;
+        facade.dataset.ytSlug = pick.id;
+        facade.dataset.album = pick.album;
+        facade.setAttribute("aria-label", `Play ${pick.title}`);
+        const poster = facade.querySelector(".video-poster");
+        if (poster) {
+          poster.onerror = () => { poster.onerror = null; poster.src = `https://i.ytimg.com/vi/${pick.id}/hqdefault.jpg`; };
+          poster.src = `https://i.ytimg.com/vi/${pick.id}/maxresdefault.jpg`;
+          poster.alt = pick.title;
+        }
+        const cap = facade.querySelector(".video-cap");
+        if (cap) cap.innerHTML = '<span class="video-cap-dot" aria-hidden="true"></span>' + pick.cap;
+        const line = document.querySelector(".video-title");
+        if (line) line.textContent = pick.line;
+      }
+    }
+  }
+
   // ---------- persistent-splash veil (home only) ----------
   // Internal navigation opens page content in a panel ABOVE the playing
   // hero video; the music never stops. Direct subpage visits are normal
@@ -338,6 +390,7 @@
       veilBody.replaceChildren(...main.children);
       veilBody.scrollTop = 0;
       serveBanners(veilBody);
+      externalize(veilBody);
       if (!replace) history.pushState({ veil: href }, "", href);
     } catch (_) {
       window.location.href = href;
