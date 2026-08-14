@@ -866,6 +866,47 @@ body.gate-locked { overflow: hidden; }
   0%, 100% { box-shadow: 0 0 10px 1px rgba(255, 140, 50, 0.1); }
   50% { box-shadow: 0 0 22px 4px rgba(255, 140, 50, 0.22); }
 }
+
+/* the singularity player: a live cropped YouTube embed floating over the gate
+   (body child at z201 - the gate stack caps at 200, and a re-parent would
+   reload the iframe). Oversized ~2x and centered so YouTube's title chrome
+   crops outside the circle; only the art and the play button show through
+   the horizon. JS sets px geometry; on play it morphs into the hero slot. */
+#gate-port {
+  position: fixed;
+  z-index: 201;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #000;
+  transform: translateZ(0);
+  transition:
+    left 0.82s cubic-bezier(0.2, 0.7, 0.2, 1), top 0.82s cubic-bezier(0.2, 0.7, 0.2, 1),
+    width 0.82s cubic-bezier(0.2, 0.7, 0.2, 1), height 0.82s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-radius 0.82s ease;
+}
+#gate-port iframe {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  height: 205%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  transition: height 0.82s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+#gate-port::after { /* event-horizon vignette feathering the video rim */
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 26px 10px #000, inset 0 0 8px 2px rgba(255, 158, 74, 0.14);
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+#gate-port.is-hero { border-radius: 0; }
+#gate-port.is-hero::after { opacity: 0; }
+#gate-port.is-hero iframe { height: 100%; width: 100%; aspect-ratio: auto; }
+#gate-port.is-docked { position: absolute; z-index: 5; transition: none; }
+.video-hero.is-ported > * { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .gh-halo, .gate-hole, .gate-enter { animation: none; }
   .gh-disk3d::before, .gh-disk3d-front::before { animation: none; }

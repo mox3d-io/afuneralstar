@@ -307,10 +307,12 @@
     { id: "CNzLqINOzTM", w: 5, title: "The Signal Thins (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Now We Ignite", line: "The signal thins. The song remains." },
     { id: "ZXzDGFwwdsI", w: 5, title: "A Dying Star (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Now We Ignite", line: "Every ending burns on the way down." },
   ];
+  let heroPick = HERO_VARIANTS[0];
   if (body.dataset.page === "home") {
     const total = HERO_VARIANTS.reduce((s, v) => s + v.w, 0);
     let roll = Math.random() * total;
     const pick = HERO_VARIANTS.find((v) => (roll -= v.w) < 0) || HERO_VARIANTS[0];
+    heroPick = pick;
     track("hero_variant", { variant: pick.id, video: pick.title });
     clarity("set", "hero_variant", pick.title);
     if (pick.id !== HERO_VARIANTS[0].id) {
@@ -414,11 +416,15 @@
     });
   }
 
-  // ---------- horizon gate (home only) ----------
-  // One gesture does everything: dismisses the gate and chains a click into
-  // the hero facade, whose autoplay=1 iframe inherits the user activation,
-  // so the album starts WITH sound. Session-scoped: internal nav never
-  // re-gates. If JS is off, a noscript style hides the gate entirely.
+  // ---------- horizon gate (home only): two doors ----------
+  // Door 1, the singularity: the hole is a LIVE cropped YouTube player, so a
+  // tap inside it is a real in-player click - YouTube credits the view and
+  // the watch time (autoplay embeds are documented as non-counting). The
+  // player floats as a body child (a re-parent reloads an iframe) and, on
+  // play, morphs from the hole into the hero slot without dropping a note.
+  // Door 2, "Enter The Horizon": the original one-gesture autoplay chain,
+  // kept verbatim as the does-autoplay-count experiment arm.
+  // Session-scoped: internal nav never re-gates. No JS, no gate.
   const gate = document.querySelector("[data-gate]");
   if (gate) {
     if (sessionStorage.getItem("horizonCrossed") === "1") {
@@ -426,17 +432,86 @@
     } else {
       body.classList.add("gate-locked");
       clarity("set", "saw_horizon_gate", "yes");
-      const cross = () => {
+      const hole = gate.querySelector(".gate-hole");
+      let port = null, portFrame = null, crossed = false;
+      const sizePort = () => {
+        if (!port || !hole) return;
+        const r = hole.getBoundingClientRect();
+        const d = Math.round(r.width * 0.34);
+        port.style.width = port.style.height = d + "px";
+        port.style.left = Math.round(r.left + r.width / 2 - d / 2) + "px";
+        port.style.top = Math.round(r.top + r.height / 2 - d / 2) + "px";
+      };
+      if (hole && body.dataset.page === "home") {
+        port = document.createElement("div");
+        port.id = "gate-port";
+        portFrame = document.createElement("iframe");
+        portFrame.src = `https://www.youtube-nocookie.com/embed/${heroPick.id}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
+        portFrame.title = heroPick.title;
+        portFrame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+        portFrame.frameBorder = "0";
+        port.appendChild(portFrame);
+        sizePort();
+        document.body.appendChild(port);
+        sizePort();
+        window.addEventListener("resize", sizePort);
+        // widget handshake so the embed reports player state back to us
+        const hello = () => { try { portFrame.contentWindow.postMessage(JSON.stringify({ event: "listening", id: "gate" }), "*"); } catch (_) {} };
+        portFrame.addEventListener("load", () => { hello(); setTimeout(hello, 600); setTimeout(hello, 1800); });
+      }
+      const cross = (door) => {
+        crossed = true;
         sessionStorage.setItem("horizonCrossed", "1");
-        track("horizon_crossed", {});
-        clarity("set", "crossed_horizon", "yes");
+        track("horizon_crossed", { door });
+        track(door === "singularity" ? "gate_singularity" : "gate_enter_button", { variant: heroPick.id });
+        clarity("set", "crossed_horizon", door);
         clarity("upgrade", "crossed_horizon");
         gate.classList.add("is-crossing");
-        body.classList.remove("gate-locked");
-        document.querySelector("[data-yt-facade]")?.click();
         setTimeout(() => gate.remove(), 750);
       };
-      gate.querySelectorAll("[data-gate-enter]").forEach((b) => b.addEventListener("click", cross));
+      // Door 1: a play (or its buffering) inside the hole is the tap signal.
+      window.addEventListener("message", (e) => {
+        if (crossed || !portFrame || e.source !== portFrame.contentWindow) return;
+        let d; try { d = JSON.parse(e.data); } catch (_) { return; }
+        const st = d && d.info && typeof d.info.playerState === "number" ? d.info.playerState
+          : d && d.event === "onStateChange" && typeof d.info === "number" ? d.info : null;
+        if (st !== 1 && st !== 3) return;
+        cross("singularity");
+        track("video_play", { video: heroPick.title, album: heroPick.album, platform: "YouTube", id: heroPick.id });
+        clarity("set", "video_play", heroPick.id);
+        clarity("upgrade", "video_play");
+        const host = document.querySelector(".video-hero");
+        if (host && port) {
+          portFrame.dataset.heroMain = "1";
+          host.classList.add("is-ported");
+          window.removeEventListener("resize", sizePort);
+          const dock = () => {
+            const t = host.getBoundingClientRect();
+            port.style.left = Math.round(t.left + window.scrollX) + "px";
+            port.style.top = Math.round(t.top + window.scrollY) + "px";
+            port.style.width = Math.round(t.width) + "px";
+            port.style.height = Math.round(t.height) + "px";
+          };
+          port.classList.add("is-hero");
+          dock();
+          setTimeout(() => {
+            body.classList.remove("gate-locked"); // scrollbar returns, page shifts
+            port.classList.add("is-docked");
+            dock(); // so measure AFTER the shift
+            window.addEventListener("resize", dock);
+          }, 840);
+        } else {
+          body.classList.remove("gate-locked");
+        }
+      });
+      // Door 2: the spoken invitation - autoplay chain, unchanged.
+      gate.querySelectorAll("[data-gate-enter]").forEach((b) => b.addEventListener("click", () => {
+        if (crossed) return;
+        if (port) { port.remove(); port = null; portFrame = null; }
+        cross("enter_button");
+        body.classList.remove("gate-locked");
+        document.querySelector("[data-yt-facade]")?.click();
+      }));
     }
   }
 })();
