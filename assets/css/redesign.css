@@ -804,29 +804,7 @@ body.gate-locked { overflow: hidden; }
   animation: gh-orbit 7s linear infinite;
   transition: filter 0.35s ease;
 }
-.gh-arc {
-  left: 50%; top: 50%;
-  width: 45%; aspect-ratio: 1;
-  transform: translate(-50%, -57%);
-  border-radius: 50%;
-  background: conic-gradient(from 240deg,
-    rgba(255, 244, 228, 0.85), rgba(255, 190, 112, 0.6) 30%,
-    rgba(190, 92, 30, 0.45) 55%, rgba(255, 216, 160, 0.65) 85%,
-    rgba(255, 244, 228, 0.85));
-  -webkit-mask: radial-gradient(circle closest-side, transparent 80%, #000 87%, #000 95%, transparent 100%);
-          mask: radial-gradient(circle closest-side, transparent 80%, #000 87%, #000 95%, transparent 100%);
-  clip-path: inset(0 0 54% 0);
-  filter: blur(2px);
-  opacity: 0.8;
-  z-index: 2;
-  animation: gh-arc-glow 5s ease-in-out infinite alternate;
-}
-@keyframes gh-arc-glow {
-  from { opacity: 0.62; filter: blur(2.2px) brightness(0.95); }
-  to { opacity: 0.88; filter: blur(1.8px) brightness(1.15); }
-}
 @keyframes gh-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
-@keyframes gh-arc-orbit { to { transform: translate(-50%, -60%) rotate(360deg); } }
 
 /* hover: the hole answers */
 .gate-hole:hover, .gate-hole:focus-visible { transform: scale(1.055); }
@@ -889,7 +867,7 @@ body.gate-locked { overflow: hidden; }
   color: rgba(197, 201, 211, 0.5);
 }
 @media (prefers-reduced-motion: reduce) {
-  .gh-halo, .gh-arc, .gate-hole, .gate-enter { animation: none; }
+  .gh-halo, .gate-hole, .gate-enter { animation: none; }
   .gh-disk3d::before, .gh-disk3d-front::before { animation: none; }
 }
 
