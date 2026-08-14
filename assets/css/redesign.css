@@ -660,87 +660,152 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.1rem;
+  gap: 0.5rem;
   background:
-    radial-gradient(ellipse at 50% 42%, rgba(96, 74, 141, 0.14), transparent 42%),
-    radial-gradient(ellipse at 50% 42%, rgba(20, 22, 34, 0.9), #030308 70%),
-    #030308;
+    radial-gradient(1px 1px at 12% 18%, rgba(255,244,230,0.5), transparent 100%),
+    radial-gradient(1px 1px at 84% 12%, rgba(255,244,230,0.35), transparent 100%),
+    radial-gradient(1.5px 1.5px at 72% 78%, rgba(255,244,230,0.28), transparent 100%),
+    radial-gradient(1px 1px at 28% 84%, rgba(255,244,230,0.35), transparent 100%),
+    radial-gradient(1px 1px at 55% 8%, rgba(255,244,230,0.25), transparent 100%),
+    radial-gradient(1.5px 1.5px at 90% 55%, rgba(255,244,230,0.2), transparent 100%),
+    radial-gradient(ellipse 75% 50% at 50% 42%, rgba(122, 58, 16, 0.12), transparent 62%),
+    #010102;
   opacity: 1;
   transition: opacity 0.7s ease;
 }
 .horizon-gate.is-crossing { opacity: 0; pointer-events: none; }
 body.gate-locked { overflow: hidden; }
-.gate-void {
+
+/* the black hole: shadow, photon ring, equatorial disk, lensed far-side arc */
+.gate-hole {
   position: relative;
-  width: min(38vmin, 210px);
-  height: min(38vmin, 210px);
-  margin-bottom: 0.4rem;
+  width: min(64vmin, 420px);
+  height: min(46vmin, 300px);
+  margin-bottom: 1.2rem;
+  animation: gh-breathe 7s ease-in-out infinite;
 }
-.gate-core {
-  position: absolute;
-  inset: 18%;
+.gate-hole > span { position: absolute; }
+.gh-shadow {
+  left: 50%; top: 50%;
+  width: 40%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   background: #000;
-  box-shadow:
-    0 0 24px 6px rgba(148, 118, 214, 0.25),
-    0 0 70px 18px rgba(96, 74, 141, 0.18),
-    inset 0 0 18px 6px rgba(0, 0, 0, 0.95);
+  box-shadow: inset 0 0 26px 10px #000, 0 0 34px 4px rgba(255, 158, 74, 0.12);
+  z-index: 3;
 }
-.gate-ring {
-  position: absolute;
-  inset: 0;
+.gh-halo {
+  left: 50%; top: 50%;
+  width: 46%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid rgba(196, 176, 240, 0.35);
-  border-top-color: rgba(228, 214, 255, 0.85);
-  filter: blur(0.4px);
-  animation: gate-spin 9s linear infinite;
+  background: conic-gradient(from 210deg,
+    rgba(255, 248, 236, 0.95), rgba(255, 196, 122, 0.75) 22%,
+    rgba(206, 106, 38, 0.58) 48%, rgba(168, 80, 26, 0.5) 62%,
+    rgba(255, 214, 156, 0.7) 82%, rgba(255, 248, 236, 0.95));
+  -webkit-mask: radial-gradient(circle, transparent 59%, #000 63%, #000 70%, transparent 75%);
+          mask: radial-gradient(circle, transparent 59%, #000 63%, #000 70%, transparent 75%);
+  filter: blur(1.2px);
+  z-index: 4;
+  animation: gh-orbit 16s linear infinite;
 }
-@keyframes gate-spin { to { transform: rotate(360deg); } }
+.gh-disk {
+  left: 50%; top: 50%;
+  width: 150%; height: 34%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  border-radius: 50%;
+  background: linear-gradient(92deg,
+    rgba(255, 247, 232, 0.85) 4%, rgba(255, 194, 122, 0.55) 24%,
+    rgba(180, 86, 28, 0.32) 52%, rgba(90, 36, 8, 0.18) 76%, transparent 96%);
+  filter: blur(14px);
+  z-index: 1;
+}
+.gh-disk-core {
+  left: 50%; top: 50%;
+  width: 132%; height: 7.5%;
+  transform: translate(-50%, -32%) rotate(-4deg);
+  border-radius: 50%;
+  background: linear-gradient(92deg,
+    #fff8ec 3%, #ffd9a3 20%, #ff9e46 40%,
+    rgba(190, 92, 30, 0.75) 62%, rgba(96, 40, 10, 0.4) 84%, transparent 97%);
+  filter: blur(2.2px);
+  z-index: 5;
+  animation: gh-shimmer 6s ease-in-out infinite;
+}
+.gh-arc {
+  left: 50%; top: 50%;
+  width: 49%; aspect-ratio: 1;
+  transform: translate(-50%, -61%);
+  border-radius: 50%;
+  background: conic-gradient(from 240deg,
+    rgba(255, 244, 228, 0.85), rgba(255, 190, 112, 0.6) 30%,
+    rgba(190, 92, 30, 0.45) 55%, rgba(255, 216, 160, 0.65) 85%,
+    rgba(255, 244, 228, 0.85));
+  -webkit-mask: radial-gradient(circle, transparent 62%, #000 70%, #000 82%, transparent 88%);
+          mask: radial-gradient(circle, transparent 62%, #000 70%, #000 82%, transparent 88%);
+  clip-path: inset(0 0 55% 0);
+  filter: blur(2.4px);
+  opacity: 0.85;
+  z-index: 2;
+  animation: gh-orbit 22s linear infinite reverse;
+}
+@keyframes gh-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
+.gh-arc { animation-name: gh-arc-orbit; }
+@keyframes gh-arc-orbit { to { transform: translate(-50%, -56%) rotate(360deg); } }
+@keyframes gh-shimmer {
+  0%, 100% { filter: blur(2.2px) brightness(1); }
+  50% { filter: blur(2.2px) brightness(1.22); }
+}
+@keyframes gh-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.012); }
+}
+
 .gate-name {
   margin: 0;
-  font-family: "Cinzel", serif;
-  font-size: clamp(1.15rem, 3.4vw, 1.7rem);
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: #e8ebf1;
-  text-indent: 0.34em;
+  font-family: "Pirata One", "Cinzel", serif;
+  font-size: clamp(2.1rem, 7.5vw, 3.4rem);
+  letter-spacing: 0.05em;
+  color: #e6ddc9;
+  text-shadow: 0 0 22px rgba(255, 150, 60, 0.22), 0 2px 14px rgba(0, 0, 0, 0.8);
+  filter: url(#gate-rough);
 }
 .gate-enter {
   appearance: none;
   cursor: pointer;
-  font-family: "Cinzel", serif;
-  font-size: clamp(0.82rem, 2.4vw, 1rem);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  text-indent: 0.28em;
-  color: #dcd2f2;
-  background: transparent;
-  border: 1px solid rgba(196, 176, 240, 0.45);
-  border-radius: 999px;
-  padding: 0.85rem 2.1rem 0.8rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-  animation: gate-breathe 3.2s ease-in-out infinite;
+  font-family: "Pirata One", "Cinzel", serif;
+  font-size: clamp(1.05rem, 3.2vw, 1.4rem);
+  letter-spacing: 0.12em;
+  color: #d6c8ae;
+  background: rgba(12, 7, 4, 0.55);
+  border: 1px solid rgba(214, 196, 168, 0.4);
+  border-radius: 3px;
+  padding: 0.72rem 2rem 0.62rem;
+  margin-top: 0.9rem;
+  filter: url(#gate-rough);
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  animation: gate-breathe 3.4s ease-in-out infinite;
 }
 .gate-enter:hover, .gate-enter:focus-visible {
   color: #fff;
-  border-color: rgba(228, 214, 255, 0.9);
-  box-shadow: 0 0 22px 4px rgba(148, 118, 214, 0.28);
+  border-color: rgba(255, 178, 102, 0.85);
+  box-shadow: 0 0 28px 4px rgba(255, 140, 50, 0.25);
   outline: none;
 }
 @keyframes gate-breathe {
-  0%, 100% { box-shadow: 0 0 10px 1px rgba(148, 118, 214, 0.12); }
-  50% { box-shadow: 0 0 20px 4px rgba(148, 118, 214, 0.26); }
+  0%, 100% { box-shadow: 0 0 10px 1px rgba(255, 140, 50, 0.1); }
+  50% { box-shadow: 0 0 22px 4px rgba(255, 140, 50, 0.22); }
 }
 .gate-sub {
-  margin: 0;
+  margin: 0.4rem 0 0;
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(197, 201, 211, 0.55);
+  color: rgba(197, 201, 211, 0.5);
 }
 @media (prefers-reduced-motion: reduce) {
-  .gate-ring, .gate-enter { animation: none; }
+  .gh-halo, .gh-arc, .gh-disk-core, .gate-hole, .gate-enter { animation: none; }
 }
 
 /* ---------- merch product grid ---------- */

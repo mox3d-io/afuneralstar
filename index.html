@@ -180,7 +180,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Spectral:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Spectral:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Pirata+One&display=swap">
     <link rel="stylesheet" href="/assets/css/redesign.css">
     <script src="/assets/js/redesign.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-888BCT159V"></script>
@@ -227,9 +227,18 @@
     <a class="skip-link" href="#stage">Skip to content</a>
 
     <div class="horizon-gate" data-gate role="dialog" aria-label="Enter the site">
-      <div class="gate-void" aria-hidden="true">
-        <span class="gate-ring"></span>
-        <span class="gate-core"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="gate-rough">
+          <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6"/>
+        </filter>
+      </svg>
+      <div class="gate-hole" aria-hidden="true">
+        <span class="gh-arc"></span>
+        <span class="gh-halo"></span>
+        <span class="gh-shadow"></span>
+        <span class="gh-disk"></span>
+        <span class="gh-disk-core"></span>
       </div>
       <p class="gate-name">A Funeral Star</p>
       <button class="gate-enter" type="button" data-gate-enter>Cross The Horizon</button>
