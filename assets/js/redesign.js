@@ -178,11 +178,33 @@
     }
   });
 
-  // ---------- YouTube lyric-video facade (click-to-load, inline swap) ----------
-  // Privacy-first: youtube-nocookie, no YT JS until intent. Swaps the poster for
-  // an autoplaying iframe in place (NOT the Spotify [data-player] overlay, which
-  // is hardwired to open.spotify.com/embed and a 470px-tall frame).
-  // Delegated so facades inside injected overlay content work too.
+  // ---------- YouTube facade (click-to-load, CUED, inline swap) ----------
+  // Privacy-first: youtube-nocookie, no YT JS until intent. 2026-08-15
+  // experiment: autoplay-classified embeds NEVER register views (2:30
+  // watched, pause/resume tried - nothing), and a play that starts inside
+  // YouTube's chrome always does. So facades load a PAUSED player; the
+  // visitor's play click is the counted event. video_play now means an
+  // actual play (widget message channel), not a poster click - that's
+  // video_cue. Delegated so facades inside veil content work too.
+  const cuedPlayers = [];
+  const armPlayTracking = (iframe, meta) => {
+    const hello = () => { try { iframe.contentWindow.postMessage(JSON.stringify({ event: "listening", id: meta.id }), "*"); } catch (_) {} };
+    iframe.addEventListener("load", () => { hello(); setTimeout(hello, 600); setTimeout(hello, 1800); });
+    cuedPlayers.push({ iframe, meta, fired: false });
+  };
+  window.addEventListener("message", (e) => {
+    const p = cuedPlayers.find((x) => x.iframe.contentWindow === e.source);
+    if (!p || p.fired) return;
+    let d; try { d = JSON.parse(e.data); } catch (_) { return; }
+    const st = d && d.info && typeof d.info.playerState === "number" ? d.info.playerState
+      : d && d.event === "onStateChange" && typeof d.info === "number" ? d.info : null;
+    if (st !== 1 && st !== 3) return;
+    p.fired = true;
+    track("video_play", { video: p.meta.video, album: p.meta.album, platform: "YouTube", id: p.meta.id, method: p.meta.method });
+    clarity("set", "video_play", p.meta.slug);
+    clarity("upgrade", "video_play");
+    if (p.meta.inVeil) pauseHero();
+  });
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-yt-facade]");
     if (btn) {
@@ -196,18 +218,15 @@
       const iframe = document.createElement("iframe");
       iframe.className = "video-frame";
       if (!inVeil) iframe.dataset.heroMain = "1";
-      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&enablejsapi=1`;
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
       iframe.title = title;
       iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
       iframe.frameBorder = "0";
       hero.replaceChildren(iframe);
       iframe.focus();
-      // The outbound delegate matches a[href^=http], not a <button>, so this is the
-      // source of truth for the play, mirroring openPlayer()'s clarity upgrade.
-      track("video_play", { video: title, album, platform: "YouTube", id });
-      clarity("set", "video_play", slug);
-      clarity("upgrade", "video_play");
-      if (inVeil) pauseHero();
+      track("video_cue", { video: title, album, platform: "YouTube", id });
+      clarity("set", "video_cued", slug);
+      armPlayTracking(iframe, { video: title, album, id, slug, inVeil, method: inVeil ? "veil_cued" : "cued_click" });
     }
   });
 
@@ -417,13 +436,14 @@
   }
 
   // ---------- horizon gate (home only): two doors ----------
-  // Door 1, the singularity: the hole is a LIVE cropped YouTube player, so a
-  // tap inside it is a real in-player click - YouTube credits the view and
-  // the watch time (autoplay embeds are documented as non-counting). The
-  // player floats as a body child (a re-parent reloads an iframe) and, on
-  // play, morphs from the hole into the hero slot without dropping a note.
-  // Door 2, "Enter The Horizon": the original one-gesture autoplay chain,
-  // kept verbatim as the does-autoplay-count experiment arm.
+  // Door 1, the singularity: the hole is a LIVE cropped YouTube player; a
+  // tap inside it is a real in-player start, which counts (verified live
+  // 2026-08-15: registered in Studio realtime within ~3 min).
+  // Door 2, "Enter The Horizon": crosses in SILENCE - the port morphs into
+  // the hero slot cued, not playing. Unlabeled on purpose (easter egg).
+  // Why: same-day experiment proved autoplay-classified embeds NEVER
+  // register (2:30 watched, pause/resume tried - nothing), so autoplaying
+  // on door 2 would waste the play. A cued hero's later play click counts.
   // Session-scoped: internal nav never re-gates. No JS, no gate.
   const gate = document.querySelector("[data-gate]");
   if (gate) {
@@ -469,48 +489,52 @@
         gate.classList.add("is-crossing");
         setTimeout(() => gate.remove(), 750);
       };
-      // Door 1: a play (or its buffering) inside the hole is the tap signal.
+      // Shared: morph the live port from the hole into the hero slot.
+      const morphToHero = () => {
+        const host = document.querySelector(".video-hero");
+        if (!host || !port) { body.classList.remove("gate-locked"); return; }
+        portFrame.dataset.heroMain = "1";
+        host.classList.add("is-ported");
+        window.removeEventListener("resize", sizePort);
+        const dock = () => {
+          const t = host.getBoundingClientRect();
+          port.style.left = Math.round(t.left + window.scrollX) + "px";
+          port.style.top = Math.round(t.top + window.scrollY) + "px";
+          port.style.width = Math.round(t.width) + "px";
+          port.style.height = Math.round(t.height) + "px";
+        };
+        port.classList.add("is-hero");
+        dock();
+        setTimeout(() => {
+          body.classList.remove("gate-locked"); // scrollbar returns, page shifts
+          port.classList.add("is-docked");
+          dock(); // so measure AFTER the shift
+          window.addEventListener("resize", dock);
+        }, 840);
+      };
+      // Port play signal (play or its buffering). Fires for door 1 (tap in
+      // the hole -> cross + morph) AND for a quiet-entry visitor who later
+      // taps play on the cued hero (video_play only, method horizon_cued).
+      let portPlayed = false;
       window.addEventListener("message", (e) => {
-        if (crossed || !portFrame || e.source !== portFrame.contentWindow) return;
+        if (portPlayed || !portFrame || e.source !== portFrame.contentWindow) return;
         let d; try { d = JSON.parse(e.data); } catch (_) { return; }
         const st = d && d.info && typeof d.info.playerState === "number" ? d.info.playerState
           : d && d.event === "onStateChange" && typeof d.info === "number" ? d.info : null;
         if (st !== 1 && st !== 3) return;
-        cross("singularity");
-        track("video_play", { video: heroPick.title, album: heroPick.album, platform: "YouTube", id: heroPick.id });
+        portPlayed = true;
+        track("video_play", { video: heroPick.title, album: heroPick.album, platform: "YouTube",
+          id: heroPick.id, method: crossed ? "horizon_cued" : "singularity" });
         clarity("set", "video_play", heroPick.id);
         clarity("upgrade", "video_play");
-        const host = document.querySelector(".video-hero");
-        if (host && port) {
-          portFrame.dataset.heroMain = "1";
-          host.classList.add("is-ported");
-          window.removeEventListener("resize", sizePort);
-          const dock = () => {
-            const t = host.getBoundingClientRect();
-            port.style.left = Math.round(t.left + window.scrollX) + "px";
-            port.style.top = Math.round(t.top + window.scrollY) + "px";
-            port.style.width = Math.round(t.width) + "px";
-            port.style.height = Math.round(t.height) + "px";
-          };
-          port.classList.add("is-hero");
-          dock();
-          setTimeout(() => {
-            body.classList.remove("gate-locked"); // scrollbar returns, page shifts
-            port.classList.add("is-docked");
-            dock(); // so measure AFTER the shift
-            window.addEventListener("resize", dock);
-          }, 840);
-        } else {
-          body.classList.remove("gate-locked");
-        }
+        if (!crossed) { cross("singularity"); morphToHero(); }
       });
-      // Door 2: the spoken invitation - autoplay chain, unchanged.
+      // Door 2: crosses in silence; the port docks CUED. Its play button is
+      // the second chance at a counted view.
       gate.querySelectorAll("[data-gate-enter]").forEach((b) => b.addEventListener("click", () => {
         if (crossed) return;
-        if (port) { port.remove(); port = null; portFrame = null; }
         cross("enter_button");
-        body.classList.remove("gate-locked");
-        document.querySelector("[data-yt-facade]")?.click();
+        morphToHero();
       }));
     }
   }
