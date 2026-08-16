@@ -471,19 +471,27 @@
         portFrame.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
         portFrame.frameBorder = "0";
         port.appendChild(portFrame);
+        // Until the player is genuinely tappable the hole PULSES and taps
+        // pass through it to the gate beneath (-> quiet entry, not a dead
+        // click). Clarity showed slow-mobile arrivals hammering the unready
+        // hole 62 times in one session.
+        port.classList.add("is-loading");
         sizePort();
         document.body.appendChild(port);
         sizePort();
         window.addEventListener("resize", sizePort);
         // widget handshake so the embed reports player state back to us
         const hello = () => { try { portFrame.contentWindow.postMessage(JSON.stringify({ event: "listening", id: "gate" }), "*"); } catch (_) {} };
-        portFrame.addEventListener("load", () => { hello(); setTimeout(hello, 600); setTimeout(hello, 1800); });
+        portFrame.addEventListener("load", () => {
+          hello(); setTimeout(hello, 600); setTimeout(hello, 1800);
+          setTimeout(() => port.classList.remove("is-loading"), 350);
+        });
       }
       const cross = (door) => {
         crossed = true;
         sessionStorage.setItem("horizonCrossed", "1");
         track("horizon_crossed", { door });
-        track(door === "singularity" ? "gate_singularity" : "gate_enter_button", { variant: heroPick.id });
+        track(door === "singularity" ? "gate_singularity" : door === "drift" ? "gate_drift" : "gate_enter_button", { variant: heroPick.id });
         clarity("set", "crossed_horizon", door);
         clarity("upgrade", "crossed_horizon");
         gate.classList.add("is-crossing");
@@ -536,6 +544,14 @@
         cross("enter_button");
         morphToHero();
       }));
+      // Door 3, the drift: a tap anywhere else on the gate (disk, name,
+      // backdrop, or the still-loading hole passing through) is someone
+      // asking to come in. Let them in quietly instead of ignoring them.
+      gate.addEventListener("click", (e) => {
+        if (crossed || e.target.closest("[data-gate-enter]")) return;
+        cross("drift");
+        morphToHero();
+      });
     }
   }
 })();
