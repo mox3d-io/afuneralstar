@@ -689,7 +689,7 @@ body.gate-locked { overflow: hidden; }
   perspective: 900px;
   filter: hue-rotate(0deg) brightness(1) saturate(1);
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1), filter 1.7s ease;
-  animation: gh-breathe 7s ease-in-out infinite;
+  animation: gate-arrive 1.6s ease 0.6s backwards, gh-breathe 7s ease-in-out 2.4s infinite;
 }
 .gate-hole:focus-visible { outline: 1px solid rgba(255, 178, 102, 0.7); outline-offset: 8px; border-radius: 50%; }
 .gate-hole > span { position: absolute; pointer-events: none; }
@@ -831,7 +831,14 @@ body.gate-locked { overflow: hidden; }
   50% { transform: scale(1.014); }
 }
 
+/* the arrival: darkness -> the name -> the disk ignites -> the horizon
+   opens -> only then, the invitation. The wait IS the show; nothing
+   interactive is delayed (port tappability is governed solely by
+   is-loading, and taps during materialization drift in quietly). */
+@keyframes gate-arrive { from { opacity: 0; } }
+
 .gate-name {
+  animation: gate-arrive 1.4s ease 0.15s backwards;
   margin: 0 0 0.6rem;
   font-family: "Pirata One", "Cinzel", serif;
   font-size: clamp(2.1rem, 7.5vw, 3.4rem);
@@ -854,7 +861,7 @@ body.gate-locked { overflow: hidden; }
   margin-top: 1rem;
   filter: url(#gate-rough);
   transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  animation: gate-breathe 3.4s ease-in-out infinite;
+  animation: gate-arrive 1.5s ease 2.4s backwards, gate-breathe 3.4s ease-in-out 3.9s infinite;
 }
 .gate-enter:hover, .gate-enter:focus-visible {
   color: #fff;
@@ -879,6 +886,7 @@ body.gate-locked { overflow: hidden; }
   overflow: hidden;
   background: #000;
   transform: translateZ(0);
+  animation: gate-arrive 1.2s ease 0.6s backwards;
   transition:
     left 0.82s cubic-bezier(0.2, 0.7, 0.2, 1), top 0.82s cubic-bezier(0.2, 0.7, 0.2, 1),
     width 0.82s cubic-bezier(0.2, 0.7, 0.2, 1), height 0.82s cubic-bezier(0.2, 0.7, 0.2, 1),
@@ -918,7 +926,7 @@ body.gate-locked { overflow: hidden; }
 #gate-port.is-docked { position: absolute; z-index: 5; transition: none; }
 .video-hero.is-ported > * { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) {
-  .gh-halo, .gate-hole, .gate-enter { animation: none; }
+  .gh-halo, .gate-hole, .gate-enter, .gate-name, #gate-port { animation: none; }
   .gh-disk3d::before, .gh-disk3d-front::before { animation: none; }
 }
 
