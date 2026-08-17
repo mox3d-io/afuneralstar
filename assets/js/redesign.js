@@ -292,10 +292,11 @@
     img.height = 854;
     a.appendChild(img);
     slot.replaceChildren(a);
-    track("banner_view", { banner: id });
+    const pos = slot.classList.contains("banner-top") ? "top" : "body";
+    track("banner_view", { banner: id, position: pos });
     clarity("set", "banner_served", id);
     a.addEventListener("click", () => {
-      track("banner_click", { banner: id });
+      track("banner_click", { banner: id, position: pos });
       clarity("set", "banner_clicked", id);
       clarity("upgrade", "banner_clicked");
     });
