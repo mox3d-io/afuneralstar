@@ -1076,6 +1076,15 @@ body.veil-locked { overflow: hidden; }
 }
 
 /* ---------- lyrics index ---------- */
+/* releases hub: the whole catalog as cover cards */
+.release-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.6rem; margin-top: 1.6rem; }
+.release-card { display: flex; flex-direction: column; gap: 0.55rem; text-decoration: none; transition: transform 220ms var(--ease); }
+.release-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--line-strong); box-shadow: 0 16px 44px rgba(0,0,0,0.5); transition: border-color 200ms var(--ease), box-shadow 260ms var(--ease); }
+.release-card:hover { transform: translateY(-4px); }
+.release-card:hover img { border-color: var(--ignite); box-shadow: 0 20px 60px rgba(238,106,30,0.28); }
+.release-card-name { font-family: var(--display); font-weight: 600; font-size: 1.12rem; color: var(--paper); line-height: 1.25; }
+.release-card-kind { font-family: "IBM Plex Mono", monospace; font-size: 0.66rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+
 /* album wayfinding: cover jump strip + section headers wearing their art */
 .lyrics-jump { display: flex; flex-wrap: wrap; gap: 1.1rem; margin: 1.4rem 0 2.6rem; }
 .lyrics-jump a { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; width: 6.4rem; text-decoration: none; color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; transition: color 180ms var(--ease), transform 200ms var(--ease); }
