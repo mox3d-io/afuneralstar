@@ -1076,7 +1076,22 @@ body.veil-locked { overflow: hidden; }
 }
 
 /* ---------- lyrics index ---------- */
-.lyrics-album { margin: 0 0 2.4rem; }
+/* album wayfinding: cover jump strip + section headers wearing their art */
+.lyrics-jump { display: flex; flex-wrap: wrap; gap: 1.1rem; margin: 1.4rem 0 2.6rem; }
+.lyrics-jump a { display: flex; flex-direction: column; align-items: center; gap: 0.45rem; width: 6.4rem; text-decoration: none; color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; transition: color 180ms var(--ease), transform 200ms var(--ease); }
+.lyrics-jump img { width: 96px; height: 96px; object-fit: cover; border: 1px solid var(--line-strong); transition: border-color 200ms var(--ease), box-shadow 240ms var(--ease); }
+.lyrics-jump a:hover { color: var(--paper); transform: translateY(-3px); }
+.lyrics-jump a:hover img { border-color: var(--ignite); box-shadow: 0 8px 28px rgba(238,106,30,0.25); }
+.lyrics-album { margin: 0 0 2.4rem; scroll-margin-top: 5.5rem; }
+.lyrics-album-head { display: flex; align-items: flex-end; gap: 1.1rem; margin-bottom: 0.9rem; }
+.lyrics-album-cover { width: 128px; height: 128px; object-fit: cover; border: 1px solid var(--line-strong); box-shadow: 0 14px 40px rgba(0,0,0,0.55); }
+.lyrics-album-head .lyrics-album-title { margin-bottom: 0.15rem; }
+@media (max-width: 560px) {
+  .lyrics-jump { gap: 0.7rem; }
+  .lyrics-jump a { width: 4.6rem; }
+  .lyrics-jump img { width: 68px; height: 68px; }
+  .lyrics-album-cover { width: 84px; height: 84px; }
+}
 .lyrics-album .trilogy-label { margin-bottom: 0.2rem; }
 .lyrics-album-title {
   margin: 0 0 0.9rem;
