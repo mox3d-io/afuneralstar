@@ -369,7 +369,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .track { display: grid; grid-template-columns: 2.4rem 1fr auto; gap: 0.9rem; align-items: baseline; padding: 0.95rem 0.4rem; border-bottom: 1px solid var(--line); transition: background 180ms var(--ease); }
 .track:hover { background: rgba(236, 232, 225, 0.02); }
 .track-num { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; color: var(--dim); }
-.track-title { font-family: var(--display); font-weight: 500; font-size: 1.28rem; line-height: 1.2; color: var(--paper); transition: transform 200ms var(--ease), color 180ms var(--ease); }
+.track-num { font-family: "IBM Plex Mono", monospace; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.08em; }
+.track-title { font-family: var(--display); font-weight: 600; font-size: 1.28rem; line-height: 1.2; color: var(--paper); transition: transform 200ms var(--ease), color 180ms var(--ease); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .track:hover .track-title { transform: translateX(4px); color: var(--star); }
 .track.no-lyrics .track-title { color: var(--muted); }
 .track.no-lyrics:hover .track-title { transform: none; }
