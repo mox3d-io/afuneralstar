@@ -11,6 +11,11 @@
         transport_type: "beacon",
         ...params,
       });
+      // Google Ads conversion mirror: a play is the site's one conversion
+      // (action 7724852142, secondary/observation - never a bid signal)
+      if (name === "video_play") {
+        window.gtag("event", "conversion", { send_to: "AW-18299802121/UGZDCK7Hv-McEImkg5ZE" });
+      }
     }
   };
   // Microsoft Clarity API (custom tags / events / session upgrade)
