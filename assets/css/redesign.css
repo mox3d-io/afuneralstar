@@ -878,6 +878,13 @@ body.gate-locked { overflow: hidden; }
   50% { box-shadow: 0 0 22px 4px rgba(255, 140, 50, 0.22); }
 }
 
+/* an eager tap during the arrival fast-forwards the choreography: every
+   gate element drops its entrance delay and lands now */
+.horizon-gate.is-hurried .gate-name,
+.horizon-gate.is-hurried .gate-hole,
+.horizon-gate.is-hurried .gate-enter,
+#gate-port.is-hurried { animation-delay: 0s; }
+
 /* the singularity player: a live cropped YouTube embed floating over the gate
    (body child at z201 - the gate stack caps at 200, and a re-parent would
    reload the iframe). Oversized ~2x and centered so YouTube's title chrome

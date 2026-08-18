@@ -546,10 +546,28 @@
         morphToHero();
       }));
       // Door 3, the drift: a tap anywhere else on the gate (disk, name,
-      // backdrop, or the still-loading hole passing through) is someone
-      // asking to come in. Let them in quietly instead of ignoring them.
+      // backdrop) is someone asking to come in. Let them in quietly
+      // instead of ignoring them - but not before the arrival finishes.
+      // Rearmed 2026-08-18: the instant drift was cannibalizing
+      // singularity plays (Aug 16: drift 65 vs singularity 43, plays 47
+      // lagging 126 crossings). The eager first-tappers are the old
+      // rage-click cohort - the best play converters - so an early tap
+      // now fast-forwards the choreography onto live doors instead of
+      // swallowing them silently. Drift arms once the button has landed.
+      let driftArmed = false;
+      setTimeout(() => { driftArmed = true; }, 4200);
+      let hurried = false;
       gate.addEventListener("click", (e) => {
         if (crossed || e.target.closest("[data-gate-enter]")) return;
+        if (!driftArmed) {
+          if (!hurried) {
+            hurried = true;
+            gate.classList.add("is-hurried");
+            port?.classList.add("is-hurried");
+            track("gate_hurry", { variant: heroPick.id });
+          }
+          return;
+        }
         cross("drift");
         morphToHero();
       });
