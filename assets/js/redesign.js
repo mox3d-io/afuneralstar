@@ -580,13 +580,11 @@
   }
 })();
 
-// ---------- X ads website tag (audience plumbing, 2026-08-17) ----------
-// Legacy oct pixel (pid redpj) as a post-load image beacon: feeds X website
-// audiences without a blocking script. Swap to uwt.js once the modern
-// pixel ID is pulled from ads.x.com Events Manager.
-window.addEventListener("load", () => {
-  ["https://analytics.twitter.com/i/adsct", "https://t.co/i/adsct"].forEach((base) => {
-    const img = new Image(1, 1);
-    img.src = base + "?txn_id=redpj&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0";
-  });
-});
+// ---------- X ads website tag (audience plumbing) ----------
+// Full X Pixel (uwt.js, pixel redpj - confirmed as the account's modern
+// website pixel in Events Manager 2026-08-18; "Site visits" recording).
+// Async by design; replaces the interim image beacon.
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+twq('config','redpj');
