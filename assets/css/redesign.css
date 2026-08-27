@@ -1138,3 +1138,18 @@ body.veil-locked { overflow: hidden; }
   font-size: clamp(1.5rem, 3.4vw, 2rem);
   color: #ece8e1;
 }
+
+/* ---------- Saudade By The Sea hero (2026-08-26) ---------- */
+.saudade-hero { margin: 1.4rem auto 0.9rem; width: min(560px, 92vw); }
+.saudade-cover { position: relative; display: block; border-radius: 6px; overflow: hidden; border: 1px solid rgba(228,232,242,0.16); box-shadow: 0 24px 64px rgba(0,0,0,0.55); transition: transform 260ms var(--ease), box-shadow 260ms var(--ease); }
+.saudade-cover img { display: block; width: 100%; height: auto; }
+.saudade-cover:hover, .saudade-cover:focus-visible { transform: translateY(-3px); box-shadow: 0 28px 72px rgba(0,0,0,0.6), 0 0 0 1px var(--ignite); outline: none; }
+.saudade-cta { position: absolute; left: 0; right: 0; bottom: 0; padding: 0.7rem 1rem; text-align: center; font-family: Cinzel, Georgia, serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: #f2f4f8; background: linear-gradient(to top, rgba(7,7,10,0.92), rgba(7,7,10,0)); }
+.saudade-cta-dot { display: inline-block; width: 7px; height: 7px; margin-right: 0.55rem; border-radius: 50%; background: #1ED760; box-shadow: 0 0 10px #1ED760; vertical-align: middle; }
+.saudade-line { max-width: 34rem; margin-left: auto; margin-right: auto; }
+.saudade-meanwhile { margin-top: 2.2rem; opacity: 0.8; }
+@media (prefers-reduced-motion: reduce) { .saudade-cover { transition: none; } .saudade-cover:hover { transform: none; } }
+/* home: top banner clears the fixed topbar (was sliding under its blur) */
+body[data-page="home"] .banner-top { margin-top: calc(var(--bar-h) + 1.1rem); position: relative; z-index: 2; }
+body[data-page="home"] .banner-top .merch-banner img { height: 200px; }
+body[data-page="home"] .hero { padding-top: 2.2rem; min-height: 0; }
