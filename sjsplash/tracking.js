@@ -23,7 +23,34 @@
     appLink.href = intentUrl;
   }
   const production = ['afuneralstar.com', 'www.afuneralstar.com'].includes(location.hostname);
+  // The X API supplied a dedicated single-event tag for Spotify button clicks.
+  // Keep it independent of GA4 so a Google blocker does not suppress X events.
+  const xClicks = [];
+  function xClick() {
+    if (window.twttr?.conversion?.trackPid) {
+      window.twttr.conversion.trackPid('rfbkq', {tw_sale_amount: 0, tw_order_quantity: 0});
+    } else {
+      xClicks.push(true);
+    }
+  }
   if (production) {
+    window.twq = window.twq || function () {
+      window.twq.exe ? window.twq.exe.apply(window.twq, arguments) : window.twq.queue.push(arguments);
+    };
+    window.twq.version = '1.1';
+    window.twq.queue = window.twq.queue || [];
+    const xBase = document.createElement('script');
+    xBase.async = true; xBase.src = 'https://static.ads-twitter.com/uwt.js';
+    document.head.appendChild(xBase);
+    window.twq('config', 'redpj');
+    const xEvent = document.createElement('script');
+    xEvent.async = true; xEvent.src = 'https://platform.twitter.com/oct.js';
+    xEvent.onload = () => {
+      if (window.twttr?.conversion?.trackPid) {
+        while (xClicks.length) { xClicks.pop(); try { xClick(); } catch (_) {} }
+      }
+    };
+    document.head.appendChild(xEvent);
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
     const tag = document.createElement('script');
@@ -40,7 +67,8 @@
   for (const [anchor, method] of [[link, android ? 'android_intent' : 'https'],
     [appLink, android ? 'android_intent' : 'spotify_uri'], [webLink, 'web_fallback']]) {
     anchor.addEventListener('click', () => {
-      if (!production || typeof window.gtag !== 'function') return;
+      if (!production) return;
+      try { xClick(); } catch (_) { /* Preserve native navigation if X is blocked. */ }
       try {
         window.gtag('event', 'stream_click', {
           ...context, send_to: measurementId,
