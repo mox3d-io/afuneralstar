@@ -9,46 +9,47 @@
     release_title: 'Saudade By The Sea',
     spotify_track_id: '0jdbNqbGIEOWz6gJg6kHml'
   };
-  // Local previews never send visits/clicks into the production property.
-  if (!['afuneralstar.com', 'www.afuneralstar.com'].includes(location.hostname)) return;
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-  const tag = document.createElement('script');
-  tag.async = true;
-  tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
-  document.head.appendChild(tag);
-  window.gtag('js', new Date());
-  // Disable the automatic initial pageview; emit one explicit, song-labelled pageview.
-  window.gtag('config', measurementId, { send_page_view: false });
-  window.gtag('event', 'page_view', {
-    ...context, send_to: measurementId,
-    page_title: document.title, page_location: location.href
-  });
   const link = document.getElementById('spotify-link');
-  link.addEventListener('click', (event) => {
-    const sameTab = event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
-    let timer;
-    let navigated = false;
-    const navigate = () => {
-      if (navigated) return;
-      navigated = true;
-      clearTimeout(timer);
-      location.assign(spotifyUrl);
-    };
-    if (sameTab) {
-      event.preventDefault();
-      // Spotify must still open if a blocker prevents Google's callback.
-      timer = setTimeout(navigate, 500);
-    }
-    try {
-      window.gtag('event', 'stream_click', {
-        ...context, send_to: measurementId,
-        streaming_service: 'spotify', link_url: spotifyUrl,
-        transport_type: 'beacon', event_timeout: 500,
-        ...(sameTab ? { event_callback: navigate } : {})
-      });
-    } catch (_) {
-      if (sameTab) navigate();
-    }
-  });
+  const appLink = document.getElementById('spotify-app-link');
+  const webLink = document.getElementById('spotify-web-link');
+  const android = /Android/i.test(navigator.userAgent) || navigator.userAgentData?.platform === 'Android';
+  const intentUrl = 'intent://open.spotify.com/track/' + context.spotify_track_id +
+    '#Intent;scheme=https;package=com.spotify.music;S.browser_fallback_url=' +
+    encodeURIComponent(spotifyUrl) + ';end';
+  // Set href ahead of the tap: app opening remains a direct user gesture.
+  // This works independently of GA4 and blockers.
+  if (android) {
+    link.href = intentUrl;
+    appLink.href = intentUrl;
+  }
+  const production = ['afuneralstar.com', 'www.afuneralstar.com'].includes(location.hostname);
+  if (production) {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+    document.head.appendChild(tag);
+    window.gtag('js', new Date());
+    window.gtag('config', measurementId, { send_page_view: false });
+    window.gtag('event', 'page_view', {
+      ...context, send_to: measurementId,
+      page_title: document.title, page_location: location.href
+    });
+  }
+  for (const [anchor, method] of [[link, android ? 'android_intent' : 'https'],
+    [appLink, android ? 'android_intent' : 'spotify_uri'], [webLink, 'web_fallback']]) {
+    anchor.addEventListener('click', () => {
+      if (!production || typeof window.gtag !== 'function') return;
+      try {
+        window.gtag('event', 'stream_click', {
+          ...context, send_to: measurementId,
+          streaming_service: 'spotify', link_url: spotifyUrl,
+          open_method: method, transport_type: 'beacon'
+        });
+      } catch (_) { /* Analytics must never prevent the native link action. */ }
+      // No preventDefault, timers, or event_callback navigation. They can
+      // remove the user gesture browsers require to open external apps.
+    });
+  }
 })();
