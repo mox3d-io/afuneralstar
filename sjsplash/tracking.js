@@ -34,6 +34,17 @@
     }
   }
   if (production) {
+    window.fbq = window.fbq || function () {
+      window.fbq.callMethod ? window.fbq.callMethod.apply(window.fbq, arguments) : window.fbq.queue.push(arguments);
+    };
+    window._fbq = window._fbq || window.fbq;
+    window.fbq.push = window.fbq; window.fbq.loaded = true; window.fbq.version = '2.0';
+    window.fbq.queue = window.fbq.queue || [];
+    const metaTag = document.createElement('script');
+    metaTag.async = true; metaTag.src = 'https://connect.facebook.net/en_US/fbevents.js';
+    document.head.appendChild(metaTag);
+    window.fbq('init', '1383265040543968');
+    window.fbq('track', 'PageView');
     window.twq = window.twq || function () {
       window.twq.exe ? window.twq.exe.apply(window.twq, arguments) : window.twq.queue.push(arguments);
     };
@@ -68,6 +79,12 @@
     [appLink, android ? 'android_intent' : 'spotify_uri'], [webLink, 'web_fallback']]) {
     anchor.addEventListener('click', () => {
       if (!production) return;
+      try {
+        window.fbq('trackCustom', 'SpotifyClick', {
+          song_title: context.song_title, spotify_track_id: context.spotify_track_id,
+          streaming_service: 'spotify', open_method: method
+        });
+      } catch (_) { /* Preserve native navigation if Meta is blocked. */ }
       try { xClick(); } catch (_) { /* Preserve native navigation if X is blocked. */ }
       try {
         window.gtag('event', 'stream_click', {
