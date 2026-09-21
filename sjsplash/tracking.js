@@ -23,16 +23,6 @@
     appLink.href = intentUrl;
   }
   const production = ['afuneralstar.com', 'www.afuneralstar.com'].includes(location.hostname);
-  // The X API supplied a dedicated single-event tag for Spotify button clicks.
-  // Keep it independent of GA4 so a Google blocker does not suppress X events.
-  const xClicks = [];
-  function xClick() {
-    if (window.twttr?.conversion?.trackPid) {
-      window.twttr.conversion.trackPid('rfbkq', {tw_sale_amount: 0, tw_order_quantity: 0});
-    } else {
-      xClicks.push(true);
-    }
-  }
   if (production) {
     window.fbq = window.fbq || function () {
       window.fbq.callMethod ? window.fbq.callMethod.apply(window.fbq, arguments) : window.fbq.queue.push(arguments);
@@ -45,35 +35,7 @@
     document.head.appendChild(metaTag);
     window.fbq('init', '1383265040543968');
     window.fbq('track', 'PageView');
-    window.twq = window.twq || function () {
-      window.twq.exe ? window.twq.exe.apply(window.twq, arguments) : window.twq.queue.push(arguments);
-    };
-    window.twq.version = '1.1';
-    window.twq.queue = window.twq.queue || [];
-    const xBase = document.createElement('script');
-    xBase.async = true; xBase.src = 'https://static.ads-twitter.com/uwt.js';
-    document.head.appendChild(xBase);
-    window.twq('config', 'redpj');
-    const xEvent = document.createElement('script');
-    xEvent.async = true; xEvent.src = 'https://platform.twitter.com/oct.js';
-    xEvent.onload = () => {
-      if (window.twttr?.conversion?.trackPid) {
-        while (xClicks.length) { xClicks.pop(); try { xClick(); } catch (_) {} }
-      }
-    };
-    document.head.appendChild(xEvent);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-    const tag = document.createElement('script');
-    tag.async = true;
-    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
-    document.head.appendChild(tag);
-    window.gtag('js', new Date());
-    window.gtag('config', measurementId, { send_page_view: false });
-    window.gtag('event', 'page_view', {
-      ...context, send_to: measurementId,
-      page_title: document.title, page_location: location.href
-    });
+
   }
   for (const [anchor, method] of [[link, android ? 'android_intent' : 'https'],
     [appLink, android ? 'android_intent' : 'spotify_uri'], [webLink, 'web_fallback']]) {
@@ -85,7 +47,6 @@
           streaming_service: 'spotify', open_method: method
         });
       } catch (_) { /* Preserve native navigation if Meta is blocked. */ }
-      try { xClick(); } catch (_) { /* Preserve native navigation if X is blocked. */ }
       try {
         window.gtag('event', 'stream_click', {
           ...context, send_to: measurementId,
