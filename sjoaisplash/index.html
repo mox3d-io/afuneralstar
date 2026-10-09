@@ -59,7 +59,7 @@ render();$('language-control').hidden=false;
 // Embedded/other browsers retain HTTPS; no install links, app-detection requests or redirect timers.
 const ua=navigator.userAgent,android=/Android/i.test(ua),intentBrowser=android&&/Chrome\//.test(ua)&&!/; wv\)|\bwv\b|Version\/|EdgA\/|OPR\/|SamsungBrowser\/|Firefox\/|FBAN|FBAV|Instagram/i.test(ua);
 const appPackages={spotify:'com.spotify.music',apple_music:'com.apple.android.music',amazon_music:'com.amazon.mp3',deezer:'deezer.android.app',youtube:'com.google.android.youtube'};
-for(const el of document.querySelectorAll('.service')){el.dataset.openMethod='https';if(intentBrowser){const web=el.href;el.href='intent://'+web.slice(8)+'#Intent;scheme=https;package='+appPackages[el.dataset.service]+';S.browser_fallback_url='+encodeURIComponent(web)+';end';el.dataset.openMethod='android_intent'}}
+for(const el of document.querySelectorAll('.service')){el.dataset.openMethod='https';if(intentBrowser&&el.dataset.service!=='youtube'){const web=el.href;el.href='intent://'+web.slice(8)+'#Intent;scheme=https;package='+appPackages[el.dataset.service]+';S.browser_fallback_url='+encodeURIComponent(web)+';end';el.dataset.openMethod='android_intent'}}
 const prod=['afuneralstar.com','www.afuneralstar.com'].includes(location.hostname);
 window.dataLayer=window.dataLayer||[];window.gtag=function(){window.dataLayer.push(arguments)};
 window.oaiq=function(){window.oaiq.q.push(arguments)};window.oaiq.q=[];
