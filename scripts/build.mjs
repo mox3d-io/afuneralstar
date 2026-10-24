@@ -1,3 +1,9 @@
+// Legacy generator: later hand-maintained pages are not represented here.
+// Use python scripts/update_catalog.py for the current catalog.
+if (!process.argv.includes("--legacy-rebuild")) {
+  throw new Error("Legacy generator would overwrite newer pages. Use scripts/update_catalog.py; --legacy-rebuild is for deliberate recovery only.");
+}
+
 // Site builder for A Funeral Star.
 //
 // Generates every static page from a single registry so per-page SEO
@@ -23,7 +29,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/now-we-ignite",
     cover: "now-we-ignite-cover.webp",
-    blurb: "A quasar fires from the black hole that consumed the funeral star, and the collapse reverses into ignition.",
+    blurb: "Now We Ignite begins the Ignition trilogy, returning to cosmic themes of growth and metamorphosis. The root of the album is the “supernova”—the violent explosion of light, the birth of new stars and the death of old. Power metal and techno fusion, and themes of life and death that are the supernova, both literal and metaphysical.",
     // Track 1 is an instrumental overture with no lyric sheet.
     instrumentals: [{ number: 1, title: "Supernova (Birth)" }],
     spotify: "https://open.spotify.com/album/3a5JAyUN6Wd45aTpIoqvIH",
@@ -42,7 +48,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/monuments",
     cover: "monuments-cover.webp",
-    blurb: "The invisible hand made flesh: money, debt, the screen, and the monuments a society raises to its own greed. The second fire of Ignition, harder and heavier, closer to the ground.",
+    blurb: "Second in the Ignition trilogy, Monuments is rooted in greed. The growth of power and control, igniting the economy for the select few and burning society as the product. Trap metal and hip-hop fuse to make the sound.",
     // Released June 19, 2026. Standard album wiring: cover opens the in-page
     // Spotify embed overlay; the share link drives the platform buttons.
     releaseIso: "2026-06-19",
@@ -61,7 +67,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/consumed-by-a-funeral-star",
     cover: "consumed-cover.webp",
-    blurb: "Cosmic black metal and death metal built around singularities, entropy, and gravitational tombs.",
+    blurb: "As the start of the cosmic collapse trilogy, and the first album for the project, Consumed by A Funeral Star explores the existential dread of the empty universe rooted in melodic death metal.",
     spotify: "https://open.spotify.com/album/6fuZyp5dx6VddapdwGRKTx",
     spotifyEmbed: "album/6fuZyp5dx6VddapdwGRKTx",
     apple: "https://music.apple.com/us/album/consumed-by-a-funeral-star/6766791921",
@@ -77,7 +83,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/homeless-and-hopeless",
     cover: "homeless-cover.webp",
-    blurb: "Death metal, hardcore punk, crust, and d-beat pressure from the human scale.",
+    blurb: "Homeless and Hopeless is about feeling lost and transient in society. The theme of collapse carries into how far one can actually fall, even in one of the richest cities in the world.",
     spotify: "https://open.spotify.com/album/1p9YdRV5ECDo2aTwbOWEDZ",
     spotifyEmbed: "album/1p9YdRV5ECDo2aTwbOWEDZ",
     apple: null,
@@ -93,7 +99,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/the-land-of-silver-and-sorrow",
     cover: "silver-cover.webp",
-    blurb: "Romantic subjects trapped inside the violence of their border narco town, where love and survival pull against the same gravity.",
+    blurb: "Silver and Sorrow describes a romantic border town that is ultimately inescapable. Violence, love, and music collide together. Fusing the beauty of Mexican ranchera, bolero, narcocorrido, and black metal.",
     spotify: "https://open.spotify.com/album/0ZBk9PCZo596PlkhXHi5y8",
     spotifyEmbed: "album/0ZBk9PCZo596PlkhXHi5y8",
     apple: "https://music.apple.com/us/album/the-land-of-silver-and-sorrow/1895990194",
@@ -885,7 +891,7 @@ ${discoHtml}
         <div class="home-connect">
           <div class="home-connect-text">
             <p class="home-connect-eyebrow">Mailing list</p>
-            <h3 class="home-connect-title">News on new releases, shorts, <em>and</em> what comes next.</h3>
+            <h3 class="home-connect-title">News on new releases, shorts, and what comes next.</h3>
           </div>
           <a class="home-connect-button" href="/mailing-list/">Subscribe</a>
         </div>
@@ -1111,7 +1117,7 @@ ${continueFooter("Continue", [
 };
 
 const aboutPage = () => {
-  const description = "About A Funeral Star: experimental death metal from Washington, D.C. Songs about people trapped by the gravity of their situations.";
+  const description = "A Funeral Star is an experimental media project formed in Washington D.C. in 2025, using artificial intelligence to enhance music and digital art.";
   const canonical = `${siteUrl}/about/`;
   const ogImage = `${siteUrl}/assets/img/sitebanner.webp`;
 
@@ -1122,7 +1128,8 @@ const aboutPage = () => {
         </div>
 
         <div class="about-prose">
-          <p>Experimental death metal from Washington, D.C. Songs about people trapped by the gravity of their situations.</p>
+          <p>Formed in Washington D.C. in 2025, A Funeral Star is an experimental media project using artificial intelligence to enhance music and digital art. The project's name is meant to invoke the melancholic end of all cosmic light: the black hole, A Funeral Star. The songs explore melodic death metal, black metal, post-hardcore, and Spanish and global genre fusion. Thank you everyone for your support.</p>
+          <p>-AFS</p>
         </div>
 
         <p class="about-social-label">Listen &amp; follow</p>

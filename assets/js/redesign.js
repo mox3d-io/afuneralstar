@@ -333,7 +333,7 @@
     { id: "ZXzDGFwwdsI", w: 5, title: "A Dying Star (Lyric Video)", cap: "Now Playing · Lyric Video", album: "Now We Ignite", line: "Every ending burns on the way down." },
   ];
   let heroPick = HERO_VARIANTS[0];
-  if (body.dataset.page === "home") {
+  if (body.dataset.page === "home" && document.querySelector("[data-yt-facade]")) {
     const total = HERO_VARIANTS.reduce((s, v) => s + v.w, 0);
     let roll = Math.random() * total;
     const pick = HERO_VARIANTS.find((v) => (roll -= v.w) < 0) || HERO_VARIANTS[0];

@@ -1153,3 +1153,29 @@ body.veil-locked { overflow: hidden; }
 body[data-page="home"] .banner-top { margin-top: calc(var(--bar-h) + 1.1rem); position: relative; z-index: 2; }
 body[data-page="home"] .banner-top .merch-banner img { height: 200px; }
 body[data-page="home"] .hero { padding-top: 2.2rem; min-height: 0; }
+
+/* Catalog refresh: compact introduction, three aligned covers per trilogy. */
+.catalog-intro { padding: 3.5rem 0 1rem; }
+.catalog-intro h1 { margin: .65rem 0 0; font-family: var(--display); font-size: clamp(2rem, 6vw, 3.8rem); font-weight: 500; line-height: 1.1; }
+.catalog-intro .eyebrow { letter-spacing: .2em; font-size: .62rem; }
+.catalog-refresh { max-width: 850px; padding-top: 2.5rem; }
+.catalog-refresh .catalog-head { margin-bottom: 2rem; }
+.catalog-refresh .trilogy { padding-top: 1.5rem; border-top: 1px solid var(--line); margin-bottom: 2.5rem; }
+.catalog-refresh .trilogy-label { font-size: .68rem; letter-spacing: .18em; line-height: 1.7; }
+.catalog-refresh .icons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.75rem, 3vw, 2rem); }
+.catalog-refresh .icon { width: auto; min-width: 0; grid-template-rows: auto 1fr auto; align-content: start; }
+.catalog-refresh .icon-name { font-size: clamp(.85rem, 2.2vw, 1.2rem); line-height: 1.25; overflow-wrap: anywhere; }
+.catalog-refresh .icon-sub { letter-spacing: .12em; }
+.catalog-refresh .icon.is-coming:hover { transform: none; }
+.catalog-refresh .icon.is-coming .icon-art { background: radial-gradient(ellipse at top, #202531, #090b10 75%); }
+.foot-col > span { font-family: var(--display); font-size: 1rem; color: var(--muted); line-height: 1.5; }
+@media (max-width: 420px) {
+ .catalog-intro { padding-top: 2rem; }
+ .catalog-refresh { padding-top: 1.5rem; }
+ .catalog-refresh .icon-sub { font-size: .5rem; }
+}
+body[data-page="home"] .catalog-intro { padding-top: 2rem; }
+@media (max-width: 600px) {
+ .foot-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1rem; }
+ .foot-col-label { line-height: 1.7; }
+}
