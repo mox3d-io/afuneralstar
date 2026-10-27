@@ -29,7 +29,7 @@ const albums = [
     type: "Album",
     sourceDir: "content/lyrics/now-we-ignite",
     cover: "now-we-ignite-cover.webp",
-    blurb: "Now We Ignite begins the Ignition trilogy, returning to cosmic themes of growth and metamorphosis. The root of the album is the “supernova”—the violent explosion of light, the birth of new stars and the death of old. Power metal and techno fusion, and themes of life and death that are the supernova, both literal and metaphysical.",
+    blurb: "Now We Ignite begins the Ignition trilogy, returning to cosmic themes of growth and metamorphosis. The root of the album is the “supernova”, the violent explosion of light, the birth of new stars and the death of old. Power metal and techno fusion, and themes of life and death that are the supernova, both literal and metaphysical.",
     // Track 1 is an instrumental overture with no lyric sheet.
     instrumentals: [{ number: 1, title: "Supernova (Birth)" }],
     spotify: "https://open.spotify.com/album/3a5JAyUN6Wd45aTpIoqvIH",

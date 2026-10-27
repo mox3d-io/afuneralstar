@@ -94,7 +94,7 @@ p.write_text(s)
 print('Catalog refreshed locally. No publication performed.')
 
 # Preserve the former announcement URL without its obsolete unreleased copy.
-(ROOT/'romantic-ignition/index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Saudade By The Sea | A Funeral Star</title><link rel="canonical" href="https://afuneralstar.com/releases/saudade-by-the-sea/"><meta http-equiv="refresh" content="0;url=/releases/saudade-by-the-sea/"></head><body><a href="/releases/saudade-by-the-sea/">Saudade By The Sea — album page</a></body></html>')
+(ROOT/'romantic-ignition/index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Saudade By The Sea | A Funeral Star</title><link rel="canonical" href="https://afuneralstar.com/releases/saudade-by-the-sea/"><meta http-equiv="refresh" content="0;url=/releases/saudade-by-the-sea/"></head><body><a href="/releases/saudade-by-the-sea/">Saudade By The Sea, album page</a></body></html>')
 
 # Keep generated markup whitespace-clean.
 p=ROOT/"index.html"
